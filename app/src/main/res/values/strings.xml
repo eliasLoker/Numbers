@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MyPlaceInfo</string>
+    <string name="for_show_my_ip_btn">Show my ip</string>
+    <string name="for_show_details_btn">More detailed</string>
+    <string name="for_show_info_btn">show details</string>
+    <string name="for_your_ip_text_view">Your IP:</string>
+</resources>
