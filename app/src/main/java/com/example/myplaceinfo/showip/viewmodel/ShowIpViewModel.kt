@@ -26,5 +26,5 @@ interface ShowIpViewModel {
 
   fun onClickShowDetailsButton()
 
-  fun onResponseCallback(ip: String)
+  fun onResponseCallback(ip: String?)
 }

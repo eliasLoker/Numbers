@@ -1,5 +1,6 @@
 package com.example.myplaceinfo
 
+import com.example.myplaceinfo.showip.retrofit.MessageAPI
 import com.example.myplaceinfo.showip.retrofit.MessageIp
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
@@ -14,10 +15,10 @@ object Controller {
     private val BASE_IP_URL = "https://api.ipify.org/"
     private val BASE_MESSAGE_DETAILED_URL = "https://ipapi.co/"
 
-    val messageIp: MessageIp
+    val messageIp: MessageAPI
         get() {
             val retrofit = getRetrofit(BASE_IP_URL)
-            return retrofit.create(MessageIp::class.java)
+            return retrofit.create(MessageAPI::class.java)
         }
 
 
