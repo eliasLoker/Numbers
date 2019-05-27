@@ -38,8 +38,7 @@ class ContainerFragment : Fragment() {
                 .commit()
         }
         */
-        toolbar = view.findViewById(R.id.toolbar)
-        activity?.setActionBar(toolbar) //???
+
         val actionBar = activity?.actionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
