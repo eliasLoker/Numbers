@@ -30,14 +30,6 @@ class ContainerFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_container, container, false)
-        /*
-        val fragment = activity!!.supportFragmentManager.findFragmentById(R.id.fragment_container)
-        if (fragment == null) {
-            activity!!.supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, StartFragment.newInstance())
-                .commit()
-        }
-        */
 
         val actionBar = activity?.actionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
