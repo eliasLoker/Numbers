@@ -13,49 +13,99 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+        <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:entries="@array/typelist"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+        </Spinner>
+
         <TextView
-                android:id="@+id/ip_text_view"
-                android:layout_width="wrap_content"
+                android:id="@+id/input_field"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:text="@{viewModel.ip}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-        <Button
-                android:id="@+id/show_ip_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="50sp"
+                android:textColor="@color/colorBlack"
                 android:layout_marginTop="10dp"
-                android:onClick="@{() -> viewModel.onClickShowIpButton()}"
-                android:text="@string/for_show_my_ip_btn"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textAlignment="center"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ip_text_view"/>
-
-        <Button
-                android:id="@+id/go_to_details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:onClick="@{() -> viewModel.onClickShowDetailsButton()}"
-                android:text="@string/for_show_details_btn"
-                app:layout_constraintEnd_toEndOf="@id/show_ip_btn"
-                app:layout_constraintStart_toStartOf="@id/show_ip_btn"
-                app:layout_constraintTop_toBottomOf="@id/show_ip_btn"/>
-
-        <ProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="@{safeUnbox(viewModel.progressBarState) ? View.VISIBLE : View.INVISIBLE}"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinner"/>
+
+        <TableLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:stretchColumns="*"
+                android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_field"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+            <TableRow>
+                <Button
+                        android:text="1"/>
+                <Button
+                        android:text="2"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"/>
+                <Button
+                        android:text="3"/>
+            </TableRow>
+
+            <TableRow
+                    android:layout_marginTop="10dp">
+                <Button
+                        android:text="3"/>
+                <Button
+                        android:text="4"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"/>
+                <Button
+                        android:text="5"/>
+            </TableRow>
+
+            <TableRow
+                    android:layout_marginTop="10dp">
+                <Button
+                        android:text="6"/>
+                <Button
+                        android:text="7"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"/>
+                <Button
+                        android:text="8"/>
+            </TableRow>
+
+            <TableRow
+                    android:layout_marginTop="10dp">
+                <Button
+                        android:text="0"/>
+                <Button
+                        android:text="9"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"/>
+                <Button
+                        android:text="C"/>
+            </TableRow>
+
+            <TableRow
+                    android:layout_marginTop="10dp">
+                <Button
+                        android:text="Random"/>
+                <Button
+                        android:layout_marginStart="5dp"
+                        android:text="Show"/>
+            </TableRow>
+
+        </TableLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

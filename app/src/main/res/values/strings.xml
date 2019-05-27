@@ -4,4 +4,10 @@
     <string name="for_show_details_btn">More detailed</string>
     <string name="for_show_info_btn">show details</string>
     <string name="for_your_ip_text_view">Your IP:</string>
+    <string-array name="typelist">
+        <item>Trivia</item>
+        <item>Year</item>
+        <item>Date</item>
+        <item>Math</item>
+    </string-array>
 </resources>
