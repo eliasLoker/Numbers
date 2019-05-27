@@ -1,4 +1,4 @@
-package com.example.myplaceinfo.showip.retrofit
+package com.example.myplaceinfo.start.retrofit
 
 import com.google.gson.annotations.SerializedName
 

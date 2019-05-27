@@ -1,18 +1,20 @@
-package com.example.myplaceinfo.showip
+package com.example.myplaceinfo.start
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.myplaceinfo.Controller
 import com.example.myplaceinfo.R
-import com.example.myplaceinfo.showip.retrofit.MessageIp
-import com.example.myplaceinfo.showip.viewmodel.ShowIpViewModel
-import com.example.myplaceinfo.showip.viewmodel.ShowIpViewModelImpl
+import com.example.myplaceinfo.ShowDetailsDialog
+import com.example.myplaceinfo.start.retrofit.MessageIp
+import com.example.myplaceinfo.start.viewmodel.StartViewModel
+import com.example.myplaceinfo.start.viewmodel.StartViewModelImpl
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,37 +24,40 @@ import retrofit2.Response
  *
  * @author Alexandr Mikhalev
  */
-class ShowIpFragment : Fragment() {
+class StartFragment : Fragment() {
 
-    private var mShowIpViewModel: ShowIpViewModel? = null
+    private var mStartViewModel: StartViewModel? = null
     private var mFragmentShowIpBinding: com.example.myplaceinfo.databinding.FragmentShowIpBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mShowIpViewModel = ViewModelProviders.of(this).get<ShowIpViewModelImpl>(ShowIpViewModelImpl::class.java)
+        mStartViewModel = ViewModelProviders.of(this).get<StartViewModelImpl>(StartViewModelImpl::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mFragmentShowIpBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_show_ip, container, false)
-        mFragmentShowIpBinding!!.viewModel = mShowIpViewModel
+        mFragmentShowIpBinding!!.viewModel = mStartViewModel
         init()
         return mFragmentShowIpBinding!!.root
     }
 
     private fun init() {
-        mShowIpViewModel!!.showIpEvent.observe(this, Observer { getMyIp() })
+        mStartViewModel!!.showIpEvent.observe(this, Observer { getMyIp(mStartViewModel!!.number.get()) })
     }
 
-    private fun getMyIp() {
-        val messages = Controller.messageIp.messages()
+    private fun getMyIp(number: String?) {
+        val messages = Controller.messageIp.messages(number!!)
 
         messages.enqueue(object : Callback<MessageIp> {
             override fun onFailure(call: Call<MessageIp>, t: Throwable) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()
             }
 
             override fun onResponse(call: Call<MessageIp>, response: Response<MessageIp>) {
-                mShowIpViewModel!!.onResponseCallback(response.body()!!.text)
+                //mStartViewModel!!.onResponseCallback(response.body()!!.text)
+                //Toast.makeText(context, response.body()!!.text, Toast.LENGTH_SHORT).show()
+                val showDetailsDialog = ShowDetailsDialog().newInstance(response.body()!!.text)
+                showDetailsDialog.show(childFragmentManager, "sdfsdfs")
             }
         })
     }
@@ -61,9 +66,9 @@ class ShowIpFragment : Fragment() {
 
         private val TAG = "MainActivity"
 
-        fun newInstance(): ShowIpFragment {
+        fun newInstance(): StartFragment {
             val args = Bundle()
-            val fragment = ShowIpFragment()
+            val fragment = StartFragment()
             fragment.arguments = args
             return fragment
         }

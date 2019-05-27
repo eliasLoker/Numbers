@@ -1,7 +1,6 @@
 package com.example.myplaceinfo
 
-import com.example.myplaceinfo.showip.retrofit.MessageAPI
-import com.example.myplaceinfo.showip.retrofit.MessageIp
+import com.example.myplaceinfo.start.retrofit.MessageAPI
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

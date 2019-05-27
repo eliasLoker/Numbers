@@ -1,4 +1,4 @@
-package com.example.myplaceinfo.showip.events
+package com.example.myplaceinfo.start.events
 
 /**
  * Created by Alexandr Mikhalev on 24.05.2019.
