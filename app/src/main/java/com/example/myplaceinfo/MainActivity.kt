@@ -1,8 +1,8 @@
 package com.example.myplaceinfo
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.myplaceinfo.start.StartFragment
+import androidx.appcompat.app.AppCompatActivity
+import com.example.my.ContainerFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -10,10 +10,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_activity_container)
         if (fragment == null) {
                 supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, StartFragment.newInstance())
+                .add(R.id.fragment_activity_container, ContainerFragment.newInstance())
                 .commit()
         }
     }
