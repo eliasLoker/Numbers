@@ -9,6 +9,6 @@ import com.google.gson.annotations.SerializedName
  */
 class MessageIp(
 
-    @SerializedName("ip")
-    var ip: String? = null
+    @SerializedName("text")
+    var text: String? = null
 )

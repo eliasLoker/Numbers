@@ -10,6 +10,6 @@ import retrofit2.http.GET
  */
 interface MessageAPI {
 
-    @GET("?format=json")
+    @GET("random/year?json")
     fun messages(): Call<MessageIp>
 }

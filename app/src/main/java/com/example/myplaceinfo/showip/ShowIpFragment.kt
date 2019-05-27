@@ -52,7 +52,7 @@ class ShowIpFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<MessageIp>, response: Response<MessageIp>) {
-                mShowIpViewModel!!.onResponseCallback(response.body()!!.ip)
+                mShowIpViewModel!!.onResponseCallback(response.body()!!.text)
             }
         })
     }

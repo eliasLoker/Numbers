@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * @author Alexandr Mikhalev
  */
 object Controller {
-    private val BASE_IP_URL = "https://api.ipify.org/"
+    private val BASE_IP_URL = "http://numbersapi.com/"
     private val BASE_MESSAGE_DETAILED_URL = "https://ipapi.co/"
 
     val messageIp: MessageAPI
