@@ -25,8 +25,9 @@ class DatesViewModelImpl : ViewModel(), DatesViewModel {
     override val showDateDialogEvent: SingleLiveEvent<ShowDateDialogEvent> = SingleLiveEvent()
     override val checkedChangedEvent: SingleLiveEvent<CountDaysEvent.DayType> = SingleLiveEvent()
 
+    /*
     override fun onItemMonthSelectedCallback() {
-        /*
+        *//*
         when (month.get()) {
             "january" -> daysSpinnerEvent
                 .postValue(CountDaysEvent(dayType = CountDaysEvent.DayType.THIRTY_ONE))
@@ -53,8 +54,8 @@ class DatesViewModelImpl : ViewModel(), DatesViewModel {
             "december" -> daysSpinnerEvent
                 .postValue(CountDaysEvent(dayType = CountDaysEvent.DayType.THIRTY_ONE))
         }
-        */
-        /*
+        *//*
+        *//*
         when(month.get()) {
             "january", "march", "may", "july", "august", "october", "december" -> daysSpinnerEvent
                 .postValue(CountDaysEvent(dayType = CountDaysEvent.DayType.THIRTY_ONE))
@@ -63,8 +64,9 @@ class DatesViewModelImpl : ViewModel(), DatesViewModel {
             "february" -> daysSpinnerEvent
                 .postValue(CountDaysEvent(dayType = CountDaysEvent.DayType.TWENTY_NINE))
         }
-        */
+        *//*
     }
+    */
 
     override fun onItemSelectedMonthCallback(index: Int) {
         month.set(index.toString())
@@ -80,10 +82,11 @@ class DatesViewModelImpl : ViewModel(), DatesViewModel {
     }
 
     override fun onItemSelectedDayCallback(index: Int) {
-        indexOfDay.set(index)
+        indexOfDay.set(index + 1)
     }
 
     override fun onClickShowButton() {
-        showDateDialogEvent.postValue(value = ShowDateDialogEvent(indexOfMonth.get().toString(), indexOfDay.get().toString()))
+        showDateDialogEvent
+            .postValue(value = ShowDateDialogEvent(indexOfMonth.get().toString(), indexOfDay.get().toString()))
     }
 }

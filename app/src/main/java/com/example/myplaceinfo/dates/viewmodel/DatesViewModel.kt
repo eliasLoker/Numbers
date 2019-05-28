@@ -28,7 +28,7 @@ interface DatesViewModel {
 
     val showDateDialogEvent: SingleLiveEvent<ShowDateDialogEvent>
 
-    fun onItemMonthSelectedCallback()
+    //fun onItemMonthSelectedCallback()
 
     fun onClickShowButton()
 

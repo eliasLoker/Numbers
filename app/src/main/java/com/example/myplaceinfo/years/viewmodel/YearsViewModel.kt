@@ -10,4 +10,10 @@ import androidx.databinding.ObservableField
 interface YearsViewModel {
 
     val isSeekBarEnabled: ObservableField<Boolean>
+
+    val textSeek: ObservableField<String>
+
+    fun onProgressChangedCallback(arg: Int)
+
+    fun onCheckedChangedCallback(checked: Boolean)
 }

@@ -10,4 +10,14 @@ import androidx.lifecycle.ViewModel
  */
 class YearsViewModelImpl: ViewModel(), YearsViewModel {
     override val isSeekBarEnabled: ObservableField<Boolean> = ObservableField(true)
+
+    override val textSeek: ObservableField<String> = ObservableField("SIGN")
+
+    override fun onProgressChangedCallback(arg: Int) {
+        textSeek.set(arg.toString())
+    }
+
+    override fun onCheckedChangedCallback(checked: Boolean) {
+        isSeekBarEnabled.set(checked)
+    }
 }
