@@ -34,7 +34,7 @@ class DatesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        datesViewModel = ViewModelProviders.of(this).get<DatesViewModelImpl>(DatesViewModelImpl::class.java)
+        datesViewModel = ViewModelProviders.of(this).get(DatesViewModelImpl::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

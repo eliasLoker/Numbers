@@ -11,6 +11,7 @@ import com.example.myplaceinfo.R
 import com.example.myplaceinfo.container.ViewPagerAdapter
 import com.example.myplaceinfo.dates.DatesFragment
 import com.example.myplaceinfo.start.StartFragment
+import com.example.myplaceinfo.years.YearsFragment
 import com.google.android.material.tabs.TabLayout
 
 
@@ -47,6 +48,7 @@ class ContainerFragment : Fragment() {
         val adapter = ViewPagerAdapter(activity!!.supportFragmentManager)
         adapter.addFragment(StartFragment.newInstance(), "Numbers")
         adapter.addFragment(DatesFragment.newInstance(), "Dates")
+        adapter.addFragment(YearsFragment.newInstance(), "Years")
         viewPager.adapter = adapter
     }
 

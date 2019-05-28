@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="viewModel" type="com.example.myplaceinfo.years.viewmodel.YearsViewModel"/>
+        <import type="android.view.View"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <Switch
+                android:id="@+id/switcher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+                android:id="@+id/tip_swithcer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="set input mode"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toStartOf="@id/switcher"
+                app:layout_constraintTop_toTopOf="@id/switcher"
+                app:layout_constraintBottom_toBottomOf="@id/switcher"/>
+
+        <TextView
+                android:id="@+id/sign_from_seekbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SIGN"
+                android:textSize="30sp"
+                android:textColor="@color/colorBlack"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/seek_bar"/>
+
+        <SeekBar
+                android:id="@+id/seek_bar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:max="2018"
+                android:progress="1"
+                android:visibility="@{safeUnbox(viewModel.isSeekBarEnabled() ? View.VISIBLE : View.INVISIBLE)}"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <EditText
+                android:id="@+id/edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="max length 4 signs"
+                android:inputType="number"
+                android:visibility="@{safeUnbox(viewModel.isSeekBarEnabled() ? View.INVISIBLE : View.VISIBLE)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Button
+                android:id="@+id/show_facts_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="show"
+                android:layout_marginBottom="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
