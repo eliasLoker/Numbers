@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import com.example.myplaceinfo.SingleLiveEvent
 import com.example.myplaceinfo.dates.events.CountDaysEvent
 import com.example.myplaceinfo.dates.events.ShowDateDialogEvent
-import java.lang.IllegalArgumentException
 
 /**
  * Created by Alexandr Mikhalev on 28.05.2019.
@@ -22,8 +21,8 @@ class DatesViewModelImpl : ViewModel(), DatesViewModel {
     override fun onItemSelectedMonthCallback(index: Int) {
         indexOfMonth.set(index + 1)
         val dayType = when (index) {
-            0,2,4,6,7,9, 11 -> CountDaysEvent.DayType.THIRTY_ONE
-            3,5,8,10 -> CountDaysEvent.DayType.THIRTY
+            0, 2, 4, 6, 7, 9, 11 -> CountDaysEvent.DayType.THIRTY_ONE
+            3, 5, 8, 10 -> CountDaysEvent.DayType.THIRTY
             1 -> CountDaysEvent.DayType.TWENTY_NINE
             else -> throw IllegalArgumentException()
         }

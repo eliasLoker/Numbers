@@ -1,6 +1,5 @@
 package com.example.myplaceinfo.dates.viewmodel
 
-import androidx.databinding.ObservableField
 import com.example.myplaceinfo.SingleLiveEvent
 import com.example.myplaceinfo.dates.events.CountDaysEvent
 import com.example.myplaceinfo.dates.events.ShowDateDialogEvent

@@ -80,8 +80,6 @@ class DatesFragment : Fragment() {
 
     companion object {
 
-        private val TAG = "MainActivity"
-
         fun newInstance(): DatesFragment {
             val args = Bundle()
             val fragment = DatesFragment()
