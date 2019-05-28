@@ -6,14 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.myplaceinfo.Controller
 import com.example.myplaceinfo.R
+import com.example.myplaceinfo.ShowDetailsDialog
 import com.example.myplaceinfo.dates.events.CountDaysEvent
+import com.example.myplaceinfo.dates.retrofit.DateIp
 import com.example.myplaceinfo.dates.viewmodel.DatesViewModel
 import com.example.myplaceinfo.dates.viewmodel.DatesViewModelImpl
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /**
  * Created by Alexandr Mikhalev on 28.05.2019.
@@ -57,6 +64,8 @@ class DatesFragment : Fragment() {
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
+
+        datesViewModel!!.showDateDialogEvent.observe(this, Observer {getDateInfo()})
     }
 
     private fun setDaysSpinner(dayType: CountDaysEvent.DayType) {
@@ -78,6 +87,37 @@ class DatesFragment : Fragment() {
         val arrayAdapter = ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, testArray)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
         binding!!.spinnerDay.adapter = arrayAdapter
+    }
+
+    private fun getDateInfo() {
+        val messages = Controller.dateAPI.messages("5", "27")
+
+
+        messages.enqueue(object : Callback<DateIp> {
+            override fun onFailure(call: Call<DateIp>, t: Throwable) {
+                Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onResponse(call: Call<DateIp>, response: Response<DateIp>) {
+                val showDetailsDialog = ShowDetailsDialog().newInstance(response.body()!!.text)
+                showDetailsDialog.show(childFragmentManager, "sdfsdfs")
+            }
+        })
+
+        /*
+        messages.enqueue(object : Callback<DateIp> {
+            override fun onFailure(call: Call<DateIp>, t: Throwable) {
+                Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onResponse(call: Call<DateIp>, response: Response<DateIp>) {
+                //mStartViewModel!!.onResponseCallback(response.body()!!.text)
+                //Toast.makeText(context, response.body()!!.text, Toast.LENGTH_SHORT).show()
+                val showDetailsDialog = ShowDetailsDialog().newInstance(response.body()!!.text)
+                showDetailsDialog.show(childFragmentManager, "sdfsdfs")
+            }
+        })
+        */
     }
 
     companion object {

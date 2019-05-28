@@ -1,5 +1,6 @@
 package com.example.myplaceinfo
 
+import com.example.myplaceinfo.dates.retrofit.DateAPI
 import com.example.myplaceinfo.start.retrofit.MessageAPI
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
@@ -18,6 +19,12 @@ object Controller {
         get() {
             val retrofit = getRetrofit(BASE_IP_URL)
             return retrofit.create(MessageAPI::class.java)
+        }
+
+    val dateAPI: DateAPI
+        get() {
+            val retrofit = getRetrofit(BASE_IP_URL)
+            return retrofit.create(DateAPI::class.java)
         }
 
 

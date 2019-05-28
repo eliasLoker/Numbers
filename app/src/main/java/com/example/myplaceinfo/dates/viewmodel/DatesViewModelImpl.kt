@@ -4,6 +4,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.example.myplaceinfo.SingleLiveEvent
 import com.example.myplaceinfo.dates.events.CountDaysEvent
+import com.example.myplaceinfo.dates.events.ShowDateDialogEvent
 
 /**
  * Created by Alexandr Mikhalev on 28.05.2019.
@@ -13,6 +14,7 @@ import com.example.myplaceinfo.dates.events.CountDaysEvent
 class DatesViewModelImpl : ViewModel(), DatesViewModel {
     override val month: ObservableField<String> = ObservableField("january")
     override val daysSpinnerEvent: SingleLiveEvent<CountDaysEvent> = SingleLiveEvent()
+    override val showDateDialogEvent: SingleLiveEvent<ShowDateDialogEvent> = SingleLiveEvent()
 
     override fun onItemMonthSelectedCallback() {
         /*
@@ -51,5 +53,9 @@ class DatesViewModelImpl : ViewModel(), DatesViewModel {
             "february" -> daysSpinnerEvent
                 .postValue(CountDaysEvent(dayType = CountDaysEvent.DayType.TWENTY_NINE))
         }
+    }
+
+    override fun onClickShowButton() {
+        showDateDialogEvent.postValue(value = ShowDateDialogEvent())
     }
 }
