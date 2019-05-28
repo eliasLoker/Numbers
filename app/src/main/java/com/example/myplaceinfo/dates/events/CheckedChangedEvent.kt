@@ -5,5 +5,5 @@ package com.example.myplaceinfo.dates.events
  *
  * @author Alexandr Mikhalev
  */
-class ShowDateDialogEvent(val month: String, val day:String) {
+class CheckedChangedEvent {
 }

@@ -38,7 +38,6 @@ class DatesFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        //return super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dates, container, false)
         binding!!.viewModel = datesViewModel
         init()
@@ -46,42 +45,21 @@ class DatesFragment : Fragment() {
     }
 
     private fun init() {
-
         datesViewModel!!.daysSpinnerEvent
             .observe(this, Observer { setDaysSpinner(it.dayType) })
 
-        binding!!.spinnerMonth.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                itemSelected: View,
-                selectedItemPosition: Int,
-                selectedId: Long
-            ) {
-                val monthArray = resources.getStringArray(R.array.month_list)
-                datesViewModel!!.month.set(monthArray[selectedItemPosition])
-                datesViewModel!!.onItemMonthSelectedCallback()
-            }
+        datesViewModel!!.showDateDialogEvent
+            .observe(this, Observer {getDateInfo(it.month, it.day)})
 
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        }
-
-        datesViewModel!!.showDateDialogEvent.observe(this, Observer {getDateInfo()})
+        datesViewModel!!.checkedChangedEvent
+            .observe(this, Observer {setDaysSpinner(it)})
     }
 
     private fun setDaysSpinner(dayType: CountDaysEvent.DayType) {
-        when (dayType) {
-            CountDaysEvent.DayType.THIRTY_ONE -> initDaysSpinner(31)
-            CountDaysEvent.DayType.THIRTY -> initDaysSpinner(30)
-            CountDaysEvent.DayType.TWENTY_NINE -> initDaysSpinner(29)
-        }
-    }
-
-    private fun initDaysSpinner(monthLength: Int) {
-        val testArray = when (monthLength) {
-            31 -> resources.getStringArray(R.array.month_list_long)
-            30 -> resources.getStringArray(R.array.month_list_average)
-            29 -> resources.getStringArray(R.array.month_list_short)
-            else -> throw IllegalArgumentException()
+        val testArray = when(dayType) {
+            CountDaysEvent.DayType.THIRTY_ONE -> resources.getStringArray(R.array.month_list_long)
+            CountDaysEvent.DayType.THIRTY -> resources.getStringArray(R.array.month_list_average)
+            CountDaysEvent.DayType.TWENTY_NINE -> resources.getStringArray(R.array.month_list_short)
         }
 
         val arrayAdapter = ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, testArray)
@@ -89,9 +67,8 @@ class DatesFragment : Fragment() {
         binding!!.spinnerDay.adapter = arrayAdapter
     }
 
-    private fun getDateInfo() {
-        val messages = Controller.dateAPI.messages("5", "27")
-
+    private fun getDateInfo(month: String, day: String) {
+        val messages = Controller.dateAPI.messages(month, day)
 
         messages.enqueue(object : Callback<DateIp> {
             override fun onFailure(call: Call<DateIp>, t: Throwable) {
