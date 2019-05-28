@@ -13,18 +13,14 @@ import java.lang.IllegalArgumentException
  * @author Alexandr Mikhalev
  */
 class DatesViewModelImpl : ViewModel(), DatesViewModel {
-    override val month: ObservableField<String> = ObservableField("january")
-    override val indexOfMonth: ObservableField<Int> = ObservableField(1)
-    override val indexOfDay: ObservableField<Int> = ObservableField(1)
+    private val indexOfMonth: ObservableField<Int> = ObservableField(1)
+    private val indexOfDay: ObservableField<Int> = ObservableField(1)
 
     override val showDateDialogEvent: SingleLiveEvent<ShowDateDialogEvent> = SingleLiveEvent()
-
     override val checkedChangedEventMonth: SingleLiveEvent<CountDaysEvent.DayType> = SingleLiveEvent()
 
     override fun onItemSelectedMonthCallback(index: Int) {
-        month.set(index.toString())
         indexOfMonth.set(index + 1)
-
         val dayType = when (index) {
             0,2,4,6,7,9, 11 -> CountDaysEvent.DayType.THIRTY_ONE
             3,5,8,10 -> CountDaysEvent.DayType.THIRTY
@@ -33,7 +29,6 @@ class DatesViewModelImpl : ViewModel(), DatesViewModel {
         }
         if (index + 1 == indexOfMonth.get()) return
         checkedChangedEventMonth.postValue(dayType)
-        //checkedChangedEventMonth.value = dayType
     }
 
     override fun onItemSelectedDayCallback(index: Int) {

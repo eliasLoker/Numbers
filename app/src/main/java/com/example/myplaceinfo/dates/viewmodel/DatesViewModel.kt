@@ -12,13 +12,6 @@ import com.example.myplaceinfo.dates.events.ShowDateDialogEvent
  */
 interface DatesViewModel {
 
-    val month: ObservableField<String>
-
-    val indexOfMonth: ObservableField<Int>
-
-    val indexOfDay: ObservableField<Int>
-
-
     val checkedChangedEventMonth: SingleLiveEvent<CountDaysEvent.DayType>
 
     val showDateDialogEvent: SingleLiveEvent<ShowDateDialogEvent>
