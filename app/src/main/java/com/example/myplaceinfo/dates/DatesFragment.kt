@@ -103,21 +103,6 @@ class DatesFragment : Fragment() {
                 showDetailsDialog.show(childFragmentManager, "sdfsdfs")
             }
         })
-
-        /*
-        messages.enqueue(object : Callback<DateIp> {
-            override fun onFailure(call: Call<DateIp>, t: Throwable) {
-                Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onResponse(call: Call<DateIp>, response: Response<DateIp>) {
-                //mStartViewModel!!.onResponseCallback(response.body()!!.text)
-                //Toast.makeText(context, response.body()!!.text, Toast.LENGTH_SHORT).show()
-                val showDetailsDialog = ShowDetailsDialog().newInstance(response.body()!!.text)
-                showDetailsDialog.show(childFragmentManager, "sdfsdfs")
-            }
-        })
-        */
     }
 
     companion object {
