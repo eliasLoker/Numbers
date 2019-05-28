@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -13,11 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.myplaceinfo.Controller
 import com.example.myplaceinfo.R
-import com.example.myplaceinfo.ShowDetailsDialog
 import com.example.myplaceinfo.dates.events.CountDaysEvent
 import com.example.myplaceinfo.dates.retrofit.DateIp
 import com.example.myplaceinfo.dates.viewmodel.DatesViewModel
 import com.example.myplaceinfo.dates.viewmodel.DatesViewModelImpl
+import com.example.myplaceinfo.dialogs.DatesDetailsDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -49,14 +48,14 @@ class DatesFragment : Fragment() {
             .observe(this, Observer { setDaysSpinner(it.dayType) })
 
         datesViewModel!!.showDateDialogEvent
-            .observe(this, Observer {getDateInfo(it.month, it.day)})
+            .observe(this, Observer { getDateInfo(it.month, it.day) })
 
         datesViewModel!!.checkedChangedEvent
-            .observe(this, Observer {setDaysSpinner(it)})
+            .observe(this, Observer { setDaysSpinner(it) })
     }
 
     private fun setDaysSpinner(dayType: CountDaysEvent.DayType) {
-        val testArray = when(dayType) {
+        val testArray = when (dayType) {
             CountDaysEvent.DayType.THIRTY_ONE -> resources.getStringArray(R.array.month_list_long)
             CountDaysEvent.DayType.THIRTY -> resources.getStringArray(R.array.month_list_average)
             CountDaysEvent.DayType.TWENTY_NINE -> resources.getStringArray(R.array.month_list_short)
@@ -76,7 +75,7 @@ class DatesFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<DateIp>, response: Response<DateIp>) {
-                val showDetailsDialog = ShowDetailsDialog().newInstance(response.body()!!.text)
+                val showDetailsDialog = DatesDetailsDialog().newInstance(response.body()!!.text)
                 showDetailsDialog.show(childFragmentManager, "sdfsdfs")
             }
         })

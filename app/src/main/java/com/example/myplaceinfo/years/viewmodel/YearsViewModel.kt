@@ -11,6 +11,8 @@ import com.example.myplaceinfo.years.events.ShowYearDialogEvent
  */
 interface YearsViewModel {
 
+    val editText: ObservableField<String>
+
     val isSeekBarEnabled: ObservableField<Boolean>
 
     val textSeek: ObservableField<String>

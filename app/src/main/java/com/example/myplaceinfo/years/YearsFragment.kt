@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.myplaceinfo.Controller
 import com.example.myplaceinfo.R
-import com.example.myplaceinfo.ShowDetailsDialog
+import com.example.myplaceinfo.dialogs.YearDetailsDialog
 import com.example.myplaceinfo.years.retrofit.YearsIp
 import com.example.myplaceinfo.years.viewmodel.YearsViewModel
 import com.example.myplaceinfo.years.viewmodel.YearsViewModelImpl
@@ -24,7 +24,7 @@ import retrofit2.Response
  *
  * @author Alexandr Mikhalev
  */
-class YearsFragment: Fragment() {
+class YearsFragment : Fragment() {
     private var binding: com.example.myplaceinfo.databinding.FragmentYearsBinding? = null
     private var yearsViewModel: YearsViewModel? = null
 
@@ -54,7 +54,7 @@ class YearsFragment: Fragment() {
             }
 
             override fun onResponse(call: Call<YearsIp>, response: Response<YearsIp>) {
-                val showDetailsDialog = ShowDetailsDialog().newInstance(response.body()!!.text)
+                val showDetailsDialog = YearDetailsDialog().newInstance(response.body()!!.text)
                 showDetailsDialog.show(childFragmentManager, "sdfsdfs")
             }
         })

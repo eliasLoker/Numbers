@@ -4,6 +4,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.example.myplaceinfo.SingleLiveEvent
 import com.example.myplaceinfo.years.events.ShowYearDialogEvent
+import java.lang.IllegalArgumentException
 
 /**
  * Created by Alexandr Mikhalev on 28.05.2019.
@@ -13,6 +14,8 @@ import com.example.myplaceinfo.years.events.ShowYearDialogEvent
 class YearsViewModelImpl: ViewModel(), YearsViewModel {
 
     override val isSeekBarEnabled: ObservableField<Boolean> = ObservableField(true)
+
+    override val editText: ObservableField<String> = ObservableField("")
 
     override val textSeek: ObservableField<String> = ObservableField("SIGN")
 
@@ -27,6 +30,11 @@ class YearsViewModelImpl: ViewModel(), YearsViewModel {
     }
 
     override fun onClickShowButton() {
-        yearDialogEvent.postValue(value = ShowYearDialogEvent(textSeek.get().toString()))
+        val showYearDialogEvent = when (isSeekBarEnabled.get()) {
+            true -> ShowYearDialogEvent(textSeek.get().toString())
+            false -> ShowYearDialogEvent(editText.get().toString())
+            null -> throw IllegalArgumentException()
+        }
+        yearDialogEvent.postValue(showYearDialogEvent)
     }
 }

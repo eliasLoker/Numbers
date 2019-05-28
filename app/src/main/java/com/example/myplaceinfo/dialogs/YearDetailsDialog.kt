@@ -1,25 +1,18 @@
-package com.example.myplaceinfo
+package com.example.myplaceinfo.dialogs
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
-import android.view.Gravity
-import android.view.WindowManager
-
-
+import com.example.myplaceinfo.R
 
 /**
- * Created by Alexandr Mikhalev on 27.05.2019.
+ * Created by Alexandr Mikhalev on 29.05.2019.
  *
  * @author Alexandr Mikhalev
  */
-class ShowDetailsDialog: DialogFragment(), View.OnClickListener {
-
+class YearDetailsDialog : DialogFragment(), View.OnClickListener {
     private lateinit var closeView: ImageView
     private var infoTextView: TextView? = null
     private var message: String? = ""
@@ -28,8 +21,6 @@ class ShowDetailsDialog: DialogFragment(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //message = arguments!!.getString(KEY, "sorry")
-        //
         arguments?.let {
             this.message = it.getString(KEY)
         }
@@ -37,7 +28,7 @@ class ShowDetailsDialog: DialogFragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
-        val view: View = inflater.inflate(R.layout.dialog_show_details, container, false)
+        val view: View = inflater.inflate(R.layout.dialog_year_details, container, false)
         closeView = view.findViewById(R.id.close_view)
         infoTextView = view.findViewById(R.id.dialog_header)
 
@@ -62,15 +53,15 @@ class ShowDetailsDialog: DialogFragment(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-        when(p0!!.id) {
+        when (p0!!.id) {
             R.id.close_view -> dialog!!.dismiss()
         }
     }
 
-    fun newInstance(message: String?): ShowDetailsDialog {
+    fun newInstance(message: String?): YearDetailsDialog {
         val args = Bundle()
         args.putString(KEY, message)
-        val fragment = ShowDetailsDialog()
+        val fragment = YearDetailsDialog()
         fragment.arguments = args
         return fragment
     }

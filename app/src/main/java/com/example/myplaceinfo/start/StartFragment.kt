@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.myplaceinfo.Controller
 import com.example.myplaceinfo.R
-import com.example.myplaceinfo.ShowDetailsDialog
+import com.example.myplaceinfo.dialogs.NumberDetailsDialog
 import com.example.myplaceinfo.start.retrofit.MessageIp
 import com.example.myplaceinfo.start.viewmodel.StartViewModel
 import com.example.myplaceinfo.start.viewmodel.StartViewModelImpl
@@ -56,7 +56,7 @@ class StartFragment : Fragment() {
             override fun onResponse(call: Call<MessageIp>, response: Response<MessageIp>) {
                 //mStartViewModel!!.onResponseCallback(response.body()!!.text)
                 //Toast.makeText(context, response.body()!!.text, Toast.LENGTH_SHORT).show()
-                val showDetailsDialog = ShowDetailsDialog().newInstance(response.body()!!.text)
+                val showDetailsDialog = NumberDetailsDialog().newInstance(response.body()!!.text)
                 showDetailsDialog.show(childFragmentManager, "sdfsdfs")
             }
         })
