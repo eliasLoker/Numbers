@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.myplaceinfo.R
+import com.example.myplaceinfo.dates.events.CountDaysEvent
 import com.example.myplaceinfo.dates.viewmodel.DatesViewModel
 import com.example.myplaceinfo.dates.viewmodel.DatesViewModelImpl
 
@@ -17,7 +20,7 @@ import com.example.myplaceinfo.dates.viewmodel.DatesViewModelImpl
  *
  * @author Alexandr Mikhalev
  */
-class DatesFragment: Fragment() {
+class DatesFragment : Fragment() {
 
     private var binding: com.example.myplaceinfo.databinding.FragmentDatesBinding? = null
     private var datesViewModel: DatesViewModel? = null
@@ -36,14 +39,45 @@ class DatesFragment: Fragment() {
     }
 
     private fun init() {
+
+        datesViewModel!!.daysSpinnerEvent
+            .observe(this, Observer { setDaysSpinner(it.dayType) })
+
         binding!!.spinnerMonth.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent:AdapterView<*>, itemSelected:View, selectedItemPosition:Int, selectedId:Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                itemSelected: View,
+                selectedItemPosition: Int,
+                selectedId: Long
+            ) {
                 val monthArray = resources.getStringArray(R.array.month_list)
                 datesViewModel!!.month.set(monthArray[selectedItemPosition])
+                datesViewModel!!.onItemMonthSelectedCallback()
             }
 
-            override fun onNothingSelected(parent:AdapterView<*>) {}
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
+    }
+
+    private fun setDaysSpinner(dayType: CountDaysEvent.DayType) {
+        when (dayType) {
+            CountDaysEvent.DayType.THIRTY_ONE -> initDaysSpinner(31)
+            CountDaysEvent.DayType.THIRTY -> initDaysSpinner(30)
+            CountDaysEvent.DayType.TWENTY_NINE -> initDaysSpinner(29)
+        }
+    }
+
+    private fun initDaysSpinner(monthLength: Int) {
+        val testArray = when (monthLength) {
+            31 -> resources.getStringArray(R.array.month_list_long)
+            30 -> resources.getStringArray(R.array.month_list_average)
+            29 -> resources.getStringArray(R.array.month_list_short)
+            else -> throw IllegalArgumentException()
+        }
+
+        val arrayAdapter = ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, testArray)
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+        binding!!.spinnerDay.adapter = arrayAdapter
     }
 
     companion object {
