@@ -46,7 +46,7 @@ class StartFragment : Fragment() {
     }
 
     private fun getMyIp(number: String?) {
-        val messages = Controller.messageIp.messages(number!!)
+        val messages = Controller.messageAPI.messages(number!!)
 
         messages.enqueue(object : Callback<MessageIp> {
             override fun onFailure(call: Call<MessageIp>, t: Throwable) {
