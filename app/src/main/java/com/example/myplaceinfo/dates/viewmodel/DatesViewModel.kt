@@ -2,7 +2,6 @@ package com.example.myplaceinfo.dates.viewmodel
 
 import androidx.databinding.ObservableField
 import com.example.myplaceinfo.SingleLiveEvent
-import com.example.myplaceinfo.dates.events.CheckedChangedEvent
 import com.example.myplaceinfo.dates.events.CountDaysEvent
 import com.example.myplaceinfo.dates.events.ShowDateDialogEvent
 
@@ -19,16 +18,10 @@ interface DatesViewModel {
 
     val indexOfDay: ObservableField<Int>
 
-    val dayType: ObservableField<CountDaysEvent.DayType>
 
-
-    val checkedChangedEvent: SingleLiveEvent<CountDaysEvent.DayType>
-
-    val daysSpinnerEvent: SingleLiveEvent<CountDaysEvent>
+    val checkedChangedEventMonth: SingleLiveEvent<CountDaysEvent.DayType>
 
     val showDateDialogEvent: SingleLiveEvent<ShowDateDialogEvent>
-
-    //fun onItemMonthSelectedCallback()
 
     fun onClickShowButton()
 

@@ -44,13 +44,10 @@ class DatesFragment : Fragment() {
     }
 
     private fun init() {
-        datesViewModel!!.daysSpinnerEvent
-            .observe(this, Observer { setDaysSpinner(it.dayType) })
-
         datesViewModel!!.showDateDialogEvent
             .observe(this, Observer { getDateInfo(it.month, it.day) })
 
-        datesViewModel!!.checkedChangedEvent
+        datesViewModel!!.checkedChangedEventMonth
             .observe(this, Observer { setDaysSpinner(it) })
     }
 
