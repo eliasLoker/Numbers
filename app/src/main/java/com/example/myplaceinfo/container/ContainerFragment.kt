@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.example.myplaceinfo.R
 import com.example.myplaceinfo.container.ViewPagerAdapter
+import com.example.myplaceinfo.dates.DatesFragment
 import com.example.myplaceinfo.start.StartFragment
 import com.google.android.material.tabs.TabLayout
 
@@ -45,7 +46,7 @@ class ContainerFragment : Fragment() {
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = ViewPagerAdapter(activity!!.supportFragmentManager)
         adapter.addFragment(StartFragment.newInstance(), "Numbers")
-        adapter.addFragment(StartFragment.newInstance(), "Dates")
+        adapter.addFragment(DatesFragment.newInstance(), "Dates")
         viewPager.adapter = adapter
     }
 
