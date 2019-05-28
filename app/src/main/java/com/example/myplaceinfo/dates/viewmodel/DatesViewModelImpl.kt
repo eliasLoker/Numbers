@@ -1,5 +1,6 @@
 package com.example.myplaceinfo.dates.viewmodel
 
+import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 
 /**
@@ -8,5 +9,5 @@ import androidx.lifecycle.ViewModel
  * @author Alexandr Mikhalev
  */
 class DatesViewModelImpl: ViewModel(), DatesViewModel {
-
+    override val month: ObservableField<String> = ObservableField("january")
 }

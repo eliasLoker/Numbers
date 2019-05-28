@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -30,7 +31,19 @@ class DatesFragment: Fragment() {
         //return super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dates, container, false)
         binding!!.viewModel = datesViewModel
+        init()
         return binding!!.root
+    }
+
+    private fun init() {
+        binding!!.spinnerMonth.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent:AdapterView<*>, itemSelected:View, selectedItemPosition:Int, selectedId:Long) {
+                val monthArray = resources.getStringArray(R.array.month_list)
+                datesViewModel!!.month.set(monthArray[selectedItemPosition])
+            }
+
+            override fun onNothingSelected(parent:AdapterView<*>) {}
+        }
     }
 
     companion object {
