@@ -4,9 +4,7 @@
       tools:showIn="navigation_view">
 
     <item android:id="@+id/about"
-          android:title="О нас"/>
-            <!--
-          android:icon="@drawable/ic_about_us"/>
-    -->
+          android:title="My numbers"
+          android:icon="@drawable/ic_numbers"/>
 
 </menu>

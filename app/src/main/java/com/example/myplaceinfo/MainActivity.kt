@@ -1,12 +1,15 @@
 package com.example.myplaceinfo
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.my.ContainerFragment
+import com.example.myplaceinfo.numberlist.NumberListFragment
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -44,7 +47,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (item.itemId == R.id.about) {
+            supportFragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.container_for_fragments, NumberListFragment.newInstance())
+                .commit()
+        }
+        drawer.closeDrawer(GravityCompat.START)
+        return true
     }
 
     override fun onBackPressed() {
