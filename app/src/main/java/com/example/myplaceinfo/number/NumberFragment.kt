@@ -58,6 +58,7 @@ class NumberFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<MessageIp>, response: Response<MessageIp>) {
+                mNumberViewModel!!.onResponseCallback(response.body()!!.text)
                 val showDetailsDialog = NumberDetailsDialog().newInstance(response.body()!!.text)
                 showDetailsDialog.show(childFragmentManager, "sdfsdfs")
             }

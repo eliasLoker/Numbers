@@ -1,5 +1,6 @@
 package com.example.myplaceinfo.number.viewmodel
 
+import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.example.myplaceinfo.SingleLiveEvent
@@ -22,8 +23,9 @@ class NumberViewModelImpl(numberInteractor: NumberInteractor) : ViewModel(), Num
 
     override val showIpEvent: SingleLiveEvent<ShowIpEvent> = SingleLiveEvent()
 
+    private var message: String? = ""
+
     override fun onClickShowIpButton() {
-        //progressBarState.set((!progressBarState.get())!!)
         progressBarState.set(true)
         val ipEvent = ShowIpEvent(typeNumber.get().toString(), number.get().toString())
         showIpEvent.postValue(ipEvent)
@@ -31,11 +33,6 @@ class NumberViewModelImpl(numberInteractor: NumberInteractor) : ViewModel(), Num
 
     override fun onClickShowDetailsButton() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onResponseCallback(ip: String?) {
-        progressBarState.set(false)
-        this.number.set(ip)
     }
 
     override fun onClickNumberButton(number: Int) {
@@ -73,5 +70,10 @@ class NumberViewModelImpl(numberInteractor: NumberInteractor) : ViewModel(), Num
             else -> throw IllegalArgumentException()
         }
         typeNumber.set(type)
+    }
+
+    override fun onResponseCallback(message: String?) {
+        this.message = message
+        Log.d("NVM", this.message)
     }
 }

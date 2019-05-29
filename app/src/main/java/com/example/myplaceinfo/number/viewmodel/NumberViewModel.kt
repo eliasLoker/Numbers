@@ -21,8 +21,6 @@ interface NumberViewModel {
 
   fun onClickShowDetailsButton()
 
-  fun onResponseCallback(ip: String?)
-
   fun onClickNumberButton(number: Int)
 
   fun onClickRandomButton(str: String)
@@ -32,4 +30,7 @@ interface NumberViewModel {
   fun onClickNull()
 
   fun onItemSelectedSpinnerCallback(index: Int)
+
+  fun onResponseCallback(message: String?)
+
 }
