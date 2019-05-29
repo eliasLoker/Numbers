@@ -9,11 +9,7 @@ import androidx.room.PrimaryKey
  * @author Alexandr Mikhalev
  */
 @Entity
-class NumberEntity(
-    @PrimaryKey
-    val id: Long,
-    val number: String,
-    val text: String
-) {
-
+class NumberEntity(var name: String, var text: String) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Long? = null
 }
