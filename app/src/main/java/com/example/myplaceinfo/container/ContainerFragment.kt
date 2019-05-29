@@ -46,15 +46,13 @@ class ContainerFragment : Fragment() {
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = ViewPagerAdapter(activity!!.supportFragmentManager)
-        adapter.addFragment(NumberFragment.newInstance(), "Numbers")
-        adapter.addFragment(DatesFragment.newInstance(), "Dates")
-        adapter.addFragment(YearFragment.newInstance(), "Years")
+        adapter.addFragment(NumberFragment.newInstance(), "Number")
+        adapter.addFragment(DatesFragment.newInstance(), "Date")
+        adapter.addFragment(YearFragment.newInstance(), "Year")
         viewPager.adapter = adapter
     }
 
     companion object {
-
-        private val TAG = "MainActivity"
 
         fun newInstance(): ContainerFragment {
             val args = Bundle()

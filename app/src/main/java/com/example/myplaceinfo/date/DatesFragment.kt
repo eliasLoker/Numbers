@@ -13,7 +13,9 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.myplaceinfo.Controller
 import com.example.myplaceinfo.R
 import com.example.myplaceinfo.date.events.CountDaysEvent
+import com.example.myplaceinfo.date.interactor.DateInteractor
 import com.example.myplaceinfo.date.retrofit.DateIp
+import com.example.myplaceinfo.date.viewmodel.DateFactory
 import com.example.myplaceinfo.date.viewmodel.DateViewModel
 import com.example.myplaceinfo.date.viewmodel.DateViewModelImpl
 import com.example.myplaceinfo.dialogs.DatesDetailsDialog
@@ -33,7 +35,9 @@ class DatesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dateViewModel = ViewModelProviders.of(this).get(DateViewModelImpl::class.java)
+        dateViewModel = ViewModelProviders
+            .of(this, DateFactory(dateInteractor = DateInteractor()))
+            .get(DateViewModelImpl::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

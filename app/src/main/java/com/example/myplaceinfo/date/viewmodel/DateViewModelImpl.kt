@@ -5,13 +5,14 @@ import androidx.lifecycle.ViewModel
 import com.example.myplaceinfo.SingleLiveEvent
 import com.example.myplaceinfo.date.events.CountDaysEvent
 import com.example.myplaceinfo.date.events.ShowDateDialogEvent
+import com.example.myplaceinfo.date.interactor.DateInteractor
 
 /**
  * Created by Alexandr Mikhalev on 28.05.2019.
  *
  * @author Alexandr Mikhalev
  */
-class DateViewModelImpl : ViewModel(), DateViewModel {
+class DateViewModelImpl(dateInteractor: DateInteractor) : ViewModel(), DateViewModel {
     private val indexOfMonth: ObservableField<Int> = ObservableField(1)
     private val indexOfDay: ObservableField<Int> = ObservableField(1)
 
