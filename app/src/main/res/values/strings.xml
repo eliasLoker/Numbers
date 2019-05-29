@@ -5,6 +5,11 @@
     <string name="for_show_info_btn">show details</string>
     <string name="for_your_ip_text_view">Your IP:</string>
     <string name="random">random</string>
+
+    <!-- For Navigation drawer-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
     <string-array name="typelist">
         <item>Math</item>
         <item>Trivia</item>
