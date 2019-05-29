@@ -33,4 +33,6 @@ interface NumberViewModel {
 
   fun onResponseCallback(message: String?)
 
+  fun onClickTestButton()
+
 }

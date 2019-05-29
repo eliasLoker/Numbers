@@ -29,7 +29,7 @@ import retrofit2.Response
 class NumberFragment : Fragment() {
 
     private var mNumberViewModel: NumberViewModel? = null
-    private var mFragmentShowIpBinding: com.example.myplaceinfo.databinding.FragmentShowIpBinding? = null
+    private var mFragmentShowIpBinding: com.example.myplaceinfo.databinding.FragmentNumberBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,7 @@ class NumberFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mFragmentShowIpBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_show_ip, container, false)
+        mFragmentShowIpBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_number, container, false)
         mFragmentShowIpBinding!!.viewModel = mNumberViewModel
         init()
         return mFragmentShowIpBinding!!.root

@@ -76,4 +76,8 @@ class NumberViewModelImpl(numberInteractor: NumberInteractor) : ViewModel(), Num
         this.message = message
         Log.d("NVM", this.message)
     }
+
+    override fun onClickTestButton() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }
