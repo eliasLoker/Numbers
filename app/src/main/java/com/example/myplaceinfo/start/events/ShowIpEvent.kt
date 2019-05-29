@@ -5,4 +5,6 @@ package com.example.myplaceinfo.start.events
  *
  * @author Alexandr Mikhalev
  */
-class ShowIpEvent
+class ShowIpEvent(val type: String, val number: String) {
+
+}

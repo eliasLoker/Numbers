@@ -31,7 +31,7 @@ class StartFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mStartViewModel = ViewModelProviders.of(this).get<StartViewModelImpl>(StartViewModelImpl::class.java)
+        mStartViewModel = ViewModelProviders.of(this).get(StartViewModelImpl::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -42,11 +42,11 @@ class StartFragment : Fragment() {
     }
 
     private fun init() {
-        mStartViewModel!!.showIpEvent.observe(this, Observer { getMyIp(mStartViewModel!!.number.get()) })
+        mStartViewModel!!.showIpEvent.observe(this, Observer { getMyIp(it.type, it.number) })
     }
 
-    private fun getMyIp(number: String?) {
-        val messages = Controller.messageAPI.messages(number!!)
+    private fun getMyIp(type: String?, number: String?) {
+        val messages = Controller.messageAPI.messages(type!!, number!!)
 
         messages.enqueue(object : Callback<MessageIp> {
             override fun onFailure(call: Call<MessageIp>, t: Throwable) {
@@ -54,8 +54,6 @@ class StartFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<MessageIp>, response: Response<MessageIp>) {
-                //mStartViewModel!!.onResponseCallback(response.body()!!.text)
-                //Toast.makeText(context, response.body()!!.text, Toast.LENGTH_SHORT).show()
                 val showDetailsDialog = NumberDetailsDialog().newInstance(response.body()!!.text)
                 showDetailsDialog.show(childFragmentManager, "sdfsdfs")
             }
@@ -63,8 +61,6 @@ class StartFragment : Fragment() {
     }
 
     companion object {
-
-        private val TAG = "MainActivity"
 
         fun newInstance(): StartFragment {
             val args = Bundle()

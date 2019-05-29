@@ -6,10 +6,8 @@
     <string name="for_your_ip_text_view">Your IP:</string>
     <string name="random">random</string>
     <string-array name="typelist">
-        <item>Trivia</item>
-        <item>Year</item>
-        <item>Date</item>
         <item>Math</item>
+        <item>Trivia</item>
     </string-array>
 
     <string-array name="month_list">

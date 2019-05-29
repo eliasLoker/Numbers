@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.myplaceinfo.SingleLiveEvent
 import com.example.myplaceinfo.start.events.FragmentEvent
 import com.example.myplaceinfo.start.events.ShowIpEvent
+import java.lang.IllegalArgumentException
 import java.lang.NumberFormatException
 
 /**
@@ -16,13 +17,15 @@ class StartViewModelImpl : ViewModel(), StartViewModel {
 
     override val number: ObservableField<String> = ObservableField("0")
     override val progressBarState: ObservableField<Boolean> = ObservableField(false)
+
+    private val typeNumber: ObservableField<String> = ObservableField("math")
+
     override val showIpEvent: SingleLiveEvent<ShowIpEvent> = SingleLiveEvent()
-    override val fragmentEvent: SingleLiveEvent<FragmentEvent> = SingleLiveEvent()
 
     override fun onClickShowIpButton() {
         //progressBarState.set((!progressBarState.get())!!)
         progressBarState.set(true)
-        val ipEvent = ShowIpEvent()
+        val ipEvent = ShowIpEvent(typeNumber.get().toString(), number.get().toString())
         showIpEvent.postValue(ipEvent)
     }
 
@@ -61,5 +64,14 @@ class StartViewModelImpl : ViewModel(), StartViewModel {
     override fun onClickNull() {
         if (number.get().equals("0")) return
         this.number.set(number.get() + "0")
+    }
+
+    override fun onItemSelectedSpinnerCallback(index: Int) {
+        val type = when(index) {
+            0 -> "math"
+            1 -> "trivia"
+            else -> throw IllegalArgumentException()
+        }
+        typeNumber.set(type)
     }
 }

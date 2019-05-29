@@ -12,6 +12,6 @@ import retrofit2.http.Path
 interface MessageAPI {
 
     //@GET("random/year?json")
-    @GET("{number}/math?json")
-    fun messages(@Path("number")number: String): Call<MessageIp>
+    @GET("{number}/{type}?json")
+    fun messages(@Path("type")type: String, @Path("number")number: String): Call<MessageIp>
 }

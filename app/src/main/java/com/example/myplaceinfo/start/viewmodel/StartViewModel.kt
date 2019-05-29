@@ -18,8 +18,6 @@ interface StartViewModel {
 
   val showIpEvent: SingleLiveEvent<ShowIpEvent>
 
-  val fragmentEvent: SingleLiveEvent<FragmentEvent>
-
   fun onClickShowIpButton()
 
   fun onClickShowDetailsButton()
@@ -33,4 +31,6 @@ interface StartViewModel {
   fun onClickReset()
 
   fun onClickNull()
+
+  fun onItemSelectedSpinnerCallback(index: Int)
 }

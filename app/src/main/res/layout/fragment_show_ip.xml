@@ -20,6 +20,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                android:textAlignment="center"
+                android:onItemSelected="@{(a,b,v,c) -> viewModel.onItemSelectedSpinnerCallback(v)}"
                 android:entries="@array/typelist"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
