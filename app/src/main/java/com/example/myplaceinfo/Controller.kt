@@ -1,8 +1,8 @@
 package com.example.myplaceinfo
 
-import com.example.myplaceinfo.dates.retrofit.DateAPI
-import com.example.myplaceinfo.start.retrofit.MessageAPI
-import com.example.myplaceinfo.years.retrofit.YearsAPI
+import com.example.myplaceinfo.date.retrofit.DateAPI
+import com.example.myplaceinfo.number.retrofit.MessageAPI
+import com.example.myplaceinfo.year.retrofit.YearsAPI
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

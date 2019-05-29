@@ -5,7 +5,7 @@
     <data>
         <variable
                 name="viewModel"
-                type="com.example.myplaceinfo.start.viewmodel.StartViewModel"/>
+                type="com.example.myplaceinfo.number.viewmodel.NumberViewModel"/>
         <import type="android.view.View"/>
     </data>
 

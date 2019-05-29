@@ -34,16 +34,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
 
-
-
-
         val fragment = supportFragmentManager.findFragmentById(R.id.container_for_fragments)
         if (fragment == null) {
                 supportFragmentManager.beginTransaction()
                 .add(R.id.container_for_fragments, ContainerFragment.newInstance())
                 .commit()
         }
-
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

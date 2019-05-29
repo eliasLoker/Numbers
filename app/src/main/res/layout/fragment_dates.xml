@@ -3,7 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="viewModel" type="com.example.myplaceinfo.dates.viewmodel.DatesViewModel"/>
+        <variable name="viewModel" type="com.example.myplaceinfo.date.viewmodel.DateViewModel"/>
         <import type="android.view.View"/>
     </data>
 

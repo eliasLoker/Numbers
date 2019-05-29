@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="viewModel" type="com.example.myplaceinfo.years.viewmodel.YearsViewModel"/>
+        <variable name="viewModel" type="com.example.myplaceinfo.year.viewmodel.YearViewModel"/>
         <import type="android.view.View"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
