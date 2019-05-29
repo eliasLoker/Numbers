@@ -1,4 +1,4 @@
-package com.example.myplaceinfo.dialogs
+package com.example.myplaceinfo.number
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,8 +21,11 @@ import com.example.myplaceinfo.R
 class NumberDetailsDialog: DialogFragment(), View.OnClickListener {
 
     private lateinit var closeView: ImageView
+    private lateinit var favouritesView: ImageView
     private var infoTextView: TextView? = null
     private var message: String? = ""
+
+    private lateinit var saveToDBListener: SaveToDBListener
 
     private val KEY: String = "KEY"
 
@@ -31,6 +34,9 @@ class NumberDetailsDialog: DialogFragment(), View.OnClickListener {
         arguments?.let {
             this.message = it.getString(KEY)
         }
+        if (parentFragment is SaveToDBListener) {
+            saveToDBListener = parentFragment as SaveToDBListener
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -38,9 +44,11 @@ class NumberDetailsDialog: DialogFragment(), View.OnClickListener {
         val view: View = inflater.inflate(R.layout.dialog_number_details, container, false)
         closeView = view.findViewById(R.id.close_view)
         infoTextView = view.findViewById(R.id.dialog_header)
+        favouritesView = view.findViewById(R.id.favourites)
 
         infoTextView!!.text = message
         closeView.setOnClickListener(this)
+        favouritesView.setOnClickListener(this)
         return view
         //return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -62,6 +70,7 @@ class NumberDetailsDialog: DialogFragment(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0!!.id) {
             R.id.close_view -> dialog!!.dismiss()
+            R.id.favourites -> saveToDBListener.save()
         }
     }
 
@@ -71,5 +80,9 @@ class NumberDetailsDialog: DialogFragment(), View.OnClickListener {
         val fragment = NumberDetailsDialog()
         fragment.arguments = args
         return fragment
+    }
+
+    interface SaveToDBListener {
+        fun save()
     }
 }

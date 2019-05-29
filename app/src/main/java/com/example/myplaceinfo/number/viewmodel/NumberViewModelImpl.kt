@@ -81,5 +81,6 @@ class NumberViewModelImpl(val numberInteractor: NumberInteractor) : ViewModel(),
     override fun onClickTestButton() {
         val numberEntity: NumberEntity = NumberEntity(number.get().toString(), message!!)
         numberInteractor.insertInDB(numberEntity).subscribe()
+        Log.d("NVM", "onClickTestButton")
     }
 }
