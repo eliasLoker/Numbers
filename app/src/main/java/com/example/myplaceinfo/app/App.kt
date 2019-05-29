@@ -11,7 +11,9 @@ import com.example.myplaceinfo.data.NumberDatabase
  */
 class App : Application()  {
 
+    /*
     lateinit var database: NumberDatabase
+    lateinit var instance: App
 
     override fun onCreate() {
         super.onCreate()
@@ -19,6 +21,9 @@ class App : Application()  {
         database = Room.databaseBuilder(this, NumberDatabase::class.java, "database").build()
     }
     companion object {
-        lateinit var instance:App
+        fun getInstance(): App {
+            return
+        }
     }
+    */
 }

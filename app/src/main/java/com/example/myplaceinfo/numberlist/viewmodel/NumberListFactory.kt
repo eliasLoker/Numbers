@@ -2,7 +2,7 @@ package com.example.myplaceinfo.numberlist.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.myplaceinfo.number.interactor.NumberInteractor
+import com.example.myplaceinfo.numberlist.interactor.NumberListInteractor
 import org.jetbrains.annotations.NotNull
 
 /**
@@ -10,9 +10,9 @@ import org.jetbrains.annotations.NotNull
  *
  * @author Alexandr Mikhalev
  */
-class NumberListFactory(val numberInteractor: NumberInteractor) : ViewModelProvider.NewInstanceFactory() {
+class NumberListFactory(val numberListInteractor: NumberListInteractor) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(@NotNull modelClass:Class<T>): T {
-        return NumberListViewModelImpl(numberInteractor) as T
+        return NumberListViewModelImpl(numberListInteractor) as T
     }
 }

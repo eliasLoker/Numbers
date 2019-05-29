@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.example.myplaceinfo.SingleLiveEvent
+import com.example.myplaceinfo.data.NumberEntity
 import com.example.myplaceinfo.number.events.ShowIpEvent
 import com.example.myplaceinfo.number.interactor.NumberInteractor
 import java.lang.IllegalArgumentException
@@ -14,7 +15,7 @@ import java.lang.NumberFormatException
  *
  * @author Alexandr Mikhalev
  */
-class NumberViewModelImpl(numberInteractor: NumberInteractor) : ViewModel(), NumberViewModel {
+class NumberViewModelImpl(val numberInteractor: NumberInteractor) : ViewModel(), NumberViewModel {
 
     override val number: ObservableField<String> = ObservableField("0")
     override val progressBarState: ObservableField<Boolean> = ObservableField(false)
@@ -78,6 +79,7 @@ class NumberViewModelImpl(numberInteractor: NumberInteractor) : ViewModel(), Num
     }
 
     override fun onClickTestButton() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val numberEntity: NumberEntity = NumberEntity(1, number.get().toString(), message!!)
+        numberInteractor.insertInDB(numberEntity).subscribe()
     }
 }

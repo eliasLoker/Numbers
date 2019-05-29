@@ -1,9 +1,20 @@
 package com.example.myplaceinfo.numberlist.interactor
 
+import com.example.myplaceinfo.data.NumberDao
+import com.example.myplaceinfo.data.NumberEntity
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+
 /**
  * Created by Alexandr Mikhalev on 29.05.2019.
  *
  * @author Alexandr Mikhalev
  */
-class NumberListInteractor {
+class NumberListInteractor(val numberDao: NumberDao) {
+    fun getAll(): Single<NumberEntity> {
+        return numberDao.getAll()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 }

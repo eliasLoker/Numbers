@@ -11,6 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.myplaceinfo.Controller
 import com.example.myplaceinfo.R
+import com.example.myplaceinfo.app.App
+import com.example.myplaceinfo.data.NumberDao
+import com.example.myplaceinfo.data.NumberDatabase
 import com.example.myplaceinfo.dialogs.NumberDetailsDialog
 import com.example.myplaceinfo.number.interactor.NumberInteractor
 import com.example.myplaceinfo.number.retrofit.MessageIp
@@ -33,8 +36,9 @@ class NumberFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val numberDao = NumberDatabase.getNumberDatabase(activity!!.applicationContext)!!.numberDao()
         mNumberViewModel = ViewModelProviders
-            .of(this, NumberFactory(numberInteractor = NumberInteractor()))
+            .of(this, NumberFactory(numberInteractor = NumberInteractor(numberDao)))
             .get(NumberViewModelImpl::class.java)
     }
 
