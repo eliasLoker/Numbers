@@ -4,6 +4,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.example.myplaceinfo.SingleLiveEvent
 import com.example.myplaceinfo.year.events.ShowYearDialogEvent
+import com.example.myplaceinfo.year.interactor.YearInteractor
 import java.lang.IllegalArgumentException
 
 /**
@@ -11,7 +12,7 @@ import java.lang.IllegalArgumentException
  *
  * @author Alexandr Mikhalev
  */
-class YearViewModelImpl: ViewModel(), YearViewModel {
+class YearViewModelImpl(yearInteractor: YearInteractor): ViewModel(), YearViewModel {
 
     override val isSeekBarEnabled: ObservableField<Boolean> = ObservableField(true)
 

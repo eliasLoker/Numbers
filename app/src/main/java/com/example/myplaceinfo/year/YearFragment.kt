@@ -12,7 +12,9 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.myplaceinfo.Controller
 import com.example.myplaceinfo.R
 import com.example.myplaceinfo.dialogs.YearDetailsDialog
+import com.example.myplaceinfo.year.interactor.YearInteractor
 import com.example.myplaceinfo.year.retrofit.YearsIp
+import com.example.myplaceinfo.year.viewmodel.YearFactory
 import com.example.myplaceinfo.year.viewmodel.YearViewModel
 import com.example.myplaceinfo.year.viewmodel.YearViewModelImpl
 import retrofit2.Call
@@ -30,11 +32,12 @@ class YearFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        yearViewModel = ViewModelProviders.of(this).get(YearViewModelImpl::class.java)
+        yearViewModel = ViewModelProviders
+            .of(this, YearFactory(yearInteractor = YearInteractor()))
+            .get(YearViewModelImpl::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        //return super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_years, container, false)
         binding!!.viewModel = yearViewModel
         init()
@@ -61,8 +64,6 @@ class YearFragment : Fragment() {
     }
 
     companion object {
-
-        private val TAG = "MainActivity"
 
         fun newInstance(): YearFragment {
             val args = Bundle()
