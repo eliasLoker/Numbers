@@ -9,4 +9,7 @@
     
     <color name="colorBlue">#1E90FF</color>
     <color name="colorSteelBlue">#4682B4</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGray">#D3D3D3</color>
+    <color name="colorDarkGray">#696969</color>
 </resources>
