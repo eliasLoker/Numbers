@@ -10,15 +10,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.myplaceinfo.AddFavouritesButtonListener
 import com.example.myplaceinfo.Controller
 import com.example.myplaceinfo.R
+import com.example.myplaceinfo.data.NumberDatabase
 import com.example.myplaceinfo.date.events.CountDaysEvent
 import com.example.myplaceinfo.date.interactor.DateInteractor
 import com.example.myplaceinfo.date.retrofit.DateIp
 import com.example.myplaceinfo.date.viewmodel.DateFactory
 import com.example.myplaceinfo.date.viewmodel.DateViewModel
 import com.example.myplaceinfo.date.viewmodel.DateViewModelImpl
-import com.example.myplaceinfo.dialogs.DatesDetailsDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,15 +29,16 @@ import retrofit2.Response
  *
  * @author Alexandr Mikhalev
  */
-class DatesFragment : Fragment() {
+class DateFragment : Fragment(), AddFavouritesButtonListener {
 
     private var binding: com.example.myplaceinfo.databinding.FragmentDatesBinding? = null
     private var dateViewModel: DateViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val numberDao = NumberDatabase.getNumberDatabase(activity!!.applicationContext)!!.numberDao()
         dateViewModel = ViewModelProviders
-            .of(this, DateFactory(dateInteractor = DateInteractor()))
+            .of(this, DateFactory(dateInteractor = DateInteractor(numberDao)))
             .get(DateViewModelImpl::class.java)
     }
 
@@ -76,17 +78,22 @@ class DatesFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<DateIp>, response: Response<DateIp>) {
-                val showDetailsDialog = DatesDetailsDialog().newInstance(response.body()!!.text)
+                val showDetailsDialog = DateDetailsDialog().newInstance(response.body()!!.text)
                 showDetailsDialog.show(childFragmentManager, "sdfsdfs")
+                dateViewModel!!.onResponseCallback(response.body()!!.text)
             }
         })
     }
 
+    override fun onClickFavouritesButton() {
+        dateViewModel!!.onClickFavouritesButtonCallback()
+    }
+
     companion object {
 
-        fun newInstance(): DatesFragment {
+        fun newInstance(): DateFragment {
             val args = Bundle()
-            val fragment = DatesFragment()
+            val fragment = DateFragment()
             fragment.arguments = args
             return fragment
         }

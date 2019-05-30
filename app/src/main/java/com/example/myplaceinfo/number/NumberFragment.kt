@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.myplaceinfo.AddFavouritesButtonListener
 import com.example.myplaceinfo.Controller
 import com.example.myplaceinfo.R
 import com.example.myplaceinfo.data.NumberDatabase
@@ -26,7 +27,7 @@ import retrofit2.Response
  *
  * @author Alexandr Mikhalev
  */
-class NumberFragment : Fragment(), NumberDetailsDialog.AddFavouritesButtonListener {
+class NumberFragment : Fragment(), AddFavouritesButtonListener {
 
     private var mNumberViewModel: NumberViewModel? = null
     private var mFragmentNumberBinding: com.example.myplaceinfo.databinding.FragmentNumberBinding? = null

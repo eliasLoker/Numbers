@@ -1,10 +1,11 @@
-package com.example.myplaceinfo.dialogs
+package com.example.myplaceinfo.date
 
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
+import com.example.myplaceinfo.AddFavouritesButtonListener
 import com.example.myplaceinfo.R
 
 /**
@@ -12,10 +13,13 @@ import com.example.myplaceinfo.R
  *
  * @author Alexandr Mikhalev
  */
-class DatesDetailsDialog : DialogFragment(), View.OnClickListener {
+class DateDetailsDialog : DialogFragment(), View.OnClickListener {
     private lateinit var closeView: ImageView
+    private lateinit var favouritesView: ImageView
     private var infoTextView: TextView? = null
     private var message: String? = ""
+
+    private lateinit var addFavouritesButtonListener: AddFavouritesButtonListener
 
     private val KEY: String = "KEY"
 
@@ -24,6 +28,10 @@ class DatesDetailsDialog : DialogFragment(), View.OnClickListener {
         arguments?.let {
             this.message = it.getString(KEY)
         }
+
+        if (parentFragment is AddFavouritesButtonListener) {
+            addFavouritesButtonListener = parentFragment as AddFavouritesButtonListener
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -31,9 +39,11 @@ class DatesDetailsDialog : DialogFragment(), View.OnClickListener {
         val view: View = inflater.inflate(R.layout.dialog_dates_details, container, false)
         closeView = view.findViewById(R.id.close_view)
         infoTextView = view.findViewById(R.id.dialog_header)
+        favouritesView = view.findViewById(R.id.favourites)
 
         infoTextView!!.text = message
         closeView.setOnClickListener(this)
+        favouritesView.setOnClickListener(this)
         return view
     }
 
@@ -52,15 +62,23 @@ class DatesDetailsDialog : DialogFragment(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
+        /*
         when (p0!!.id) {
             R.id.close_view -> dialog!!.dismiss()
         }
+        */
+        if (p0!!.id == R.id.close_view) {
+            dialog!!.dismiss()
+        } else if (p0.id == R.id.favourites) {
+            addFavouritesButtonListener.onClickFavouritesButton()
+            this.favouritesView.visibility = View.INVISIBLE
+        }
     }
 
-    fun newInstance(message: String?): DatesDetailsDialog {
+    fun newInstance(message: String?): DateDetailsDialog {
         val args = Bundle()
         args.putString(KEY, message)
-        val fragment = DatesDetailsDialog()
+        val fragment = DateDetailsDialog()
         fragment.arguments = args
         return fragment
     }

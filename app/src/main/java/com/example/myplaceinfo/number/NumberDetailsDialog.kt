@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import android.view.Gravity
 import android.view.WindowManager
+import com.example.myplaceinfo.AddFavouritesButtonListener
 import com.example.myplaceinfo.R
 
 
@@ -88,9 +89,5 @@ class NumberDetailsDialog: DialogFragment(), View.OnClickListener {
         val fragment = NumberDetailsDialog()
         fragment.arguments = args
         return fragment
-    }
-
-    interface AddFavouritesButtonListener {
-        fun onClickFavouritesButton()
     }
 }

@@ -3,6 +3,7 @@ package com.example.myplaceinfo.date.viewmodel
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.example.myplaceinfo.SingleLiveEvent
+import com.example.myplaceinfo.data.NumberEntity
 import com.example.myplaceinfo.date.events.CountDaysEvent
 import com.example.myplaceinfo.date.events.ShowDateDialogEvent
 import com.example.myplaceinfo.date.interactor.DateInteractor
@@ -12,9 +13,11 @@ import com.example.myplaceinfo.date.interactor.DateInteractor
  *
  * @author Alexandr Mikhalev
  */
-class DateViewModelImpl(dateInteractor: DateInteractor) : ViewModel(), DateViewModel {
+class DateViewModelImpl(val dateInteractor: DateInteractor) : ViewModel(), DateViewModel {
     private val indexOfMonth: ObservableField<Int> = ObservableField(1)
     private val indexOfDay: ObservableField<Int> = ObservableField(1)
+
+    private var message: String? = null
 
     override val showDateDialogEvent: SingleLiveEvent<ShowDateDialogEvent> = SingleLiveEvent()
     override val checkedChangedEventMonth: SingleLiveEvent<CountDaysEvent.DayType> = SingleLiveEvent()
@@ -38,5 +41,14 @@ class DateViewModelImpl(dateInteractor: DateInteractor) : ViewModel(), DateViewM
     override fun onClickShowButton() {
         showDateDialogEvent
             .postValue(value = ShowDateDialogEvent(indexOfMonth.get().toString(), indexOfDay.get().toString()))
+    }
+
+    override fun onResponseCallback(message: String?) {
+        this.message = message
+    }
+
+    override fun onClickFavouritesButtonCallback() {
+        val numberEntity = NumberEntity("Date", "${indexOfMonth.get()}/${indexOfDay.get()}", message!!)
+        dateInteractor.insertInDB(numberEntity).subscribe()
     }
 }

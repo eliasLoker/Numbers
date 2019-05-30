@@ -20,4 +20,8 @@ interface DateViewModel {
     fun onItemSelectedMonthCallback(index: Int)
 
     fun onItemSelectedDayCallback(index: Int)
+
+    fun onResponseCallback(message: String?)
+
+    fun onClickFavouritesButtonCallback()
 }
