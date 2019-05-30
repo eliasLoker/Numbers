@@ -13,11 +13,9 @@ import io.reactivex.schedulers.Schedulers
  * @author Alexandr Mikhalev
  */
 class NumberListInteractor(val numberDao: NumberDao) {
-    fun getAll(): Single<NumberEntity> {
+    fun getAll(): Single<List<NumberEntity>> {
         return numberDao.getAll()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            //.map { Function<in List<NumberEntity>!, > }
-            .map { t: List<NumberEntity> -> t[t.size - 1] }
     }
 }
