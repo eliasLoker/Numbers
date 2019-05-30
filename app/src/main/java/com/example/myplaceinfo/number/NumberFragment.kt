@@ -29,7 +29,7 @@ import retrofit2.Response
 class NumberFragment : Fragment(), NumberDetailsDialog.AddFavouritesButtonListener {
 
     private var mNumberViewModel: NumberViewModel? = null
-    private var mFragmentShowIpBinding: com.example.myplaceinfo.databinding.FragmentNumberBinding? = null
+    private var mFragmentNumberBinding: com.example.myplaceinfo.databinding.FragmentNumberBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +40,10 @@ class NumberFragment : Fragment(), NumberDetailsDialog.AddFavouritesButtonListen
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mFragmentShowIpBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_number, container, false)
-        mFragmentShowIpBinding!!.viewModel = mNumberViewModel
+        mFragmentNumberBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_number, container, false)
+        mFragmentNumberBinding!!.viewModel = mNumberViewModel
         init()
-        return mFragmentShowIpBinding!!.root
+        return mFragmentNumberBinding!!.root
     }
 
     private fun init() {
@@ -67,7 +67,7 @@ class NumberFragment : Fragment(), NumberDetailsDialog.AddFavouritesButtonListen
     }
 
     override fun onClickFavouritesButton() {
-        mNumberViewModel!!.onClickTestButton()
+        mNumberViewModel!!.onClickFavouritesButtonCallback(mFragmentNumberBinding!!.spinner.selectedItem.toString())
     }
 
     companion object {

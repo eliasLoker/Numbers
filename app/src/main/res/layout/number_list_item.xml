@@ -16,7 +16,7 @@
                 android:textSize="30sp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:text="ID: "
+                android:text="Type: "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="id"/>
@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30sp"
-                android:text="@{String.valueOf(number.id)}"
+                android:text="@{String.valueOf(number.type)}"
                 android:layout_marginStart="10dp"
                 app:layout_constraintBottom_toBottomOf="@id/id_header_text_view"
                 app:layout_constraintStart_toEndOf="@id/id_header_text_view"
@@ -39,7 +39,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:textSize="30sp"
-                android:text="@{number.name}"
+                android:text="@{number.numberStr}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="555"/>

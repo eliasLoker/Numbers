@@ -32,10 +32,6 @@ class NumberViewModelImpl(val numberInteractor: NumberInteractor) : ViewModel(),
         showIpEvent.postValue(ipEvent)
     }
 
-    override fun onClickShowDetailsButton() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     override fun onClickNumberButton(number: Int) {
         if (this.number.get()!!.length > 10) return
         if (this.number.get().equals("0")) {
@@ -78,9 +74,9 @@ class NumberViewModelImpl(val numberInteractor: NumberInteractor) : ViewModel(),
         Log.d("NVM", this.message)
     }
 
-    override fun onClickTestButton() {
-        val numberEntity: NumberEntity = NumberEntity(number.get().toString(), message!!)
+    override fun onClickFavouritesButtonCallback(type: String) {
+        val numberEntity = NumberEntity(type, number.get()!!, message!!)
         numberInteractor.insertInDB(numberEntity).subscribe()
-        Log.d("NVM", "onClickTestButton")
+        Log.d("NVM", "onClickFavouritesButtonCallback")
     }
 }

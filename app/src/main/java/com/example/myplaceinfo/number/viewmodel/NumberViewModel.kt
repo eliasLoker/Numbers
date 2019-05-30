@@ -19,8 +19,6 @@ interface NumberViewModel {
 
   fun onClickShowIpButton()
 
-  fun onClickShowDetailsButton()
-
   fun onClickNumberButton(number: Int)
 
   fun onClickRandomButton(str: String)
@@ -33,6 +31,6 @@ interface NumberViewModel {
 
   fun onResponseCallback(message: String?)
 
-  fun onClickTestButton()
+  fun onClickFavouritesButtonCallback(type: String)
 
 }

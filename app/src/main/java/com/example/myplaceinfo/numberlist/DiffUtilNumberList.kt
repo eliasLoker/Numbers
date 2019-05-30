@@ -30,7 +30,7 @@ class DiffUtilNumberList(private val oldList: List<NumberEntity>, private val ne
         var isSame = true
         for (i in 0 until newList.size)
         {
-            if (!((oldItem.name == newItem.name)&&(oldItem.text == newItem.text))) isSame = false
+            if (!((oldItem.numberStr == newItem.numberStr)&&(oldItem.text == newItem.text))) isSame = false
         }
         return isSame
     }
