@@ -3,6 +3,7 @@ package com.example.myplaceinfo.year.viewmodel
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.example.myplaceinfo.SingleLiveEvent
+import com.example.myplaceinfo.data.NumberEntity
 import com.example.myplaceinfo.year.events.ShowYearDialogEvent
 import com.example.myplaceinfo.year.interactor.YearInteractor
 import java.lang.IllegalArgumentException
@@ -12,13 +13,15 @@ import java.lang.IllegalArgumentException
  *
  * @author Alexandr Mikhalev
  */
-class YearViewModelImpl(yearInteractor: YearInteractor): ViewModel(), YearViewModel {
+class YearViewModelImpl(val yearInteractor: YearInteractor): ViewModel(), YearViewModel {
 
     override val isSeekBarEnabled: ObservableField<Boolean> = ObservableField(true)
 
     override val editText: ObservableField<String> = ObservableField("")
 
-    override val textSeek: ObservableField<String> = ObservableField("SIGN")
+    override val textSeek: ObservableField<String> = ObservableField("0")
+
+    private var message: String? = null
 
     override val yearDialogEvent: SingleLiveEvent<ShowYearDialogEvent> = SingleLiveEvent()
 
@@ -37,5 +40,18 @@ class YearViewModelImpl(yearInteractor: YearInteractor): ViewModel(), YearViewMo
             null -> throw IllegalArgumentException()
         }
         yearDialogEvent.postValue(showYearDialogEvent)
+    }
+
+    override fun onResponseCallback(message: String?) {
+        this.message = message
+    }
+
+    override fun onClickFavouritesButtonCallback() {
+        val numberEntity = when(isSeekBarEnabled.get()) {
+            true -> NumberEntity("Year", textSeek.get()!!, message!!)
+            false -> NumberEntity("Year", editText.get()!!, message!!)
+            else -> throw IllegalArgumentException()
+        }
+        yearInteractor.insertInDB(numberEntity).subscribe()
     }
 }

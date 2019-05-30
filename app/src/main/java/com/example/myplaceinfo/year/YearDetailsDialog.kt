@@ -1,10 +1,11 @@
-package com.example.myplaceinfo.dialogs
+package com.example.myplaceinfo.year
 
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
+import com.example.myplaceinfo.AddFavouritesButtonListener
 import com.example.myplaceinfo.R
 
 /**
@@ -15,7 +16,10 @@ import com.example.myplaceinfo.R
 class YearDetailsDialog : DialogFragment(), View.OnClickListener {
     private lateinit var closeView: ImageView
     private var infoTextView: TextView? = null
+    private lateinit var favouritesView: ImageView
     private var message: String? = ""
+
+    private lateinit var addFavouritesButtonListener: AddFavouritesButtonListener
 
     private val KEY: String = "KEY"
 
@@ -24,6 +28,9 @@ class YearDetailsDialog : DialogFragment(), View.OnClickListener {
         arguments?.let {
             this.message = it.getString(KEY)
         }
+        if (parentFragment is AddFavouritesButtonListener) {
+            addFavouritesButtonListener = parentFragment as AddFavouritesButtonListener
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -31,9 +38,11 @@ class YearDetailsDialog : DialogFragment(), View.OnClickListener {
         val view: View = inflater.inflate(R.layout.dialog_year_details, container, false)
         closeView = view.findViewById(R.id.close_view)
         infoTextView = view.findViewById(R.id.dialog_header)
+        favouritesView = view.findViewById(R.id.favourites)
 
         infoTextView!!.text = message
         closeView.setOnClickListener(this)
+        favouritesView.setOnClickListener(this)
         return view
         //return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -53,8 +62,11 @@ class YearDetailsDialog : DialogFragment(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-        when (p0!!.id) {
-            R.id.close_view -> dialog!!.dismiss()
+        if (p0!!.id == R.id.close_view) {
+            dialog!!.dismiss()
+        } else if (p0.id == R.id.favourites) {
+            addFavouritesButtonListener.onClickFavouritesButton()
+            this.favouritesView.visibility = View.INVISIBLE
         }
     }
 

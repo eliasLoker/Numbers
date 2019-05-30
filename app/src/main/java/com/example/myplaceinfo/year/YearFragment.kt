@@ -9,9 +9,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.myplaceinfo.AddFavouritesButtonListener
 import com.example.myplaceinfo.Controller
 import com.example.myplaceinfo.R
-import com.example.myplaceinfo.dialogs.YearDetailsDialog
+import com.example.myplaceinfo.data.NumberDatabase
 import com.example.myplaceinfo.year.interactor.YearInteractor
 import com.example.myplaceinfo.year.retrofit.YearsIp
 import com.example.myplaceinfo.year.viewmodel.YearFactory
@@ -26,14 +27,15 @@ import retrofit2.Response
  *
  * @author Alexandr Mikhalev
  */
-class YearFragment : Fragment() {
+class YearFragment : Fragment(), AddFavouritesButtonListener {
     private var binding: com.example.myplaceinfo.databinding.FragmentYearsBinding? = null
     private var yearViewModel: YearViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val numberDao = NumberDatabase.getNumberDatabase(activity!!.applicationContext)!!.numberDao()
         yearViewModel = ViewModelProviders
-            .of(this, YearFactory(yearInteractor = YearInteractor()))
+            .of(this, YearFactory(yearInteractor = YearInteractor(numberDao)))
             .get(YearViewModelImpl::class.java)
     }
 
@@ -59,8 +61,13 @@ class YearFragment : Fragment() {
             override fun onResponse(call: Call<YearsIp>, response: Response<YearsIp>) {
                 val showDetailsDialog = YearDetailsDialog().newInstance(response.body()!!.text)
                 showDetailsDialog.show(childFragmentManager, "sdfsdfs")
+                yearViewModel!!.onResponseCallback(response.body()!!.text)
             }
         })
+    }
+
+    override fun onClickFavouritesButton() {
+        yearViewModel!!.onClickFavouritesButtonCallback()
     }
 
     companion object {

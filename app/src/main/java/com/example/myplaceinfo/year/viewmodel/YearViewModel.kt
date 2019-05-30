@@ -24,4 +24,8 @@ interface YearViewModel {
     fun onCheckedChangedCallback(checked: Boolean)
 
     fun onClickShowButton()
+
+    fun onResponseCallback(message: String?)
+
+    fun onClickFavouritesButtonCallback()
 }
