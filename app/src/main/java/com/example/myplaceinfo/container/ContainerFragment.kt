@@ -45,7 +45,7 @@ class ContainerFragment : Fragment() {
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
-        val adapter = ViewPagerAdapter(activity!!.supportFragmentManager)
+        val adapter = ViewPagerAdapter(childFragmentManager)
         adapter.addFragment(NumberFragment.newInstance(), "Number")
         adapter.addFragment(DatesFragment.newInstance(), "Date")
         adapter.addFragment(YearFragment.newInstance(), "Year")

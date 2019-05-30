@@ -4,6 +4,7 @@ import com.example.myplaceinfo.data.NumberDao
 import com.example.myplaceinfo.data.NumberEntity
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
 
 /**
@@ -16,5 +17,7 @@ class NumberListInteractor(val numberDao: NumberDao) {
         return numberDao.getAll()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            //.map { Function<in List<NumberEntity>!, > }
+            .map { t: List<NumberEntity> -> t[t.size - 1] }
     }
 }

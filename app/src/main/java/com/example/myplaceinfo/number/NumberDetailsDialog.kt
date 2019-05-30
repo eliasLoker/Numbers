@@ -25,7 +25,7 @@ class NumberDetailsDialog: DialogFragment(), View.OnClickListener {
     private var infoTextView: TextView? = null
     private var message: String? = ""
 
-    private lateinit var saveToDBListener: SaveToDBListener
+    private lateinit var addFavouritesButtonListener: AddFavouritesButtonListener
 
     private val KEY: String = "KEY"
 
@@ -34,8 +34,8 @@ class NumberDetailsDialog: DialogFragment(), View.OnClickListener {
         arguments?.let {
             this.message = it.getString(KEY)
         }
-        if (parentFragment is SaveToDBListener) {
-            saveToDBListener = parentFragment as SaveToDBListener
+        if (parentFragment is AddFavouritesButtonListener) {
+            addFavouritesButtonListener = parentFragment as AddFavouritesButtonListener
         }
     }
 
@@ -68,9 +68,17 @@ class NumberDetailsDialog: DialogFragment(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
+        /*
         when(p0!!.id) {
             R.id.close_view -> dialog!!.dismiss()
-            R.id.favourites -> saveToDBListener.save()
+            R.id.favourites -> addFavouritesButtonListener.onClickFavouritesButton(), this.favouritesView.visibility = View.INVISIBLE
+        }
+        */
+        if (p0!!.id == R.id.close_view) {
+            dialog!!.dismiss()
+        } else if (p0.id == R.id.favourites) {
+            addFavouritesButtonListener.onClickFavouritesButton()
+            this.favouritesView.visibility = View.INVISIBLE
         }
     }
 
@@ -82,7 +90,7 @@ class NumberDetailsDialog: DialogFragment(), View.OnClickListener {
         return fragment
     }
 
-    interface SaveToDBListener {
-        fun save()
+    interface AddFavouritesButtonListener {
+        fun onClickFavouritesButton()
     }
 }

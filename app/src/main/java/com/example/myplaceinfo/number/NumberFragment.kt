@@ -26,7 +26,7 @@ import retrofit2.Response
  *
  * @author Alexandr Mikhalev
  */
-class NumberFragment : Fragment(), NumberDetailsDialog.SaveToDBListener {
+class NumberFragment : Fragment(), NumberDetailsDialog.AddFavouritesButtonListener {
 
     private var mNumberViewModel: NumberViewModel? = null
     private var mFragmentShowIpBinding: com.example.myplaceinfo.databinding.FragmentNumberBinding? = null
@@ -66,7 +66,7 @@ class NumberFragment : Fragment(), NumberDetailsDialog.SaveToDBListener {
         })
     }
 
-    override fun save() {
+    override fun onClickFavouritesButton() {
         mNumberViewModel!!.onClickTestButton()
     }
 

@@ -15,7 +15,7 @@ import io.reactivex.Single
 interface NumberDao {
 
     @Query("SELECT * FROM NumberEntity")
-    fun getAll(): Single<NumberEntity>
+    fun getAll(): Single<List<NumberEntity>>
 
     @Insert
     fun insert(numberEntity: NumberEntity): Completable
