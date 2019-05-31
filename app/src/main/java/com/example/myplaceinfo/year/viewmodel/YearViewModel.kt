@@ -27,5 +27,5 @@ interface YearViewModel {
 
     fun onResponseCallback(message: String?)
 
-    fun onClickFavouritesButtonCallback()
+    fun onClickDialogCloseButtonListenerCallback(isSaved: Boolean)
 }

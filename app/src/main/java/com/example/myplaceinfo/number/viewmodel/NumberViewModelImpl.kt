@@ -74,9 +74,9 @@ class NumberViewModelImpl(val numberInteractor: NumberInteractor) : ViewModel(),
         Log.d("NVM", this.message)
     }
 
-    override fun onClickFavouritesButtonCallback(type: String) {
+    override fun onClickDialogCloseButtonListenerCallback(isSaved: Boolean, type: String) {
+        if (!isSaved) return
         val numberEntity = NumberEntity(type, number.get()!!, message!!)
         numberInteractor.insertInDB(numberEntity).subscribe()
-        Log.d("NVM", "onClickFavouritesButtonCallback")
     }
 }

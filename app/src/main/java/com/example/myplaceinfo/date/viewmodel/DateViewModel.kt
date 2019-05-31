@@ -23,5 +23,5 @@ interface DateViewModel {
 
     fun onResponseCallback(message: String?)
 
-    fun onClickFavouritesButtonCallback()
+    fun onClickDialogCloseButtonListenerCallback(isSaved: Boolean)
 }

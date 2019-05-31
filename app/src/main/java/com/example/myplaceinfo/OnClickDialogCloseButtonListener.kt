@@ -5,6 +5,6 @@ package com.example.myplaceinfo
  *
  * @author Alexandr Mikhalev
  */
-interface AddFavouritesButtonListener {
-    fun onClickFavouritesButton()
+interface OnClickDialogCloseButtonListener {
+    fun onClickCloseButton(isSaved: Boolean)
 }

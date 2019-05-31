@@ -9,8 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.myplaceinfo.AddFavouritesButtonListener
 import com.example.myplaceinfo.Controller
+import com.example.myplaceinfo.OnClickDialogCloseButtonListener
 import com.example.myplaceinfo.R
 import com.example.myplaceinfo.data.NumberDatabase
 import com.example.myplaceinfo.number.interactor.NumberInteractor
@@ -27,7 +27,7 @@ import retrofit2.Response
  *
  * @author Alexandr Mikhalev
  */
-class NumberFragment : Fragment(), AddFavouritesButtonListener {
+class NumberFragment : Fragment(), OnClickDialogCloseButtonListener {
 
     private var mNumberViewModel: NumberViewModel? = null
     private var mFragmentNumberBinding: com.example.myplaceinfo.databinding.FragmentNumberBinding? = null
@@ -60,15 +60,18 @@ class NumberFragment : Fragment(), AddFavouritesButtonListener {
             }
 
             override fun onResponse(call: Call<MessageIp>, response: Response<MessageIp>) {
-                mNumberViewModel!!.onResponseCallback(response.body()!!.text)
+                mNumberViewModel!!.onResponseCallback(response.body()!!.text ?: "")
                 val showDetailsDialog = NumberDetailsDialog().newInstance(response.body()!!.text)
                 showDetailsDialog.show(childFragmentManager, "sdfsdfs")
             }
         })
     }
 
-    override fun onClickFavouritesButton() {
-        mNumberViewModel!!.onClickFavouritesButtonCallback(mFragmentNumberBinding!!.spinner.selectedItem.toString())
+    override fun onClickCloseButton(isSaved: Boolean) {
+        if (isSaved) mNumberViewModel!!.onClickDialogCloseButtonListenerCallback(
+            isSaved,
+            mFragmentNumberBinding!!.spinner.selectedItem.toString()
+        )
     }
 
     companion object {

@@ -35,7 +35,6 @@ class NumberListViewModelImpl(val numberInteractor: NumberListInteractor) : View
                 updateListEvent.postValue(UpdateListEvent(list))
                 stateRecycler.set(true)
                 Log.d("RV", "stateRecycler.set(true)")
-                Log.d("RV", list[1].text)
                 Log.d("RV", list.size.toString())
                         }
     }

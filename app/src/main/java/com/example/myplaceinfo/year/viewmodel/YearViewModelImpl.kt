@@ -34,10 +34,9 @@ class YearViewModelImpl(val yearInteractor: YearInteractor): ViewModel(), YearVi
     }
 
     override fun onClickShowButton() {
-        val showYearDialogEvent = when (isSeekBarEnabled.get()) {
-            true -> ShowYearDialogEvent(textSeek.get().toString())
-            false -> ShowYearDialogEvent(editText.get().toString())
-            null -> throw IllegalArgumentException()
+        val showYearDialogEvent = when (isSeekBarEnabled.get()!!) {
+            true -> ShowYearDialogEvent(textSeek.get()!!)
+            false -> ShowYearDialogEvent(editText.get()!!)
         }
         yearDialogEvent.postValue(showYearDialogEvent)
     }
@@ -46,11 +45,11 @@ class YearViewModelImpl(val yearInteractor: YearInteractor): ViewModel(), YearVi
         this.message = message
     }
 
-    override fun onClickFavouritesButtonCallback() {
-        val numberEntity = when(isSeekBarEnabled.get()) {
+    override fun onClickDialogCloseButtonListenerCallback(isSaved: Boolean) {
+        if (!isSaved) return
+        val numberEntity = when(isSeekBarEnabled.get()!!) {
             true -> NumberEntity("Year", textSeek.get()!!, message!!)
             false -> NumberEntity("Year", editText.get()!!, message!!)
-            else -> throw IllegalArgumentException()
         }
         yearInteractor.insertInDB(numberEntity).subscribe()
     }

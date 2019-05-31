@@ -4,8 +4,9 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.ToggleButton
 import androidx.fragment.app.DialogFragment
-import com.example.myplaceinfo.AddFavouritesButtonListener
+import com.example.myplaceinfo.OnClickDialogCloseButtonListener
 import com.example.myplaceinfo.R
 
 /**
@@ -16,10 +17,10 @@ import com.example.myplaceinfo.R
 class YearDetailsDialog : DialogFragment(), View.OnClickListener {
     private lateinit var closeView: ImageView
     private var infoTextView: TextView? = null
-    private lateinit var favouritesView: ImageView
+    private lateinit var favouritesToggleButton: ToggleButton
     private var message: String? = ""
 
-    private lateinit var addFavouritesButtonListener: AddFavouritesButtonListener
+    private lateinit var onClickDialogCloseButtonListener: OnClickDialogCloseButtonListener
 
     private val KEY: String = "KEY"
 
@@ -28,8 +29,8 @@ class YearDetailsDialog : DialogFragment(), View.OnClickListener {
         arguments?.let {
             this.message = it.getString(KEY)
         }
-        if (parentFragment is AddFavouritesButtonListener) {
-            addFavouritesButtonListener = parentFragment as AddFavouritesButtonListener
+        if (parentFragment is OnClickDialogCloseButtonListener) {
+            onClickDialogCloseButtonListener = parentFragment as OnClickDialogCloseButtonListener
         }
     }
 
@@ -38,11 +39,11 @@ class YearDetailsDialog : DialogFragment(), View.OnClickListener {
         val view: View = inflater.inflate(R.layout.dialog_year_details, container, false)
         closeView = view.findViewById(R.id.close_view)
         infoTextView = view.findViewById(R.id.dialog_header)
-        favouritesView = view.findViewById(R.id.favourites)
+        favouritesToggleButton = view.findViewById(R.id.favourites)
 
         infoTextView!!.text = message
         closeView.setOnClickListener(this)
-        favouritesView.setOnClickListener(this)
+        favouritesToggleButton.setOnClickListener(this)
         return view
         //return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -63,10 +64,8 @@ class YearDetailsDialog : DialogFragment(), View.OnClickListener {
 
     override fun onClick(p0: View?) {
         if (p0!!.id == R.id.close_view) {
+            onClickDialogCloseButtonListener.onClickCloseButton(favouritesToggleButton.isChecked)
             dialog!!.dismiss()
-        } else if (p0.id == R.id.favourites) {
-            addFavouritesButtonListener.onClickFavouritesButton()
-            this.favouritesView.visibility = View.INVISIBLE
         }
     }
 

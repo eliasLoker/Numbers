@@ -10,7 +10,8 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import android.view.Gravity
 import android.view.WindowManager
-import com.example.myplaceinfo.AddFavouritesButtonListener
+import android.widget.ToggleButton
+import com.example.myplaceinfo.OnClickDialogCloseButtonListener
 import com.example.myplaceinfo.R
 
 
@@ -22,11 +23,11 @@ import com.example.myplaceinfo.R
 class NumberDetailsDialog: DialogFragment(), View.OnClickListener {
 
     private lateinit var closeView: ImageView
-    private lateinit var favouritesView: ImageView
+    private lateinit var favouritesToggleButton: ToggleButton
     private var infoTextView: TextView? = null
     private var message: String? = ""
 
-    private lateinit var addFavouritesButtonListener: AddFavouritesButtonListener
+    private lateinit var onClickDialogCloseButtonListener: OnClickDialogCloseButtonListener
 
     private val KEY: String = "KEY"
 
@@ -35,8 +36,8 @@ class NumberDetailsDialog: DialogFragment(), View.OnClickListener {
         arguments?.let {
             this.message = it.getString(KEY)
         }
-        if (parentFragment is AddFavouritesButtonListener) {
-            addFavouritesButtonListener = parentFragment as AddFavouritesButtonListener
+        if (parentFragment is OnClickDialogCloseButtonListener) {
+            onClickDialogCloseButtonListener = parentFragment as OnClickDialogCloseButtonListener
         }
     }
 
@@ -45,11 +46,11 @@ class NumberDetailsDialog: DialogFragment(), View.OnClickListener {
         val view: View = inflater.inflate(R.layout.dialog_number_details, container, false)
         closeView = view.findViewById(R.id.close_view)
         infoTextView = view.findViewById(R.id.dialog_header)
-        favouritesView = view.findViewById(R.id.favourites)
+        favouritesToggleButton = view.findViewById(R.id.favourites)
 
         infoTextView!!.text = message
         closeView.setOnClickListener(this)
-        favouritesView.setOnClickListener(this)
+        favouritesToggleButton.setOnClickListener(this)
         return view
         //return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -72,14 +73,12 @@ class NumberDetailsDialog: DialogFragment(), View.OnClickListener {
         /*
         when(p0!!.id) {
             R.id.close_view -> dialog!!.dismiss()
-            R.id.favourites -> addFavouritesButtonListener.onClickFavouritesButton(), this.favouritesView.visibility = View.INVISIBLE
+            R.id.favourites -> onClickDialogCloseButtonListener.onClickCloseButton(), this.favouritesToggleButton.visibility = View.INVISIBLE
         }
         */
         if (p0!!.id == R.id.close_view) {
+            onClickDialogCloseButtonListener.onClickCloseButton(favouritesToggleButton.isChecked)
             dialog!!.dismiss()
-        } else if (p0.id == R.id.favourites) {
-            addFavouritesButtonListener.onClickFavouritesButton()
-            this.favouritesView.visibility = View.INVISIBLE
         }
     }
 

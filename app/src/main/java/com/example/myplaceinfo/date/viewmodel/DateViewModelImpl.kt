@@ -47,7 +47,8 @@ class DateViewModelImpl(val dateInteractor: DateInteractor) : ViewModel(), DateV
         this.message = message
     }
 
-    override fun onClickFavouritesButtonCallback() {
+    override fun onClickDialogCloseButtonListenerCallback(isSaved: Boolean) {
+        if (!isSaved) return
         val numberEntity = NumberEntity("Date", "${indexOfMonth.get()}/${indexOfDay.get()}", message!!)
         dateInteractor.insertInDB(numberEntity).subscribe()
     }

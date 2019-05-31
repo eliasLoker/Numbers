@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.myplaceinfo.AddFavouritesButtonListener
+import com.example.myplaceinfo.OnClickDialogCloseButtonListener
 import com.example.myplaceinfo.Controller
 import com.example.myplaceinfo.R
 import com.example.myplaceinfo.data.NumberDatabase
@@ -29,7 +29,7 @@ import retrofit2.Response
  *
  * @author Alexandr Mikhalev
  */
-class DateFragment : Fragment(), AddFavouritesButtonListener {
+class DateFragment : Fragment(), OnClickDialogCloseButtonListener {
 
     private var binding: com.example.myplaceinfo.databinding.FragmentDatesBinding? = null
     private var dateViewModel: DateViewModel? = null
@@ -85,8 +85,8 @@ class DateFragment : Fragment(), AddFavouritesButtonListener {
         })
     }
 
-    override fun onClickFavouritesButton() {
-        dateViewModel!!.onClickFavouritesButtonCallback()
+    override fun onClickCloseButton(isSaved: Boolean) {
+        dateViewModel!!.onClickDialogCloseButtonListenerCallback(isSaved)
     }
 
     companion object {

@@ -11,26 +11,26 @@ import com.example.myplaceinfo.number.events.ShowIpEvent
  */
 interface NumberViewModel {
 
-  val number: ObservableField<String>
+    val number: ObservableField<String>
 
-  val progressBarState: ObservableField<Boolean>
+    val progressBarState: ObservableField<Boolean>
 
-  val showIpEvent: SingleLiveEvent<ShowIpEvent>
+    val showIpEvent: SingleLiveEvent<ShowIpEvent>
 
-  fun onClickShowIpButton()
+    fun onClickShowIpButton()
 
-  fun onClickNumberButton(number: Int)
+    fun onClickNumberButton(number: Int)
 
-  fun onClickRandomButton(str: String)
+    fun onClickRandomButton(str: String)
 
-  fun onClickReset()
+    fun onClickReset()
 
-  fun onClickNull()
+    fun onClickNull()
 
-  fun onItemSelectedSpinnerCallback(index: Int)
+    fun onItemSelectedSpinnerCallback(index: Int)
 
-  fun onResponseCallback(message: String?)
+    fun onResponseCallback(message: String?)
 
-  fun onClickFavouritesButtonCallback(type: String)
+    fun onClickDialogCloseButtonListenerCallback(isSaved: Boolean, type: String)
 
 }
