@@ -6,6 +6,7 @@ import androidx.room.Query
 import io.reactivex.Completable
 import io.reactivex.Single
 
+
 /**
  * Created by Alexandr Mikhalev on 29.05.2019.
  *
@@ -19,4 +20,7 @@ interface NumberDao {
 
     @Insert
     fun insert(numberEntity: NumberEntity): Completable
+
+    @Query("DELETE FROM NumberEntity WHERE numberStr = :number")
+    fun deleteByNumber(number: String): Completable
 }

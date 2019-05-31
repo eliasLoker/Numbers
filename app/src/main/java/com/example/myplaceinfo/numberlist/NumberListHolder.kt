@@ -8,11 +8,11 @@ import com.example.myplaceinfo.data.NumberEntity
  *
  * @author Alexandr Mikhalev
  */
-class NumberListHolder(numberListItemBinding: com.example.myplaceinfo.databinding.NumberListItemBinding) : RecyclerView.ViewHolder(numberListItemBinding.root) {
-    var numberListItemBinding: com.example.myplaceinfo.databinding.NumberListItemBinding = numberListItemBinding
+class NumberListHolder(var numberListItemBinding: com.example.myplaceinfo.databinding.NumberListItemBinding) :
+    RecyclerView.ViewHolder(numberListItemBinding.root) {
 
     fun bind(numberEntity: NumberEntity) {
-            numberListItemBinding.number = numberEntity
-            numberListItemBinding.executePendingBindings()
+        numberListItemBinding.number = numberEntity
+        numberListItemBinding.executePendingBindings()
     }
 }

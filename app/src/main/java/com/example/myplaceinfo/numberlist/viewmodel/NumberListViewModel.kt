@@ -21,4 +21,6 @@ interface NumberListViewModel {
     fun onClickView()
 
     fun getNumberList(): List<NumberEntity>
+
+    fun onBasketClickCallback(number: String, positionInList: Int)
 }

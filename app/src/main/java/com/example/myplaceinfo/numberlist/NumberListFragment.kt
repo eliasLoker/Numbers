@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myplaceinfo.R
-import com.example.myplaceinfo.app.App
 import com.example.myplaceinfo.data.NumberDatabase
 import com.example.myplaceinfo.data.NumberEntity
 import com.example.myplaceinfo.numberlist.interactor.NumberListInteractor
@@ -26,7 +25,7 @@ import com.example.myplaceinfo.numberlist.viewmodel.NumberListViewModelImpl
  *
  * @author Alexandr Mikhalev
  */
-class NumberListFragment : Fragment() {
+class NumberListFragment : Fragment(), OnBasketClickListener {
 
     private var numberListViewModel: NumberListViewModel? = null
     private var fragmentNumbersListBinding: com.example.myplaceinfo.databinding.FragmentNumbersListBinding? = null
@@ -48,7 +47,7 @@ class NumberListFragment : Fragment() {
         init()
         //start
         recyclerView = fragmentNumbersListBinding!!.recyclerView
-        val layoutManager: RecyclerView.LayoutManager =  LinearLayoutManager(activity)
+        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity)
         recyclerView.layoutManager = layoutManager
 
         numberListAdapter = NumberListAdapter()
@@ -56,6 +55,7 @@ class NumberListFragment : Fragment() {
 
         //numberListAdapterRefresh.data//addList
         //end
+        numberListAdapter.setOnBasketClickListener(this)
         return fragmentNumbersListBinding!!.root
     }
 
@@ -74,6 +74,11 @@ class NumberListFragment : Fragment() {
         numberListAdapter.numberListAdapterRefresh(numberList)
         diffResult.dispatchUpdatesTo(numberListAdapter)
 
+    }
+
+    override fun onBasketClick(number: String, positionInList: Int) {
+        //Toast.makeText(context, "Delete $id", Toast.LENGTH_SHORT).show()
+        numberListViewModel!!.onBasketClickCallback(number, positionInList)
     }
 
     companion object {

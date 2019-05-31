@@ -14,9 +14,10 @@ import com.example.myplaceinfo.databinding.NumberListItemBinding
  *
  * @author Alexandr Mikhalev
  */
-class NumberListAdapter: RecyclerView.Adapter<NumberListHolder>() {
+class NumberListAdapter : RecyclerView.Adapter<NumberListHolder>() {
 
     var data: List<NumberEntity> = ArrayList()
+    lateinit var listener: OnBasketClickListener
 
     fun numberListAdapterRefresh(list: List<NumberEntity>) {
         data = list
@@ -36,5 +37,16 @@ class NumberListAdapter: RecyclerView.Adapter<NumberListHolder>() {
 
     override fun onBindViewHolder(holder: NumberListHolder, position: Int) {
         holder.bind(data[position])
+        holder.numberListItemBinding.basketView.setOnClickListener {
+            listener.onBasketClick(
+                holder.numberListItemBinding.numberTextView.text.toString(),
+                position
+            )
+        }
     }
+
+    fun setOnBasketClickListener(onBasketClickListener: OnBasketClickListener) {
+        listener = onBasketClickListener
+    }
+
 }
