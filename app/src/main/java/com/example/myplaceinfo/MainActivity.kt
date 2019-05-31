@@ -44,16 +44,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.about) {
-            supportFragmentManager.beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.container_for_fragments, NumberListFragment.newInstance())
-                .commit()
+            val fragment = supportFragmentManager.findFragmentByTag("NUMBER_LIST")
+            if (fragment == null) {
+                supportFragmentManager.beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.container_for_fragments, NumberListFragment.newInstance(), "NUMBER_LIST")
+                    .commit()
+            }
+
         }
         drawer.closeDrawer(GravityCompat.START)
         return true
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 }
