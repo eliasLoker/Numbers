@@ -2,7 +2,6 @@ package com.example.myplaceinfo.numberlist.viewmodel
 
 import androidx.databinding.ObservableField
 import com.example.myplaceinfo.SingleLiveEvent
-import com.example.myplaceinfo.data.NumberEntity
 import com.example.myplaceinfo.numberlist.events.UpdateListEvent
 
 /**
@@ -12,15 +11,13 @@ import com.example.myplaceinfo.numberlist.events.UpdateListEvent
  */
 interface NumberListViewModel {
 
-    val updateListEvent: SingleLiveEvent<UpdateListEvent>
+    val stateProgressBar: ObservableField<Boolean>
 
     val stateRecycler: ObservableField<Boolean>
 
-    val text: ObservableField<String>
+    val stateEmptyTextView: ObservableField<Boolean>
 
-    fun onClickView()
+    val updateListEvent: SingleLiveEvent<UpdateListEvent>
 
-    fun getNumberList(): List<NumberEntity>
-
-    fun onBasketClickCallback(number: String, positionInList: Int)
+    fun onBasketClickCallback(number: String)
 }

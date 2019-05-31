@@ -6,5 +6,6 @@ package com.example.myplaceinfo.numberlist
  * @author Alexandr Mikhalev
  */
 interface OnBasketClickListener {
-    fun onBasketClick(number: String, positionInList: Int)
+
+    fun onBasketClick(number: String)
 }

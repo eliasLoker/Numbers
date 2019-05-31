@@ -1,12 +1,12 @@
 package com.example.myplaceinfo.numberlist.viewmodel
 
-import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.example.myplaceinfo.SingleLiveEvent
 import com.example.myplaceinfo.data.NumberEntity
 import com.example.myplaceinfo.numberlist.events.UpdateListEvent
 import com.example.myplaceinfo.numberlist.interactor.NumberListInteractor
+import io.reactivex.disposables.CompositeDisposable
 
 /**
  * Created by Alexandr Mikhalev on 29.05.2019.
@@ -17,36 +17,52 @@ class NumberListViewModelImpl(val numberListInteractor: NumberListInteractor) : 
 
     lateinit var list: MutableList<NumberEntity>
 
+    override val stateEmptyTextView: ObservableField<Boolean> = ObservableField(false)
+
     override val updateListEvent: SingleLiveEvent<UpdateListEvent> = SingleLiveEvent()
 
-    override val text: ObservableField<String> = ObservableField("HIIII")
-
     override val stateRecycler: ObservableField<Boolean> = ObservableField(false)
+
+    override val stateProgressBar: ObservableField<Boolean> = ObservableField(true)
+
+    private val compositeDisposable = CompositeDisposable()
 
     init {
         val disposable = numberListInteractor.getAll()
             .subscribe { t: List<NumberEntity>? ->
                 list = t!!.toMutableList()
-                updateListEvent.postValue(UpdateListEvent(list))
-                stateRecycler.set(true)
-                Log.d("RV", "stateRecycler.set(true)")
-                Log.d("RV", list.size.toString())
+                if (list.isEmpty()) {
+                    stateEmptyTextView.set(true)
+                    stateProgressBar.set(false)
+                } else {
+                    updateListEvent.postValue(UpdateListEvent(list))
+                    stateRecycler.set(true)
+                    stateProgressBar.set(false)
+                }
+
             }
+        compositeDisposable.add(disposable)
     }
 
-    override fun onClickView() {
-
-    }
-
-    override fun getNumberList(): List<NumberEntity> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onBasketClickCallback(number: String, positionInList: Int) {
-        numberListInteractor.deleteByNumber(number)
+    override fun onBasketClickCallback(number: String) {
+        val disposable = numberListInteractor.deleteByNumber(number)
             .subscribe {
-                list.removeAt(positionInList)
-                updateListEvent.postValue(UpdateListEvent(list))
+                numberListInteractor.getAll()
+                    .subscribe { t: List<NumberEntity>? ->
+                        list.clear()
+                        list = t!!.toMutableList()
+                        if (list.isEmpty()) {
+                            stateEmptyTextView.set(true)
+                            stateRecycler.set(false)
+                        } else {
+                            updateListEvent.postValue(UpdateListEvent(list))
+                        }
+                    }
             }
+        compositeDisposable.add(disposable)
+    }
+
+    override fun onCleared() {
+        compositeDisposable.dispose()
     }
 }

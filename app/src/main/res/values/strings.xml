@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyPlaceInfo</string>
+    <string name="app_name">NumberFacts</string>
     <string name="for_show_my_ip_btn">Show my ip</string>
     <string name="for_show_details_btn">More detailed</string>
     <string name="for_show_info_btn">show details</string>

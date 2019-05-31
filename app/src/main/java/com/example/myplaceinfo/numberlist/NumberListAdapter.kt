@@ -38,10 +38,7 @@ class NumberListAdapter : RecyclerView.Adapter<NumberListHolder>() {
     override fun onBindViewHolder(holder: NumberListHolder, position: Int) {
         holder.bind(data[position])
         holder.numberListItemBinding.basketView.setOnClickListener {
-            listener.onBasketClick(
-                holder.numberListItemBinding.numberTextView.text.toString(),
-                position
-            )
+            listener.onBasketClick(holder.numberListItemBinding.numberTextView.text.toString())
         }
     }
 

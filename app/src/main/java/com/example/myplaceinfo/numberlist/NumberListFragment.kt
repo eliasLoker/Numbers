@@ -76,9 +76,9 @@ class NumberListFragment : Fragment(), OnBasketClickListener {
 
     }
 
-    override fun onBasketClick(number: String, positionInList: Int) {
+    override fun onBasketClick(number: String) {
         //Toast.makeText(context, "Delete $id", Toast.LENGTH_SHORT).show()
-        numberListViewModel!!.onBasketClickCallback(number, positionInList)
+        numberListViewModel!!.onBasketClickCallback(number)
     }
 
     companion object {

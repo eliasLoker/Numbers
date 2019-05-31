@@ -28,7 +28,20 @@
                 android:id="@+id/progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="@{viewModel.stateRecycler ? View.INVISIBLE : View.VISIBLE}"
+                android:visibility="@{viewModel.stateProgressBar ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+                android:id="@+id/empty_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your list is empty"
+                android:textSize="30sp"
+                android:visibility="@{safeUnbox(viewModel.stateEmptyTextView) ? View.VISIBLE : View.INVISIBLE}"
+                android:textColor="@color/colorSteelBlue"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

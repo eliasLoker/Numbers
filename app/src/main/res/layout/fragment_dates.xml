@@ -13,7 +13,7 @@
 
         <TextView
                 android:id="@+id/month_header"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="1. Choose month:"
@@ -26,39 +26,38 @@
 
         <Spinner
                 android:id="@+id/spinner_month"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:onItemSelected="@{(a,b,v,c) -> viewModel.onItemSelectedMonthCallback(v)}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:entries="@array/month_list"
                 android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="@id/month_header"
+                app:layout_constraintEnd_toEndOf="@id/month_header"
                 app:layout_constraintTop_toBottomOf="@id/month_header">
         </Spinner>
 
         <TextView
                 android:id="@+id/date_header"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2. Choose date:"
                 android:textSize="30sp"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/colorBlack"
                 android:textAlignment="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/spinner_month"
                 app:layout_constraintTop_toBottomOf="@id/spinner_month"/>
 
         <Spinner
                 android:id="@+id/spinner_day"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:onItemSelected="@{(a,b,v,c) -> viewModel.onItemSelectedDayCallback(v)}"
                 android:entries="@array/month_list_long"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/date_header"
+                app:layout_constraintEnd_toEndOf="@id/date_header"
                 app:layout_constraintTop_toBottomOf="@id/date_header"
                 android:textAlignment="center">
         </Spinner>
