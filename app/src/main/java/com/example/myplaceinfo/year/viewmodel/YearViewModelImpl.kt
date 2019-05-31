@@ -19,14 +19,14 @@ class YearViewModelImpl(val yearInteractor: YearInteractor): ViewModel(), YearVi
 
     override val editText: ObservableField<String> = ObservableField("")
 
-    override val textSeek: ObservableField<String> = ObservableField("0")
+    override val textSeek: ObservableField<Int> = ObservableField(0)
 
     private var message: String? = null
 
     override val yearDialogEvent: SingleLiveEvent<ShowYearDialogEvent> = SingleLiveEvent()
 
     override fun onProgressChangedCallback(arg: Int) {
-        textSeek.set(arg.toString())
+        textSeek.set(arg)
     }
 
     override fun onCheckedChangedCallback(checked: Boolean) {
@@ -35,7 +35,7 @@ class YearViewModelImpl(val yearInteractor: YearInteractor): ViewModel(), YearVi
 
     override fun onClickShowButton() {
         val showYearDialogEvent = when (isSeekBarEnabled.get()!!) {
-            true -> ShowYearDialogEvent(textSeek.get()!!)
+            true -> ShowYearDialogEvent(textSeek.get().toString())
             false -> ShowYearDialogEvent(editText.get()!!)
         }
         yearDialogEvent.postValue(showYearDialogEvent)
@@ -48,7 +48,7 @@ class YearViewModelImpl(val yearInteractor: YearInteractor): ViewModel(), YearVi
     override fun onClickDialogCloseButtonListenerCallback(isSaved: Boolean) {
         if (!isSaved) return
         val numberEntity = when(isSeekBarEnabled.get()!!) {
-            true -> NumberEntity("Year", textSeek.get()!!, message!!)
+            true -> NumberEntity("Year", textSeek.get().toString(), message!!)
             false -> NumberEntity("Year", editText.get()!!, message!!)
         }
         yearInteractor.insertInDB(numberEntity).subscribe()

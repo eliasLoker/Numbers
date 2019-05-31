@@ -15,7 +15,7 @@ interface YearViewModel {
 
     val isSeekBarEnabled: ObservableField<Boolean>
 
-    val textSeek: ObservableField<String>
+    val textSeek: ObservableField<Int>
 
     val yearDialogEvent: SingleLiveEvent<ShowYearDialogEvent>
 
