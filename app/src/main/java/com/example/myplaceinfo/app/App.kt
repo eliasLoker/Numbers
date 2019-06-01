@@ -1,29 +1,36 @@
 package com.example.myplaceinfo.app
 
 import android.app.Application
-import androidx.room.Room
-import com.example.myplaceinfo.data.NumberDatabase
+import androidx.fragment.app.Fragment
+import com.example.myplaceinfo.app.inject.AppComponent
+import com.example.myplaceinfo.app.inject.DaggerAppComponent
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
+import javax.inject.Inject
 
 /**
  * Created by Alexandr Mikhalev on 29.05.2019.
  *
  * @author Alexandr Mikhalev
  */
-class App : Application()  {
+class App : Application(), HasSupportFragmentInjector {
 
-    /*
-    lateinit var database: NumberDatabase
-    lateinit var instance: App
+    lateinit var appComponent: AppComponent
+
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment> //!!!
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
-        database = Room.databaseBuilder(this, NumberDatabase::class.java, "database").build()
+        appComponent = DaggerAppComponent
+            .builder()
+            .application(this)
+            .build()
+        appComponent.inject(this)
     }
-    companion object {
-        fun getInstance(): App {
-            return
-        }
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+        return dispatchingAndroidInjector
     }
-    */
 }

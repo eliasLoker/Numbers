@@ -8,19 +8,16 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.myplaceinfo.Controller
 import com.example.myplaceinfo.OnClickDialogCloseButtonListener
 import com.example.myplaceinfo.R
-import com.example.myplaceinfo.data.NumberDatabase
-import com.example.myplaceinfo.number.interactor.NumberInteractor
 import com.example.myplaceinfo.number.retrofit.MessageIp
-import com.example.myplaceinfo.number.viewmodel.NumberFactory
 import com.example.myplaceinfo.number.viewmodel.NumberViewModel
-import com.example.myplaceinfo.number.viewmodel.NumberViewModelImpl
+import dagger.android.support.AndroidSupportInjection
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
 /**
  * Created by Alexandr Mikhalev on 24.05.2019.
@@ -29,26 +26,33 @@ import retrofit2.Response
  */
 class NumberFragment : Fragment(), OnClickDialogCloseButtonListener {
 
-    private var mNumberViewModel: NumberViewModel? = null
+    @Inject
+    lateinit var numberViewModel: NumberViewModel
+
+
     private var mFragmentNumberBinding: com.example.myplaceinfo.databinding.FragmentNumberBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
+
+        /*
         val numberDao = NumberDatabase.getNumberDatabase(activity!!.applicationContext)!!.numberDao()
-        mNumberViewModel = ViewModelProviders
+        numberViewModel = ViewModelProviders
             .of(this, NumberFactory(numberInteractor = NumberInteractor(numberDao)))
             .get(NumberViewModelImpl::class.java)
+        */
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mFragmentNumberBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_number, container, false)
-        mFragmentNumberBinding!!.viewModel = mNumberViewModel
+        mFragmentNumberBinding!!.viewModel = numberViewModel
         init()
         return mFragmentNumberBinding!!.root
     }
 
     private fun init() {
-        mNumberViewModel!!.showIpEvent.observe(this, Observer { getMyIp(it.type, it.number) })
+        numberViewModel!!.showIpEvent.observe(this, Observer { getMyIp(it.type, it.number) })
     }
 
     private fun getMyIp(type: String?, number: String?) {
@@ -60,7 +64,7 @@ class NumberFragment : Fragment(), OnClickDialogCloseButtonListener {
             }
 
             override fun onResponse(call: Call<MessageIp>, response: Response<MessageIp>) {
-                mNumberViewModel!!.onResponseCallback(response.body()!!.text ?: "")
+                numberViewModel!!.onResponseCallback(response.body()!!.text ?: "")
                 val showDetailsDialog = NumberDetailsDialog().newInstance(response.body()!!.text)
                 showDetailsDialog.show(childFragmentManager, "sdfsdfs")
             }
@@ -68,7 +72,7 @@ class NumberFragment : Fragment(), OnClickDialogCloseButtonListener {
     }
 
     override fun onClickCloseButton(isSaved: Boolean) {
-        if (isSaved) mNumberViewModel!!.onClickDialogCloseButtonListenerCallback(
+        if (isSaved) numberViewModel!!.onClickDialogCloseButtonListenerCallback(
             isSaved,
             mFragmentNumberBinding!!.spinner.selectedItem.toString()
         )
