@@ -12,7 +12,7 @@ import io.reactivex.schedulers.Schedulers
  *
  * @author Alexandr Mikhalev
  */
-class NumberListInteractor(val numbersDao: NumbersDao) {
+class NumberListInteractor(private val numbersDao: NumbersDao) {
     fun getAll(): Single<List<NumbersEntity>> {
         return numbersDao.getAll()
             .subscribeOn(Schedulers.io())

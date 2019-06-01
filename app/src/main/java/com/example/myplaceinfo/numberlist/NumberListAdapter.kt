@@ -19,9 +19,9 @@ class NumberListAdapter : RecyclerView.Adapter<NumberListHolder>() {
     var data: List<NumbersEntity> = ArrayList()
     lateinit var listener: OnBasketClickListener
 
-    fun numberListAdapterRefresh(list: List<NumbersEntity>) {
+    fun setList(list: List<NumbersEntity>) {
         data = list
-        Log.d("RV", data[0].text + " from numberListAdapterRefresh")
+        Log.d("RV", data[0].text + " from setList")
         notifyDataSetChanged()
     }
 

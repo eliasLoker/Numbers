@@ -7,5 +7,4 @@ import com.example.myplaceinfo.data.NumbersEntity
  *
  * @author Alexandr Mikhalev
  */
-class UpdateListEvent(val list: List<NumbersEntity>) {
-}
+class UpdateListEvent(val list: List<NumbersEntity>)

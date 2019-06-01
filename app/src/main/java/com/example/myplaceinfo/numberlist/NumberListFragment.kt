@@ -35,12 +35,6 @@ class NumberListFragment : Fragment(), OnBasketClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
-        /*
-        val numbersDao = NumbersDatabase.getNumberDatabase(activity!!.applicationContext)!!.numbersDao()
-        numberListViewModel = ViewModelProviders
-            .of(this, NumberListFactory(numberListInteractor = NumberListInteractor(numbersDao)))
-            .get(NumberListViewModelImpl::class.java)
-        */
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -55,7 +49,7 @@ class NumberListFragment : Fragment(), OnBasketClickListener {
         numberListAdapter = NumberListAdapter()
         recyclerView.adapter = numberListAdapter
 
-        //numberListAdapterRefresh.data//addList
+        //setList.data//addList
         //end
         numberListAdapter.setOnBasketClickListener(this)
         return fragmentNumbersListBinding!!.root
@@ -67,20 +61,15 @@ class NumberListFragment : Fragment(), OnBasketClickListener {
     }
 
     private fun setList(numbersList: List<NumbersEntity>) {
-        /*
-        numberListAdapter.numberListAdapterRefresh(numbersList)
-        Log.d("RV", "setList")
-        */
         val diffUtilNumberList = DiffUtilNumberList(numberListAdapter.data, numbersList)
         val diffResult = DiffUtil.calculateDiff(diffUtilNumberList)
-        numberListAdapter.numberListAdapterRefresh(numbersList)
+        numberListAdapter.setList(numbersList)
         diffResult.dispatchUpdatesTo(numberListAdapter)
 
     }
 
     override fun onBasketClick(number: String) {
-        //Toast.makeText(context, "Delete $id", Toast.LENGTH_SHORT).show()
-        numberListViewModel!!.onBasketClickCallback(number)
+        numberListViewModel.onBasketClickCallback(number)
     }
 
     companion object {

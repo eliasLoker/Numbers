@@ -13,18 +13,15 @@ import io.reactivex.disposables.CompositeDisposable
  *
  * @author Alexandr Mikhalev
  */
-class NumberListViewModelImpl(val numberListInteractor: NumberListInteractor) : ViewModel(), NumberListViewModel {
-
-    lateinit var list: MutableList<NumbersEntity>
+class NumberListViewModelImpl(private val numberListInteractor: NumberListInteractor) : ViewModel(), NumberListViewModel {
 
     override val stateEmptyTextView: ObservableField<Boolean> = ObservableField(false)
+    override val stateRecycler: ObservableField<Boolean> = ObservableField(false)
+    override val stateProgressBar: ObservableField<Boolean> = ObservableField(true)
 
     override val updateListEvent: SingleLiveEvent<UpdateListEvent> = SingleLiveEvent()
 
-    override val stateRecycler: ObservableField<Boolean> = ObservableField(false)
-
-    override val stateProgressBar: ObservableField<Boolean> = ObservableField(true)
-
+    private lateinit var list: MutableList<NumbersEntity>
     private val compositeDisposable = CompositeDisposable()
 
     init {
