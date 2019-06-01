@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @author Alexandr Mikhalev
  */
-class DateIp {
+class DateMessage {
     @SerializedName("text")
     var text: String? = null
 }

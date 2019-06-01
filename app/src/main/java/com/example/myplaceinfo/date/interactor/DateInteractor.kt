@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
  */
 class DateInteractor(val numbersDao: NumbersDao) {
 
-    fun insertInDB(numbersEntity: NumbersEntity): Completable {
+    fun writeToDataBase(numbersEntity: NumbersEntity): Completable {
         return numbersDao.insert(numbersEntity)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

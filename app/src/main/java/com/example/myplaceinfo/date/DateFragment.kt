@@ -13,7 +13,7 @@ import com.example.myplaceinfo.Controller
 import com.example.myplaceinfo.OnClickDialogCloseButtonListener
 import com.example.myplaceinfo.R
 import com.example.myplaceinfo.date.events.SetDaysQuantityEvent
-import com.example.myplaceinfo.date.retrofit.DateIp
+import com.example.myplaceinfo.date.retrofit.DateMessage
 import com.example.myplaceinfo.date.viewmodel.DateViewModel
 import dagger.android.support.AndroidSupportInjection
 import retrofit2.Call
@@ -28,20 +28,14 @@ import javax.inject.Inject
  */
 class DateFragment : Fragment(), OnClickDialogCloseButtonListener {
 
-    private var binding: com.example.myplaceinfo.databinding.FragmentDatesBinding? = null
-
     @Inject
     lateinit var dateViewModel: DateViewModel
+
+    private var binding: com.example.myplaceinfo.databinding.FragmentDatesBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
-        /*
-        val numbersDao = NumbersDatabase.getNumberDatabase(activity!!.applicationContext)!!.numbersDao()
-        dateViewModel = ViewModelProviders
-            .of(this, DateFactory(dateInteractor = DateInteractor(numbersDao)))
-            .get(DateViewModelImpl::class.java)
-        */
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -74,12 +68,12 @@ class DateFragment : Fragment(), OnClickDialogCloseButtonListener {
     private fun getDateInfo(month: String, day: String) {
         val messages = Controller.dateAPI.messages(month, day)
 
-        messages.enqueue(object : Callback<DateIp> {
-            override fun onFailure(call: Call<DateIp>, t: Throwable) {
+        messages.enqueue(object : Callback<DateMessage> {
+            override fun onFailure(call: Call<DateMessage>, t: Throwable) {
                 Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()
             }
 
-            override fun onResponse(call: Call<DateIp>, response: Response<DateIp>) {
+            override fun onResponse(call: Call<DateMessage>, response: Response<DateMessage>) {
                 val showDetailsDialog = DateDetailsDialog().newInstance(response.body()!!.text)
                 showDetailsDialog.show(childFragmentManager, "sdfsdfs")
                 dateViewModel!!.onResponseCallback(response.body()!!.text)

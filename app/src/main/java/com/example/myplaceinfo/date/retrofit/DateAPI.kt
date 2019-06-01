@@ -11,5 +11,5 @@ import retrofit2.http.Path
  */
 interface DateAPI {
     @GET("{month}/{day}/date?json")
-    fun messages(@Path("month")month: String, @Path("day")day: String): Call<DateIp>
+    fun messages(@Path("month")month: String, @Path("day")day: String): Call<DateMessage>
 }

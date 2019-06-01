@@ -1,6 +1,5 @@
 package com.example.myplaceinfo.date.viewmodel
 
-import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.example.myplaceinfo.Constants
 import com.example.myplaceinfo.SingleLiveEvent
@@ -40,7 +39,7 @@ class DateViewModelImpl(private val dateInteractor: DateInteractor) : ViewModel(
 
     override fun onClickShowFactButton() {
         showDateDialogEvent
-            .postValue(value = ShowDateDialogEvent("$indexOfMonth", "$indexOfDay"))
+            .postValue(ShowDateDialogEvent("$indexOfMonth", "$indexOfDay"))
     }
 
     override fun onResponseCallback(message: String?) {
@@ -50,6 +49,6 @@ class DateViewModelImpl(private val dateInteractor: DateInteractor) : ViewModel(
     override fun onClickDialogCloseButtonCallback(isSaved: Boolean) {
         if (!isSaved) return
         val numberEntity = NumbersEntity(Constants.FOR_DATE_TYPE, "$indexOfMonth/$indexOfDay", message!!)
-        dateInteractor.insertInDB(numberEntity).subscribe()
+        dateInteractor.writeToDataBase(numberEntity).subscribe()
     }
 }
