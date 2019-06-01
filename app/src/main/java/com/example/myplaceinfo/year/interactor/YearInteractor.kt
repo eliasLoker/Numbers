@@ -11,7 +11,7 @@ import io.reactivex.schedulers.Schedulers
  *
  * @author Alexandr Mikhalev
  */
-class YearInteractor(val numbersDao: NumbersDao) {
+class YearInteractor(private val numbersDao: NumbersDao) {
 
     fun insertInDB(numbersEntity: NumbersEntity): Completable {
         return numbersDao.insert(numbersEntity)

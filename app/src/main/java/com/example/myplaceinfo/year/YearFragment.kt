@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import com.example.myplaceinfo.Controller
 import com.example.myplaceinfo.OnClickDialogCloseButtonListener
 import com.example.myplaceinfo.R
-import com.example.myplaceinfo.year.retrofit.YearsIp
+import com.example.myplaceinfo.year.retrofit.YearsMessage
 import com.example.myplaceinfo.year.viewmodel.YearViewModel
 import dagger.android.support.AndroidSupportInjection
 import retrofit2.Call
@@ -55,12 +55,12 @@ class YearFragment : Fragment(), OnClickDialogCloseButtonListener {
     private fun getYearInfo(year: String) {
         val messages = Controller.yearAPI.messages(year)
 
-        messages.enqueue(object : Callback<YearsIp> {
-            override fun onFailure(call: Call<YearsIp>, t: Throwable) {
+        messages.enqueue(object : Callback<YearsMessage> {
+            override fun onFailure(call: Call<YearsMessage>, t: Throwable) {
                 Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()
             }
 
-            override fun onResponse(call: Call<YearsIp>, response: Response<YearsIp>) {
+            override fun onResponse(call: Call<YearsMessage>, response: Response<YearsMessage>) {
                 val showDetailsDialog = YearDetailsDialog().newInstance(response.body()!!.text)
                 showDetailsDialog.show(childFragmentManager, "sdfsdfs")
                 yearViewModel!!.onResponseCallback(response.body()!!.text)
@@ -69,7 +69,7 @@ class YearFragment : Fragment(), OnClickDialogCloseButtonListener {
     }
 
     override fun onClickCloseButton(isSaved: Boolean) {
-        yearViewModel!!.onClickDialogCloseButtonListenerCallback(isSaved)
+        yearViewModel!!.onClickDialogCloseButtonCallback(isSaved)
     }
 
     companion object {

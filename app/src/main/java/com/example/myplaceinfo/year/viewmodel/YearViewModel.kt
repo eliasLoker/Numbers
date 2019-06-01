@@ -19,13 +19,13 @@ interface YearViewModel {
 
     val yearDialogEvent: SingleLiveEvent<ShowYearDialogEvent>
 
-    fun onProgressChangedCallback(arg: Int)
+    fun onProgressChangedSeekBar(arg: Int)
 
-    fun onCheckedChangedCallback(checked: Boolean)
+    fun onCheckedChangedSwitch(checked: Boolean)
 
-    fun onClickShowButton()
+    fun onClickShowFactButton()
 
     fun onResponseCallback(message: String?)
 
-    fun onClickDialogCloseButtonListenerCallback(isSaved: Boolean)
+    fun onClickDialogCloseButtonCallback(isSaved: Boolean)
 }

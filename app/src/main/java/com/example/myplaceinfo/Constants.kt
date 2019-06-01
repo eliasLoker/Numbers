@@ -8,5 +8,6 @@ package com.example.myplaceinfo
 class Constants {
     companion object {
         val FOR_DATE_TYPE = "Date"
+        val FOR_YEAR_TYPE = "Year"
     }
 }

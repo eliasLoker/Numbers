@@ -11,5 +11,5 @@ import retrofit2.http.Path
  */
 interface YearsAPI {
     @GET("{year}/year?json")
-    fun messages(@Path("year")year: String): Call<YearsIp>
+    fun messages(@Path("year")year: String): Call<YearsMessage>
 }

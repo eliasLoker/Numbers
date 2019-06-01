@@ -2,6 +2,7 @@ package com.example.myplaceinfo.year.viewmodel
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
+import com.example.myplaceinfo.Constants
 import com.example.myplaceinfo.SingleLiveEvent
 import com.example.myplaceinfo.data.NumbersEntity
 import com.example.myplaceinfo.year.events.ShowYearDialogEvent
@@ -12,7 +13,7 @@ import com.example.myplaceinfo.year.interactor.YearInteractor
  *
  * @author Alexandr Mikhalev
  */
-class YearViewModelImpl(val yearInteractor: YearInteractor): ViewModel(), YearViewModel {
+class YearViewModelImpl(private val yearInteractor: YearInteractor) : ViewModel(), YearViewModel {
 
     override val isSeekBarEnabled: ObservableField<Boolean> = ObservableField(true)
 
@@ -24,15 +25,15 @@ class YearViewModelImpl(val yearInteractor: YearInteractor): ViewModel(), YearVi
 
     override val yearDialogEvent: SingleLiveEvent<ShowYearDialogEvent> = SingleLiveEvent()
 
-    override fun onProgressChangedCallback(arg: Int) {
+    override fun onProgressChangedSeekBar(arg: Int) {
         textSeek.set(arg)
     }
 
-    override fun onCheckedChangedCallback(checked: Boolean) {
+    override fun onCheckedChangedSwitch(checked: Boolean) {
         isSeekBarEnabled.set(checked)
     }
 
-    override fun onClickShowButton() {
+    override fun onClickShowFactButton() {
         val showYearDialogEvent = when (isSeekBarEnabled.get()!!) {
             true -> ShowYearDialogEvent(textSeek.get().toString())
             false -> ShowYearDialogEvent(editText.get()!!)
@@ -44,11 +45,11 @@ class YearViewModelImpl(val yearInteractor: YearInteractor): ViewModel(), YearVi
         this.message = message
     }
 
-    override fun onClickDialogCloseButtonListenerCallback(isSaved: Boolean) {
+    override fun onClickDialogCloseButtonCallback(isSaved: Boolean) {
         if (!isSaved) return
-        val numberEntity = when(isSeekBarEnabled.get()!!) {
-            true -> NumbersEntity("Year", textSeek.get().toString(), message!!)
-            false -> NumbersEntity("Year", editText.get()!!, message!!)
+        val numberEntity = when (isSeekBarEnabled.get()!!) {
+            true -> NumbersEntity(Constants.FOR_YEAR_TYPE, textSeek.get().toString(), message!!)
+            false -> NumbersEntity(Constants.FOR_YEAR_TYPE, editText.get()!!, message!!)
         }
         yearInteractor.insertInDB(numberEntity).subscribe()
     }

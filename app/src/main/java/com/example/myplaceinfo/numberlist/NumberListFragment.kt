@@ -1,7 +1,6 @@
 package com.example.myplaceinfo.numberlist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,7 +56,6 @@ class NumberListFragment : Fragment(), OnBasketClickListener {
 
     private fun init() {
         numberListViewModel!!.updateListEvent.observe(this, Observer { setList(it.list) })
-        Log.d("RV", "init")
     }
 
     private fun setList(numbersList: List<NumbersEntity>) {
