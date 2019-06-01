@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @author Alexandr Mikhalev
  */
-class MessageIp(
+class NumberMessage(
 
     @SerializedName("text")
     var text: String? = null

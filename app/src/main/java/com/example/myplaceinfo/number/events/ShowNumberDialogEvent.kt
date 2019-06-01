@@ -5,6 +5,4 @@ package com.example.myplaceinfo.number.events
  *
  * @author Alexandr Mikhalev
  */
-class ShowIpEvent(val type: String, val number: String) {
-
-}
+class ShowNumberDialogEvent(val type: String, val number: String)

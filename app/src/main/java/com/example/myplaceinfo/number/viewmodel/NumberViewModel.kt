@@ -2,7 +2,7 @@ package com.example.myplaceinfo.number.viewmodel
 
 import androidx.databinding.ObservableField
 import com.example.myplaceinfo.SingleLiveEvent
-import com.example.myplaceinfo.number.events.ShowIpEvent
+import com.example.myplaceinfo.number.events.ShowNumberDialogEvent
 
 /**
  * Created by Alexandr Mikhalev on 24.05.2019.
@@ -13,11 +13,9 @@ interface NumberViewModel {
 
     val number: ObservableField<String>
 
-    val progressBarState: ObservableField<Boolean>
+    val showNumberDialogEvent: SingleLiveEvent<ShowNumberDialogEvent>
 
-    val showIpEvent: SingleLiveEvent<ShowIpEvent>
-
-    fun onClickShowIpButton()
+    fun onClickShowFactButton()
 
     fun onClickNumberButton(number: Int)
 
@@ -27,10 +25,10 @@ interface NumberViewModel {
 
     fun onClickNull()
 
-    fun onItemSelectedSpinnerCallback(index: Int)
+    fun onItemSelectedSpinner(str: String, index: Int)
 
     fun onResponseCallback(message: String?)
 
-    fun onClickDialogCloseButtonListenerCallback(isSaved: Boolean, type: String)
+    fun onClickDialogCloseButtonCallback(isSaved: Boolean, type: String)
 
 }

@@ -1,35 +1,29 @@
 package com.example.myplaceinfo.number.viewmodel
 
-import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.example.myplaceinfo.SingleLiveEvent
 import com.example.myplaceinfo.data.NumbersEntity
-import com.example.myplaceinfo.number.events.ShowIpEvent
+import com.example.myplaceinfo.number.events.ShowNumberDialogEvent
 import com.example.myplaceinfo.number.interactor.NumberInteractor
-import java.lang.IllegalArgumentException
-import java.lang.NumberFormatException
 
 /**
  * Created by Alexandr Mikhalev on 24.05.2019.
  *
  * @author Alexandr Mikhalev
  */
-class NumberViewModelImpl(val numberInteractor: NumberInteractor) : ViewModel(), NumberViewModel {
+class NumberViewModelImpl(private val numberInteractor: NumberInteractor) : ViewModel(), NumberViewModel {
 
     override val number: ObservableField<String> = ObservableField("0")
-    override val progressBarState: ObservableField<Boolean> = ObservableField(false)
 
-    private val typeNumber: ObservableField<String> = ObservableField("math")
+    override val showNumberDialogEvent: SingleLiveEvent<ShowNumberDialogEvent> = SingleLiveEvent()
 
-    override val showIpEvent: SingleLiveEvent<ShowIpEvent> = SingleLiveEvent()
-
+    private var typeNumber = "math"
     private var message: String? = ""
 
-    override fun onClickShowIpButton() {
-        progressBarState.set(true)
-        val ipEvent = ShowIpEvent(typeNumber.get().toString(), number.get().toString())
-        showIpEvent.postValue(ipEvent)
+    override fun onClickShowFactButton() {
+        val ipEvent = ShowNumberDialogEvent(typeNumber, number.get()!!)
+        showNumberDialogEvent.postValue(ipEvent)
     }
 
     override fun onClickNumberButton(number: Int) {
@@ -60,23 +54,17 @@ class NumberViewModelImpl(val numberInteractor: NumberInteractor) : ViewModel(),
         this.number.set(number.get() + "0")
     }
 
-    override fun onItemSelectedSpinnerCallback(index: Int) {
-        val type = when(index) {
-            0 -> "math"
-            1 -> "trivia"
-            else -> throw IllegalArgumentException()
-        }
-        typeNumber.set(type)
+    override fun onItemSelectedSpinner(str: String, index: Int) {
+        typeNumber = str.toLowerCase()
     }
 
     override fun onResponseCallback(message: String?) {
         this.message = message
-        Log.d("NVM", this.message)
     }
 
-    override fun onClickDialogCloseButtonListenerCallback(isSaved: Boolean, type: String) {
+    override fun onClickDialogCloseButtonCallback(isSaved: Boolean, type: String) {
         if (!isSaved) return
         val numberEntity = NumbersEntity(type, number.get()!!, message!!)
-        numberInteractor.insertInDB(numberEntity).subscribe()
+        numberInteractor.writeToDataBase(numberEntity).subscribe()
     }
 }

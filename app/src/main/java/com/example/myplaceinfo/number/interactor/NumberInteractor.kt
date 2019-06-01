@@ -11,9 +11,9 @@ import io.reactivex.schedulers.Schedulers
  *
  * @author Alexandr Mikhalev
  */
-class NumberInteractor(val numbersDao: NumbersDao) {
+class NumberInteractor(private val numbersDao: NumbersDao) {
 
-    fun insertInDB(numbersEntity: NumbersEntity): Completable {
+    fun writeToDataBase(numbersEntity: NumbersEntity): Completable {
         return numbersDao.insert(numbersEntity)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

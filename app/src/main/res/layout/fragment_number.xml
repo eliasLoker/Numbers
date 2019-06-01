@@ -21,7 +21,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:textAlignment="center"
-                android:onItemSelected="@{(a,b,v,c) -> viewModel.onItemSelectedSpinnerCallback(v)}"
+                android:onItemSelected="@{(a,b,v,c) -> viewModel.onItemSelectedSpinner(String.valueOf(a.getItemAtPosition(v)),v)}"
                 android:entries="@array/typelist"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -122,7 +122,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:onClick="@{() -> viewModel.onClickShowIpButton()}"
+                android:onClick="@{() -> viewModel.onClickShowFactButton()}"
                 app:layout_constraintStart_toStartOf="@id/table_layout"
                 app:layout_constraintEnd_toEndOf="@id/table_layout"
                 app:layout_constraintBottom_toBottomOf="parent"/>

@@ -24,7 +24,7 @@ class NumberDetailsDialog: DialogFragment(), View.OnClickListener {
 
     private lateinit var closeView: ImageView
     private lateinit var favouritesToggleButton: ToggleButton
-    private var infoTextView: TextView? = null
+    private lateinit var infoTextView: TextView
     private var message: String? = ""
 
     private lateinit var onClickDialogCloseButtonListener: OnClickDialogCloseButtonListener
@@ -48,11 +48,10 @@ class NumberDetailsDialog: DialogFragment(), View.OnClickListener {
         infoTextView = view.findViewById(R.id.dialog_header)
         favouritesToggleButton = view.findViewById(R.id.favourites)
 
-        infoTextView!!.text = message
+        infoTextView.text = message
         closeView.setOnClickListener(this)
         favouritesToggleButton.setOnClickListener(this)
         return view
-        //return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onResume() {
@@ -70,12 +69,6 @@ class NumberDetailsDialog: DialogFragment(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-        /*
-        when(p0!!.id) {
-            R.id.close_view -> dialog!!.dismiss()
-            R.id.favourites -> onClickDialogCloseButtonListener.onClickCloseButton(), this.favouritesToggleButton.visibility = View.INVISIBLE
-        }
-        */
         if (p0!!.id == R.id.close_view) {
             onClickDialogCloseButtonListener.onClickCloseButton(favouritesToggleButton.isChecked)
             dialog!!.dismiss()

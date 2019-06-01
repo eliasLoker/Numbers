@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import com.example.myplaceinfo.Controller
 import com.example.myplaceinfo.OnClickDialogCloseButtonListener
 import com.example.myplaceinfo.R
-import com.example.myplaceinfo.number.retrofit.MessageIp
+import com.example.myplaceinfo.number.retrofit.NumberMessage
 import com.example.myplaceinfo.number.viewmodel.NumberViewModel
 import dagger.android.support.AndroidSupportInjection
 import retrofit2.Call
@@ -29,7 +29,7 @@ class NumberFragment : Fragment(), OnClickDialogCloseButtonListener {
     @Inject
     lateinit var numberViewModel: NumberViewModel
 
-    private var mFragmentNumberBinding: com.example.myplaceinfo.databinding.FragmentNumberBinding? = null
+    private var numberBinding: com.example.myplaceinfo.databinding.FragmentNumberBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
@@ -37,41 +37,39 @@ class NumberFragment : Fragment(), OnClickDialogCloseButtonListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mFragmentNumberBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_number, container, false)
-        mFragmentNumberBinding!!.viewModel = numberViewModel
+        numberBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_number, container, false)
+        numberBinding!!.viewModel = numberViewModel
         init()
-        return mFragmentNumberBinding!!.root
+        return numberBinding!!.root
     }
 
     private fun init() {
-        numberViewModel!!.showIpEvent.observe(this, Observer { getMyIp(it.type, it.number) })
+        numberViewModel.showNumberDialogEvent.observe(this, Observer { getMyIp(it.type, it.number) })
     }
 
     private fun getMyIp(type: String?, number: String?) {
-        val messages = Controller.messageAPI.messages(type!!, number!!)
+        val messages = Controller.numberAPI.messages(type!!, number!!)
 
-        messages.enqueue(object : Callback<MessageIp> {
-            override fun onFailure(call: Call<MessageIp>, t: Throwable) {
+        messages.enqueue(object : Callback<NumberMessage> {
+            override fun onFailure(call: Call<NumberMessage>, t: Throwable) {
                 Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()
             }
 
-            override fun onResponse(call: Call<MessageIp>, response: Response<MessageIp>) {
-                numberViewModel!!.onResponseCallback(response.body()!!.text ?: "")
-                val showDetailsDialog = NumberDetailsDialog().newInstance(response.body()!!.text)
+            override fun onResponse(call: Call<NumberMessage>, response: Response<NumberMessage>) {
+                val message = response.body()!!.text
+                numberViewModel.onResponseCallback(message)
+                val showDetailsDialog = NumberDetailsDialog().newInstance(message)
                 showDetailsDialog.show(childFragmentManager, "sdfsdfs")
             }
         })
     }
 
     override fun onClickCloseButton(isSaved: Boolean) {
-        if (isSaved) numberViewModel!!.onClickDialogCloseButtonListenerCallback(
-            isSaved,
-            mFragmentNumberBinding!!.spinner.selectedItem.toString()
-        )
+        val type = numberBinding!!.spinner.selectedItem.toString()
+        if (isSaved) numberViewModel.onClickDialogCloseButtonCallback(isSaved, type)
     }
 
     companion object {
-
         fun newInstance(): NumberFragment {
             val args = Bundle()
             val fragment = NumberFragment()

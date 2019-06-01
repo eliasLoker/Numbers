@@ -10,9 +10,9 @@ import org.jetbrains.annotations.NotNull
  *
  * @author Alexandr Mikhalev
  */
-class NumberFactory(val numberInteractor: NumberInteractor): ViewModelProvider.NewInstanceFactory() {
+class NumberFactory(val numberInteractor: NumberInteractor) : ViewModelProvider.NewInstanceFactory() {
 
-    override fun <T : ViewModel?> create(@NotNull modelClass:Class<T>): T {
+    override fun <T : ViewModel?> create(@NotNull modelClass: Class<T>): T {
         return NumberViewModelImpl(numberInteractor) as T
     }
 }
