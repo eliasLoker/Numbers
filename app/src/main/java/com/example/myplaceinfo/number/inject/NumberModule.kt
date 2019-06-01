@@ -20,21 +20,16 @@ class NumberModule {
 
     @NumberScope
     @Provides
-    fun provideNumberInteractor(numberDao: NumberDao): NumberInteractor {
-        return NumberInteractor(numberDao)
-    }
+    fun provideNumberInteractor(numberDao: NumberDao) = NumberInteractor(numberDao)
 
     @NumberScope
     @Provides
-    fun provideNumberFactory(numberInteractor: NumberInteractor): NumberFactory {
-        return NumberFactory(numberInteractor)
-    }
+    fun provideNumberFactory(numberInteractor: NumberInteractor) = NumberFactory(numberInteractor)
 
     @NumberScope
     @Provides
     fun provideNumberViewModel(numberFragment: NumberFragment, numberFactory: NumberFactory): NumberViewModel {
-        return ViewModelProviders
-            .of(numberFragment, numberFactory)
-            .get(NumberViewModelImpl::class.java)
+        return ViewModelProviders.of(numberFragment, numberFactory).get(NumberViewModelImpl::class.java)
     }
+
 }

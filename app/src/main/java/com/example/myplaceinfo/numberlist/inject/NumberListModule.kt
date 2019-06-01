@@ -20,9 +20,7 @@ class NumberListModule {
 
     @NumberListScope
     @Provides
-    fun provideNumberListInteractor(numberDao: NumberDao): NumberListInteractor {
-        return NumberListInteractor(numberDao)
-    }
+    fun provideNumberListInteractor(numberDao: NumberDao) = NumberListInteractor(numberDao)
 
     @NumberListScope
     @Provides
@@ -30,9 +28,9 @@ class NumberListModule {
 
     @NumberListScope
     @Provides
-    fun provideNumberListViewModel(numberListFragment: NumberListFragment, numberListFactory: NumberListFactory): NumberListViewModel {
-        return ViewModelProviders
-            .of(numberListFragment, numberListFactory)
-            .get(NumberListViewModelImpl::class.java)
+    fun provideNumberListViewModel(numberListFragment: NumberListFragment, numberListFactory: NumberListFactory)
+            : NumberListViewModel {
+        return ViewModelProviders.of(numberListFragment, numberListFactory).get(NumberListViewModelImpl::class.java)
     }
+
 }

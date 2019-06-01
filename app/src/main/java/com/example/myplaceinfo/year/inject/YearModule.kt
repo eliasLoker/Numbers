@@ -20,21 +20,15 @@ class YearModule {
 
     @YearScope
     @Provides
-    fun provideYearInteractor(numberDao: NumberDao): YearInteractor {
-        return YearInteractor(numberDao)
-    }
+    fun provideYearInteractor(numberDao: NumberDao) = YearInteractor(numberDao)
 
     @YearScope
     @Provides
-    fun provideYearFractory(yearInteractor: YearInteractor): YearFactory {
-        return YearFactory(yearInteractor)
-    }
+    fun provideYearFractory(yearInteractor: YearInteractor) = YearFactory(yearInteractor)
 
     @YearScope
     @Provides
     fun provideYearViewModel(yearFragment: YearFragment, yearFactory: YearFactory): YearViewModel {
-        return ViewModelProviders
-            .of(yearFragment, yearFactory)
-            .get(YearViewModelImpl::class.java)
+        return ViewModelProviders.of(yearFragment, yearFactory).get(YearViewModelImpl::class.java)
     }
 }

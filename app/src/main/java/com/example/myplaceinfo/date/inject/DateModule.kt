@@ -20,21 +20,16 @@ class DateModule {
 
     @DateScope
     @Provides
-    fun provideDateInteractor(numberDao: NumberDao): DateInteractor {
-        return DateInteractor(numberDao)
-    }
+    fun provideDateInteractor(numberDao: NumberDao) = DateInteractor(numberDao)
 
     @DateScope
     @Provides
-    fun provideDateFactory(dateInteractor: DateInteractor): DateFactory {
-        return DateFactory(dateInteractor)
-    }
+    fun provideDateFactory(dateInteractor: DateInteractor) = DateFactory(dateInteractor)
 
     @DateScope
     @Provides
     fun provideDateViewModel(dateFragment: DateFragment, dateFactory: DateFactory): DateViewModel {
-        return ViewModelProviders
-            .of(dateFragment, dateFactory)
-            .get(DateViewModelImpl::class.java)
+        return ViewModelProviders.of(dateFragment, dateFactory).get(DateViewModelImpl::class.java)
     }
+
 }
