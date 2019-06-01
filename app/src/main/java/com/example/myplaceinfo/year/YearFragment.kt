@@ -8,19 +8,16 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import com.example.myplaceinfo.OnClickDialogCloseButtonListener
 import com.example.myplaceinfo.Controller
+import com.example.myplaceinfo.OnClickDialogCloseButtonListener
 import com.example.myplaceinfo.R
-import com.example.myplaceinfo.data.NumberDatabase
-import com.example.myplaceinfo.year.interactor.YearInteractor
 import com.example.myplaceinfo.year.retrofit.YearsIp
-import com.example.myplaceinfo.year.viewmodel.YearFactory
 import com.example.myplaceinfo.year.viewmodel.YearViewModel
-import com.example.myplaceinfo.year.viewmodel.YearViewModelImpl
+import dagger.android.support.AndroidSupportInjection
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
 /**
  * Created by Alexandr Mikhalev on 28.05.2019.
@@ -29,14 +26,19 @@ import retrofit2.Response
  */
 class YearFragment : Fragment(), OnClickDialogCloseButtonListener {
     private var binding: com.example.myplaceinfo.databinding.FragmentYearsBinding? = null
-    private var yearViewModel: YearViewModel? = null
+
+    @Inject
+    lateinit var yearViewModel: YearViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
+        /*
         val numberDao = NumberDatabase.getNumberDatabase(activity!!.applicationContext)!!.numberDao()
         yearViewModel = ViewModelProviders
             .of(this, YearFactory(yearInteractor = YearInteractor(numberDao)))
             .get(YearViewModelImpl::class.java)
+        */
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
