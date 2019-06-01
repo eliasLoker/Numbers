@@ -1,7 +1,7 @@
 package com.example.myplaceinfo.numberlist
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myplaceinfo.data.NumberEntity
+import com.example.myplaceinfo.data.NumbersEntity
 
 /**
  * Created by Alexandr Mikhalev on 30.05.2019.
@@ -11,8 +11,8 @@ import com.example.myplaceinfo.data.NumberEntity
 class NumberListHolder(var numberListItemBinding: com.example.myplaceinfo.databinding.NumberListItemBinding) :
     RecyclerView.ViewHolder(numberListItemBinding.root) {
 
-    fun bind(numberEntity: NumberEntity) {
-        numberListItemBinding.number = numberEntity
+    fun bind(numbersEntity: NumbersEntity) {
+        numberListItemBinding.number = numbersEntity
         numberListItemBinding.executePendingBindings()
     }
 }

@@ -34,9 +34,9 @@ class YearFragment : Fragment(), OnClickDialogCloseButtonListener {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
         /*
-        val numberDao = NumberDatabase.getNumberDatabase(activity!!.applicationContext)!!.numberDao()
+        val numbersDao = NumbersDatabase.getNumberDatabase(activity!!.applicationContext)!!.numbersDao()
         yearViewModel = ViewModelProviders
-            .of(this, YearFactory(yearInteractor = YearInteractor(numberDao)))
+            .of(this, YearFactory(yearInteractor = YearInteractor(numbersDao)))
             .get(YearViewModelImpl::class.java)
         */
     }

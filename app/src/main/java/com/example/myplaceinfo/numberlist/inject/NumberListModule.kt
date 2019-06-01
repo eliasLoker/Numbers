@@ -1,7 +1,7 @@
 package com.example.myplaceinfo.numberlist.inject
 
 import androidx.lifecycle.ViewModelProviders
-import com.example.myplaceinfo.data.NumberDao
+import com.example.myplaceinfo.data.NumbersDao
 import com.example.myplaceinfo.numberlist.NumberListFragment
 import com.example.myplaceinfo.numberlist.interactor.NumberListInteractor
 import com.example.myplaceinfo.numberlist.viewmodel.NumberListFactory
@@ -20,7 +20,7 @@ class NumberListModule {
 
     @NumberListScope
     @Provides
-    fun provideNumberListInteractor(numberDao: NumberDao) = NumberListInteractor(numberDao)
+    fun provideNumberListInteractor(numbersDao: NumbersDao) = NumberListInteractor(numbersDao)
 
     @NumberListScope
     @Provides

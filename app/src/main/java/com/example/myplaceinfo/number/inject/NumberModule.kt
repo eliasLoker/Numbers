@@ -1,7 +1,7 @@
 package com.example.myplaceinfo.number.inject
 
 import androidx.lifecycle.ViewModelProviders
-import com.example.myplaceinfo.data.NumberDao
+import com.example.myplaceinfo.data.NumbersDao
 import com.example.myplaceinfo.number.NumberFragment
 import com.example.myplaceinfo.number.interactor.NumberInteractor
 import com.example.myplaceinfo.number.viewmodel.NumberFactory
@@ -20,7 +20,7 @@ class NumberModule {
 
     @NumberScope
     @Provides
-    fun provideNumberInteractor(numberDao: NumberDao) = NumberInteractor(numberDao)
+    fun provideNumberInteractor(numbersDao: NumbersDao) = NumberInteractor(numbersDao)
 
     @NumberScope
     @Provides

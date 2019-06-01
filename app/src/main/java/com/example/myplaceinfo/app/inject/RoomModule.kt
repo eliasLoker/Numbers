@@ -2,7 +2,7 @@ package com.example.myplaceinfo.app.inject
 
 import android.content.Context
 import androidx.room.Room
-import com.example.myplaceinfo.data.NumberDatabase
+import com.example.myplaceinfo.data.NumbersDatabase
 import dagger.Module
 import dagger.Provides
 
@@ -17,9 +17,9 @@ class RoomModule {
     @AppScope
     @Provides
     fun provideNumberDatabase(context: Context) =
-        Room.databaseBuilder(context, NumberDatabase::class.java, "myDB").build()
+        Room.databaseBuilder(context, NumbersDatabase::class.java, "myDB").build()
 
     @AppScope
     @Provides
-    fun provideNumberDao(numberDatabase: NumberDatabase) = numberDatabase.numberDao()
+    fun provideNumberDao(numbersDatabase: NumbersDatabase) = numbersDatabase.numberDao()
 }

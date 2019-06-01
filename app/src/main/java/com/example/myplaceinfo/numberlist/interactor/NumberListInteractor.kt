@@ -1,7 +1,7 @@
 package com.example.myplaceinfo.numberlist.interactor
 
-import com.example.myplaceinfo.data.NumberDao
-import com.example.myplaceinfo.data.NumberEntity
+import com.example.myplaceinfo.data.NumbersDao
+import com.example.myplaceinfo.data.NumbersEntity
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -12,15 +12,15 @@ import io.reactivex.schedulers.Schedulers
  *
  * @author Alexandr Mikhalev
  */
-class NumberListInteractor(val numberDao: NumberDao) {
-    fun getAll(): Single<List<NumberEntity>> {
-        return numberDao.getAll()
+class NumberListInteractor(val numbersDao: NumbersDao) {
+    fun getAll(): Single<List<NumbersEntity>> {
+        return numbersDao.getAll()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
     fun deleteByNumber(number: String): Completable {
-        return numberDao.deleteByNumber(number)
+        return numbersDao.deleteByNumber(number)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

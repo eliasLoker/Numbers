@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.example.myplaceinfo.SingleLiveEvent
-import com.example.myplaceinfo.data.NumberEntity
+import com.example.myplaceinfo.data.NumbersEntity
 import com.example.myplaceinfo.number.events.ShowIpEvent
 import com.example.myplaceinfo.number.interactor.NumberInteractor
 import java.lang.IllegalArgumentException
@@ -76,7 +76,7 @@ class NumberViewModelImpl(val numberInteractor: NumberInteractor) : ViewModel(),
 
     override fun onClickDialogCloseButtonListenerCallback(isSaved: Boolean, type: String) {
         if (!isSaved) return
-        val numberEntity = NumberEntity(type, number.get()!!, message!!)
+        val numberEntity = NumbersEntity(type, number.get()!!, message!!)
         numberInteractor.insertInDB(numberEntity).subscribe()
     }
 }

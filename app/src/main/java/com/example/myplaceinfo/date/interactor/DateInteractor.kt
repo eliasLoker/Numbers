@@ -1,7 +1,7 @@
 package com.example.myplaceinfo.date.interactor
 
-import com.example.myplaceinfo.data.NumberDao
-import com.example.myplaceinfo.data.NumberEntity
+import com.example.myplaceinfo.data.NumbersDao
+import com.example.myplaceinfo.data.NumbersEntity
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -11,10 +11,10 @@ import io.reactivex.schedulers.Schedulers
  *
  * @author Alexandr Mikhalev
  */
-class DateInteractor(val numberDao: NumberDao) {
+class DateInteractor(val numbersDao: NumbersDao) {
 
-    fun insertInDB(numberEntity: NumberEntity): Completable {
-        return numberDao.insert(numberEntity)
+    fun insertInDB(numbersEntity: NumbersEntity): Completable {
+        return numbersDao.insert(numbersEntity)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

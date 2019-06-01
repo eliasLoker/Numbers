@@ -1,7 +1,7 @@
 package com.example.myplaceinfo.date.viewmodel
 
 import com.example.myplaceinfo.SingleLiveEvent
-import com.example.myplaceinfo.date.events.CountDaysEvent
+import com.example.myplaceinfo.date.events.SetDaysQuantityEvent
 import com.example.myplaceinfo.date.events.ShowDateDialogEvent
 
 /**
@@ -11,17 +11,17 @@ import com.example.myplaceinfo.date.events.ShowDateDialogEvent
  */
 interface DateViewModel {
 
-    val checkedChangedEventMonth: SingleLiveEvent<CountDaysEvent.DayType>
+    val checkedChangedQuantityEventMonth: SingleLiveEvent<SetDaysQuantityEvent>
 
     val showDateDialogEvent: SingleLiveEvent<ShowDateDialogEvent>
 
-    fun onClickShowButton()
+    fun onItemSelectedMonth(index: Int)
 
-    fun onItemSelectedMonthCallback(index: Int)
+    fun onItemSelectedDay(index: Int)
 
-    fun onItemSelectedDayCallback(index: Int)
+    fun onClickShowFactButton()
 
     fun onResponseCallback(message: String?)
 
-    fun onClickDialogCloseButtonListenerCallback(isSaved: Boolean)
+    fun onClickDialogCloseButtonCallback(isSaved: Boolean)
 }

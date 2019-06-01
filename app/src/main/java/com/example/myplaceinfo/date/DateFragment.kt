@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import com.example.myplaceinfo.Controller
 import com.example.myplaceinfo.OnClickDialogCloseButtonListener
 import com.example.myplaceinfo.R
-import com.example.myplaceinfo.date.events.CountDaysEvent
+import com.example.myplaceinfo.date.events.SetDaysQuantityEvent
 import com.example.myplaceinfo.date.retrofit.DateIp
 import com.example.myplaceinfo.date.viewmodel.DateViewModel
 import dagger.android.support.AndroidSupportInjection
@@ -37,9 +37,9 @@ class DateFragment : Fragment(), OnClickDialogCloseButtonListener {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
         /*
-        val numberDao = NumberDatabase.getNumberDatabase(activity!!.applicationContext)!!.numberDao()
+        val numbersDao = NumbersDatabase.getNumberDatabase(activity!!.applicationContext)!!.numbersDao()
         dateViewModel = ViewModelProviders
-            .of(this, DateFactory(dateInteractor = DateInteractor(numberDao)))
+            .of(this, DateFactory(dateInteractor = DateInteractor(numbersDao)))
             .get(DateViewModelImpl::class.java)
         */
     }
@@ -55,18 +55,18 @@ class DateFragment : Fragment(), OnClickDialogCloseButtonListener {
         dateViewModel!!.showDateDialogEvent
             .observe(this, Observer { getDateInfo(it.month, it.day) })
 
-        dateViewModel!!.checkedChangedEventMonth
-            .observe(this, Observer { setDaysSpinner(it) })
+        dateViewModel!!.checkedChangedQuantityEventMonth
+            .observe(this, Observer { setDaysSpinner(it.dayType) })
     }
 
-    private fun setDaysSpinner(dayType: CountDaysEvent.DayType) {
+    private fun setDaysSpinner(dayType: SetDaysQuantityEvent.DayType) {
         val testArray = when (dayType) {
-            CountDaysEvent.DayType.THIRTY_ONE -> resources.getStringArray(R.array.month_list_long)
-            CountDaysEvent.DayType.THIRTY -> resources.getStringArray(R.array.month_list_average)
-            CountDaysEvent.DayType.TWENTY_NINE -> resources.getStringArray(R.array.month_list_short)
+            SetDaysQuantityEvent.DayType.THIRTY_ONE -> resources.getStringArray(R.array.month_list_long)
+            SetDaysQuantityEvent.DayType.THIRTY -> resources.getStringArray(R.array.month_list_average)
+            SetDaysQuantityEvent.DayType.TWENTY_NINE -> resources.getStringArray(R.array.month_list_short)
         }
 
-        val arrayAdapter = ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, testArray)
+        val arrayAdapter = ArrayAdapter<String>(context!!, android.R.layout.simple_spinner_item, testArray)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
         binding!!.spinnerDay.adapter = arrayAdapter
     }
@@ -88,7 +88,7 @@ class DateFragment : Fragment(), OnClickDialogCloseButtonListener {
     }
 
     override fun onClickCloseButton(isSaved: Boolean) {
-        dateViewModel!!.onClickDialogCloseButtonListenerCallback(isSaved)
+        dateViewModel!!.onClickDialogCloseButtonCallback(isSaved)
     }
 
     companion object {

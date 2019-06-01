@@ -5,12 +5,11 @@ package com.example.myplaceinfo.date.events
  *
  * @author Alexandr Mikhalev
  */
-class CountDaysEvent(dayType: DayType) {
-    val dayType: DayType = dayType
+class SetDaysQuantityEvent(val dayType: DayType) {
 
     enum class DayType {
-            TWENTY_NINE,
-            THIRTY,
-            THIRTY_ONE
-        }
+        TWENTY_NINE,
+        THIRTY,
+        THIRTY_ONE
+    }
 }

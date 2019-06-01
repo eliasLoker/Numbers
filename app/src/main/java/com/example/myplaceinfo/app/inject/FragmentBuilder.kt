@@ -37,5 +37,5 @@ interface FragmentBuilder {
 
     @ContributesAndroidInjector(modules = [NumberListModule::class])
     @NumberListScope
-    fun contributeNumberListFragment() : NumberListFragment
+    fun contributeNumberListFragment(): NumberListFragment
 }

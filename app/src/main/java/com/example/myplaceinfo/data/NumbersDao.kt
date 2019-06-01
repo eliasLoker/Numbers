@@ -13,14 +13,14 @@ import io.reactivex.Single
  * @author Alexandr Mikhalev
  */
 @Dao
-interface NumberDao {
+interface NumbersDao {
 
-    @Query("SELECT * FROM NumberEntity")
-    fun getAll(): Single<List<NumberEntity>>
+    @Query("SELECT * FROM NumbersEntity")
+    fun getAll(): Single<List<NumbersEntity>>
 
     @Insert
-    fun insert(numberEntity: NumberEntity): Completable
+    fun insert(numbersEntity: NumbersEntity): Completable
 
-    @Query("DELETE FROM NumberEntity WHERE numberStr = :number")
+    @Query("DELETE FROM NumbersEntity WHERE numberStr = :number")
     fun deleteByNumber(number: String): Completable
 }

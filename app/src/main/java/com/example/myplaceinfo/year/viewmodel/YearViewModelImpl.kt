@@ -3,10 +3,9 @@ package com.example.myplaceinfo.year.viewmodel
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.example.myplaceinfo.SingleLiveEvent
-import com.example.myplaceinfo.data.NumberEntity
+import com.example.myplaceinfo.data.NumbersEntity
 import com.example.myplaceinfo.year.events.ShowYearDialogEvent
 import com.example.myplaceinfo.year.interactor.YearInteractor
-import java.lang.IllegalArgumentException
 
 /**
  * Created by Alexandr Mikhalev on 28.05.2019.
@@ -48,8 +47,8 @@ class YearViewModelImpl(val yearInteractor: YearInteractor): ViewModel(), YearVi
     override fun onClickDialogCloseButtonListenerCallback(isSaved: Boolean) {
         if (!isSaved) return
         val numberEntity = when(isSeekBarEnabled.get()!!) {
-            true -> NumberEntity("Year", textSeek.get().toString(), message!!)
-            false -> NumberEntity("Year", editText.get()!!, message!!)
+            true -> NumbersEntity("Year", textSeek.get().toString(), message!!)
+            false -> NumbersEntity("Year", editText.get()!!, message!!)
         }
         yearInteractor.insertInDB(numberEntity).subscribe()
     }

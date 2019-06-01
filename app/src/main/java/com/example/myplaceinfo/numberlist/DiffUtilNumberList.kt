@@ -1,14 +1,14 @@
 package com.example.myplaceinfo.numberlist
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.myplaceinfo.data.NumberEntity
+import com.example.myplaceinfo.data.NumbersEntity
 
 /**
  * Created by Alexandr Mikhalev on 30.05.2019.
  *
  * @author Alexandr Mikhalev
  */
-class DiffUtilNumberList(private val oldList: List<NumberEntity>, private val newList: List<NumberEntity>): DiffUtil.Callback() {
+class DiffUtilNumberList(private val oldList: List<NumbersEntity>, private val newList: List<NumbersEntity>): DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {
         return oldList.size

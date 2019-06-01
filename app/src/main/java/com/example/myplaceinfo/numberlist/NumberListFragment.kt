@@ -8,17 +8,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myplaceinfo.R
-import com.example.myplaceinfo.data.NumberDatabase
-import com.example.myplaceinfo.data.NumberEntity
-import com.example.myplaceinfo.numberlist.interactor.NumberListInteractor
-import com.example.myplaceinfo.numberlist.viewmodel.NumberListFactory
+import com.example.myplaceinfo.data.NumbersEntity
 import com.example.myplaceinfo.numberlist.viewmodel.NumberListViewModel
-import com.example.myplaceinfo.numberlist.viewmodel.NumberListViewModelImpl
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -41,9 +36,9 @@ class NumberListFragment : Fragment(), OnBasketClickListener {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
         /*
-        val numberDao = NumberDatabase.getNumberDatabase(activity!!.applicationContext)!!.numberDao()
+        val numbersDao = NumbersDatabase.getNumberDatabase(activity!!.applicationContext)!!.numbersDao()
         numberListViewModel = ViewModelProviders
-            .of(this, NumberListFactory(numberListInteractor = NumberListInteractor(numberDao)))
+            .of(this, NumberListFactory(numberListInteractor = NumberListInteractor(numbersDao)))
             .get(NumberListViewModelImpl::class.java)
         */
     }
@@ -71,14 +66,14 @@ class NumberListFragment : Fragment(), OnBasketClickListener {
         Log.d("RV", "init")
     }
 
-    private fun setList(numberList: List<NumberEntity>) {
+    private fun setList(numbersList: List<NumbersEntity>) {
         /*
-        numberListAdapter.numberListAdapterRefresh(numberList)
+        numberListAdapter.numberListAdapterRefresh(numbersList)
         Log.d("RV", "setList")
         */
-        val diffUtilNumberList = DiffUtilNumberList(numberListAdapter.data, numberList)
+        val diffUtilNumberList = DiffUtilNumberList(numberListAdapter.data, numbersList)
         val diffResult = DiffUtil.calculateDiff(diffUtilNumberList)
-        numberListAdapter.numberListAdapterRefresh(numberList)
+        numberListAdapter.numberListAdapterRefresh(numbersList)
         diffResult.dispatchUpdatesTo(numberListAdapter)
 
     }

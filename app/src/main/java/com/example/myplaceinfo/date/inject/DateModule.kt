@@ -1,7 +1,7 @@
 package com.example.myplaceinfo.date.inject
 
 import androidx.lifecycle.ViewModelProviders
-import com.example.myplaceinfo.data.NumberDao
+import com.example.myplaceinfo.data.NumbersDao
 import com.example.myplaceinfo.date.DateFragment
 import com.example.myplaceinfo.date.interactor.DateInteractor
 import com.example.myplaceinfo.date.viewmodel.DateFactory
@@ -20,7 +20,7 @@ class DateModule {
 
     @DateScope
     @Provides
-    fun provideDateInteractor(numberDao: NumberDao) = DateInteractor(numberDao)
+    fun provideDateInteractor(numbersDao: NumbersDao) = DateInteractor(numbersDao)
 
     @DateScope
     @Provides

@@ -1,7 +1,7 @@
 package com.example.myplaceinfo.year.inject
 
 import androidx.lifecycle.ViewModelProviders
-import com.example.myplaceinfo.data.NumberDao
+import com.example.myplaceinfo.data.NumbersDao
 import com.example.myplaceinfo.year.YearFragment
 import com.example.myplaceinfo.year.interactor.YearInteractor
 import com.example.myplaceinfo.year.viewmodel.YearFactory
@@ -20,7 +20,7 @@ class YearModule {
 
     @YearScope
     @Provides
-    fun provideYearInteractor(numberDao: NumberDao) = YearInteractor(numberDao)
+    fun provideYearInteractor(numbersDao: NumbersDao) = YearInteractor(numbersDao)
 
     @YearScope
     @Provides

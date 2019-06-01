@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myplaceinfo.R
-import com.example.myplaceinfo.data.NumberEntity
+import com.example.myplaceinfo.data.NumbersEntity
 import com.example.myplaceinfo.databinding.NumberListItemBinding
 
 /**
@@ -16,10 +16,10 @@ import com.example.myplaceinfo.databinding.NumberListItemBinding
  */
 class NumberListAdapter : RecyclerView.Adapter<NumberListHolder>() {
 
-    var data: List<NumberEntity> = ArrayList()
+    var data: List<NumbersEntity> = ArrayList()
     lateinit var listener: OnBasketClickListener
 
-    fun numberListAdapterRefresh(list: List<NumberEntity>) {
+    fun numberListAdapterRefresh(list: List<NumbersEntity>) {
         data = list
         Log.d("RV", data[0].text + " from numberListAdapterRefresh")
         notifyDataSetChanged()

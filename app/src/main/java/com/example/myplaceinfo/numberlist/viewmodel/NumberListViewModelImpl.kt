@@ -3,7 +3,7 @@ package com.example.myplaceinfo.numberlist.viewmodel
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.example.myplaceinfo.SingleLiveEvent
-import com.example.myplaceinfo.data.NumberEntity
+import com.example.myplaceinfo.data.NumbersEntity
 import com.example.myplaceinfo.numberlist.events.UpdateListEvent
 import com.example.myplaceinfo.numberlist.interactor.NumberListInteractor
 import io.reactivex.disposables.CompositeDisposable
@@ -15,7 +15,7 @@ import io.reactivex.disposables.CompositeDisposable
  */
 class NumberListViewModelImpl(val numberListInteractor: NumberListInteractor) : ViewModel(), NumberListViewModel {
 
-    lateinit var list: MutableList<NumberEntity>
+    lateinit var list: MutableList<NumbersEntity>
 
     override val stateEmptyTextView: ObservableField<Boolean> = ObservableField(false)
 
@@ -29,7 +29,7 @@ class NumberListViewModelImpl(val numberListInteractor: NumberListInteractor) : 
 
     init {
         val disposable = numberListInteractor.getAll()
-            .subscribe { t: List<NumberEntity>? ->
+            .subscribe { t: List<NumbersEntity>? ->
                 list = t!!.toMutableList()
                 if (list.isEmpty()) {
                     stateEmptyTextView.set(true)
@@ -48,7 +48,7 @@ class NumberListViewModelImpl(val numberListInteractor: NumberListInteractor) : 
         val disposable = numberListInteractor.deleteByNumber(number)
             .subscribe {
                 numberListInteractor.getAll()
-                    .subscribe { t: List<NumberEntity>? ->
+                    .subscribe { t: List<NumbersEntity>? ->
                         list.clear()
                         list = t!!.toMutableList()
                         if (list.isEmpty()) {
