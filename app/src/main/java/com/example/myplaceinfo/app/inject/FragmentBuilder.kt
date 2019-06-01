@@ -1,5 +1,8 @@
 package com.example.myplaceinfo.app.inject
 
+import com.example.myplaceinfo.date.DateFragment
+import com.example.myplaceinfo.date.inject.DateModule
+import com.example.myplaceinfo.date.inject.DateScope
 import com.example.myplaceinfo.number.NumberFragment
 import com.example.myplaceinfo.number.inject.NumberModule
 import com.example.myplaceinfo.number.inject.NumberScope
@@ -17,4 +20,8 @@ interface FragmentBuilder {
     @ContributesAndroidInjector(modules = [NumberModule::class])
     @NumberScope
     fun contributeNumberFragment(): NumberFragment
+
+    @ContributesAndroidInjector(modules = [DateModule::class])
+    @DateScope
+    fun contributeDateFragment(): DateFragment
 }

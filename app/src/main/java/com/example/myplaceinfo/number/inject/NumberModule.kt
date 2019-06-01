@@ -26,15 +26,15 @@ class NumberModule {
 
     @NumberScope
     @Provides
-    fun provideNumberViewModel(numberFragment: NumberFragment, numberFactory: NumberFactory): NumberViewModel {
-        return ViewModelProviders
-            .of(numberFragment, numberFactory)
-            .get(NumberViewModelImpl::class.java)
+    fun provideNumberFactory(numberInteractor: NumberInteractor): NumberFactory {
+        return NumberFactory(numberInteractor)
     }
 
     @NumberScope
     @Provides
-    fun provideNumberFactory(numberInteractor: NumberInteractor): NumberFactory {
-        return NumberFactory(numberInteractor)
+    fun provideNumberViewModel(numberFragment: NumberFragment, numberFactory: NumberFactory): NumberViewModel {
+        return ViewModelProviders
+            .of(numberFragment, numberFactory)
+            .get(NumberViewModelImpl::class.java)
     }
 }

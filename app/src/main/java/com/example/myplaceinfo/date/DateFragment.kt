@@ -9,20 +9,17 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import com.example.myplaceinfo.OnClickDialogCloseButtonListener
 import com.example.myplaceinfo.Controller
+import com.example.myplaceinfo.OnClickDialogCloseButtonListener
 import com.example.myplaceinfo.R
-import com.example.myplaceinfo.data.NumberDatabase
 import com.example.myplaceinfo.date.events.CountDaysEvent
-import com.example.myplaceinfo.date.interactor.DateInteractor
 import com.example.myplaceinfo.date.retrofit.DateIp
-import com.example.myplaceinfo.date.viewmodel.DateFactory
 import com.example.myplaceinfo.date.viewmodel.DateViewModel
-import com.example.myplaceinfo.date.viewmodel.DateViewModelImpl
+import dagger.android.support.AndroidSupportInjection
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
 /**
  * Created by Alexandr Mikhalev on 28.05.2019.
@@ -32,14 +29,19 @@ import retrofit2.Response
 class DateFragment : Fragment(), OnClickDialogCloseButtonListener {
 
     private var binding: com.example.myplaceinfo.databinding.FragmentDatesBinding? = null
-    private var dateViewModel: DateViewModel? = null
+
+    @Inject
+    lateinit var dateViewModel: DateViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
+        /*
         val numberDao = NumberDatabase.getNumberDatabase(activity!!.applicationContext)!!.numberDao()
         dateViewModel = ViewModelProviders
             .of(this, DateFactory(dateInteractor = DateInteractor(numberDao)))
             .get(DateViewModelImpl::class.java)
+        */
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

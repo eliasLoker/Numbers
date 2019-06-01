@@ -14,7 +14,7 @@ import dagger.android.support.AndroidSupportInjectionModule
  */
 @AppScope
 @Component(modules = [FragmentBuilder::class, RoomModule::class, AppModule::class, AndroidSupportInjectionModule::class])
-interface AppComponent: AndroidInjector<App> {
+interface AppComponent : AndroidInjector<App> {
 
     override fun inject(app: App)
 

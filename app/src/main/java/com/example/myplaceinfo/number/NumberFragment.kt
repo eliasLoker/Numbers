@@ -29,19 +29,11 @@ class NumberFragment : Fragment(), OnClickDialogCloseButtonListener {
     @Inject
     lateinit var numberViewModel: NumberViewModel
 
-
     private var mFragmentNumberBinding: com.example.myplaceinfo.databinding.FragmentNumberBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
-
-        /*
-        val numberDao = NumberDatabase.getNumberDatabase(activity!!.applicationContext)!!.numberDao()
-        numberViewModel = ViewModelProviders
-            .of(this, NumberFactory(numberInteractor = NumberInteractor(numberDao)))
-            .get(NumberViewModelImpl::class.java)
-        */
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

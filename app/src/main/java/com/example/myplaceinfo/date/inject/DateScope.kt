@@ -1,4 +1,4 @@
-package com.example.myplaceinfo.app.inject
+package com.example.myplaceinfo.date.inject
 
 import javax.inject.Scope
 
@@ -9,5 +9,5 @@ import javax.inject.Scope
  */
 @Scope
 @Retention(AnnotationRetention.RUNTIME)
-annotation class AppScope {
+annotation class DateScope {
 }
