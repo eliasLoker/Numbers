@@ -7,7 +7,7 @@ package com.example.myplaceinfo
  */
 class Constants {
     companion object {
-        val FOR_DATE_TYPE = "Date"
-        val FOR_YEAR_TYPE = "Year"
+        const val FOR_DATE_TYPE = "Date"
+        const val FOR_YEAR_TYPE = "Year"
     }
 }
