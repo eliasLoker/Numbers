@@ -6,6 +6,9 @@ import com.example.myplaceinfo.date.inject.DateScope
 import com.example.myplaceinfo.number.NumberFragment
 import com.example.myplaceinfo.number.inject.NumberModule
 import com.example.myplaceinfo.number.inject.NumberScope
+import com.example.myplaceinfo.numberlist.NumberListFragment
+import com.example.myplaceinfo.numberlist.inject.NumberListModule
+import com.example.myplaceinfo.numberlist.inject.NumberListScope
 import com.example.myplaceinfo.year.YearFragment
 import com.example.myplaceinfo.year.inject.YearModule
 import com.example.myplaceinfo.year.inject.YearScope
@@ -31,4 +34,8 @@ interface FragmentBuilder {
     @ContributesAndroidInjector(modules = [YearModule::class])
     @YearScope
     fun contributeYearFragment(): YearFragment
+
+    @ContributesAndroidInjector(modules = [NumberListModule::class])
+    @NumberListScope
+    fun contributeNumberListFragment() : NumberListFragment
 }
