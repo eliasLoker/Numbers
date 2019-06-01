@@ -31,7 +31,7 @@ class DateFragment : Fragment(), OnClickDialogCloseButtonListener {
     @Inject
     lateinit var dateViewModel: DateViewModel
 
-    private var binding: com.example.myplaceinfo.databinding.FragmentDatesBinding? = null
+    private var binding: com.example.myplaceinfo.databinding.FragmentDateBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
@@ -39,17 +39,17 @@ class DateFragment : Fragment(), OnClickDialogCloseButtonListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dates, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_date, container, false)
         binding!!.viewModel = dateViewModel
         init()
         return binding!!.root
     }
 
     private fun init() {
-        dateViewModel!!.showDateDialogEvent
+        dateViewModel.showDateDialogEvent
             .observe(this, Observer { getDateInfo(it.month, it.day) })
 
-        dateViewModel!!.checkedChangedQuantityEventMonth
+        dateViewModel.checkedChangedQuantityEventMonth
             .observe(this, Observer { setDaysSpinner(it.dayType) })
     }
 
@@ -76,17 +76,16 @@ class DateFragment : Fragment(), OnClickDialogCloseButtonListener {
             override fun onResponse(call: Call<DateMessage>, response: Response<DateMessage>) {
                 val showDetailsDialog = DateDetailsDialog().newInstance(response.body()!!.text)
                 showDetailsDialog.show(childFragmentManager, "sdfsdfs")
-                dateViewModel!!.onResponseCallback(response.body()!!.text)
+                dateViewModel.onResponseCallback(response.body()!!.text)
             }
         })
     }
 
     override fun onClickCloseButton(isSaved: Boolean) {
-        dateViewModel!!.onClickDialogCloseButtonCallback(isSaved)
+        dateViewModel.onClickDialogCloseButtonCallback(isSaved)
     }
 
     companion object {
-
         fun newInstance(): DateFragment {
             val args = Bundle()
             val fragment = DateFragment()

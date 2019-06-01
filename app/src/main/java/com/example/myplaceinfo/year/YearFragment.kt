@@ -25,7 +25,7 @@ import javax.inject.Inject
  * @author Alexandr Mikhalev
  */
 class YearFragment : Fragment(), OnClickDialogCloseButtonListener {
-    private var binding: com.example.myplaceinfo.databinding.FragmentYearsBinding? = null
+    private var yearBinding: com.example.myplaceinfo.databinding.FragmentYearBinding? = null
 
     @Inject
     lateinit var yearViewModel: YearViewModel
@@ -42,10 +42,10 @@ class YearFragment : Fragment(), OnClickDialogCloseButtonListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_years, container, false)
-        binding!!.viewModel = yearViewModel
+        yearBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_year, container, false)
+        yearBinding!!.viewModel = yearViewModel
         init()
-        return binding!!.root
+        return yearBinding!!.root
     }
 
     private fun init() {

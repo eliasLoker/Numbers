@@ -26,7 +26,7 @@ class NumberListFragment : Fragment(), OnBasketClickListener {
     @Inject
     lateinit var numberListViewModel: NumberListViewModel
 
-    private var fragmentNumbersListBinding: com.example.myplaceinfo.databinding.FragmentNumbersListBinding? = null
+    private var numberListBinding: com.example.myplaceinfo.databinding.FragmentNumberListBinding? = null
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var numberListAdapter: NumberListAdapter
@@ -37,25 +37,23 @@ class NumberListFragment : Fragment(), OnBasketClickListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        fragmentNumbersListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_numbers_list, container, false)
-        fragmentNumbersListBinding!!.viewModel = numberListViewModel
+        numberListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_number_list, container, false)
+        numberListBinding!!.viewModel = numberListViewModel
         init()
         //start
-        recyclerView = fragmentNumbersListBinding!!.recyclerView
+        recyclerView = numberListBinding!!.recyclerView
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity)
         recyclerView.layoutManager = layoutManager
 
         numberListAdapter = NumberListAdapter()
         recyclerView.adapter = numberListAdapter
-
-        //setList.data//addList
         //end
         numberListAdapter.setOnBasketClickListener(this)
-        return fragmentNumbersListBinding!!.root
+        return numberListBinding!!.root
     }
 
     private fun init() {
-        numberListViewModel!!.updateListEvent.observe(this, Observer { setList(it.list) })
+        numberListViewModel.updateListEvent.observe(this, Observer { setList(it.list) })
     }
 
     private fun setList(numbersList: List<NumbersEntity>) {
