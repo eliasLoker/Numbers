@@ -4,14 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.example.myplaceinfo.Controller
-import com.example.myplaceinfo.ErrorDialog
-import com.example.myplaceinfo.OnClickDialogCloseButtonListener
-import com.example.myplaceinfo.R
+import com.example.myplaceinfo.*
 import com.example.myplaceinfo.year.retrofit.YearsMessage
 import com.example.myplaceinfo.year.viewmodel.YearViewModel
 import dagger.android.support.AndroidSupportInjection
@@ -52,14 +48,21 @@ class YearFragment : Fragment(), OnClickDialogCloseButtonListener {
 
         messages.enqueue(object : Callback<YearsMessage> {
             override fun onFailure(call: Call<YearsMessage>, t: Throwable) {
-                val errorDialog = ErrorDialog().newIntstance(t.message)
+                val errorDialog = ErrorConnectionDialog().newIntstance(t.message)
                 errorDialog.show(childFragmentManager, "NumberDialog")
             }
 
             override fun onResponse(call: Call<YearsMessage>, response: Response<YearsMessage>) {
-                val showDetailsDialog = YearDetailsDialog().newInstance(response.body()!!.text)
-                showDetailsDialog.show(childFragmentManager, "sdfsdfs")
-                yearViewModel.onResponseCallback(response.body()!!.text)
+                if (response.isSuccessful) {
+                    val message = response.body()!!.text
+                    val showDetailsDialog = YearDetailsDialog().newInstance(message)
+                    showDetailsDialog.show(childFragmentManager, "sdfsdfs")
+                    yearViewModel.onResponseCallback(response.body()!!.text)
+                } else {
+                    val errorMessage = response.code()
+                    val responseNotSuccessfulDialog = ResponseNotSuccessfulDialog().newIntstance(errorMessage.toString())
+                    responseNotSuccessfulDialog.show(childFragmentManager, "KEY")
+                }
             }
         })
     }
@@ -69,7 +72,6 @@ class YearFragment : Fragment(), OnClickDialogCloseButtonListener {
     }
 
     companion object {
-
         fun newInstance(): YearFragment {
             val args = Bundle()
             val fragment = YearFragment()

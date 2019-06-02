@@ -5,14 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.example.myplaceinfo.Controller
-import com.example.myplaceinfo.ErrorDialog
-import com.example.myplaceinfo.OnClickDialogCloseButtonListener
-import com.example.myplaceinfo.R
+import com.example.myplaceinfo.*
 import com.example.myplaceinfo.date.events.SetDaysQuantityEvent
 import com.example.myplaceinfo.date.retrofit.DateMessage
 import com.example.myplaceinfo.date.viewmodel.DateViewModel
@@ -71,14 +67,21 @@ class DateFragment : Fragment(), OnClickDialogCloseButtonListener {
 
         messages.enqueue(object : Callback<DateMessage> {
             override fun onFailure(call: Call<DateMessage>, t: Throwable) {
-                val errorDialog = ErrorDialog().newIntstance(t.message)
+                val errorDialog = ErrorConnectionDialog().newIntstance(t.message)
                 errorDialog.show(childFragmentManager, "NumberDialog")
             }
 
             override fun onResponse(call: Call<DateMessage>, response: Response<DateMessage>) {
-                val showDetailsDialog = DateDetailsDialog().newInstance(response.body()!!.text)
-                showDetailsDialog.show(childFragmentManager, "sdfsdfs")
-                dateViewModel.onResponseCallback(response.body()!!.text)
+                if (response.isSuccessful) {
+                    val message = response.body()!!.text
+                    val showDetailsDialog = DateDetailsDialog().newInstance(message)
+                    showDetailsDialog.show(childFragmentManager, "sdfsdfs")
+                    dateViewModel.onResponseCallback(response.body()!!.text)
+                } else {
+                    val errorMessage = response.code()
+                    val responseNotSuccessfulDialog = ResponseNotSuccessfulDialog().newIntstance(errorMessage.toString())
+                    responseNotSuccessfulDialog.show(childFragmentManager, "KEY")
+                }
             }
         })
     }

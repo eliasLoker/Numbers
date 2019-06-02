@@ -4,14 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.example.myplaceinfo.Controller
-import com.example.myplaceinfo.ErrorDialog
-import com.example.myplaceinfo.OnClickDialogCloseButtonListener
-import com.example.myplaceinfo.R
+import com.example.myplaceinfo.*
 import com.example.myplaceinfo.number.retrofit.NumberMessage
 import com.example.myplaceinfo.number.viewmodel.NumberViewModel
 import dagger.android.support.AndroidSupportInjection
@@ -54,15 +50,21 @@ class NumberFragment : Fragment(), OnClickDialogCloseButtonListener {
         messages.enqueue(object : Callback<NumberMessage> {
             override fun onFailure(call: Call<NumberMessage>, t: Throwable) {
                 //Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()
-                val errorDialog = ErrorDialog().newIntstance(t.message)
+                val errorDialog = ErrorConnectionDialog().newIntstance(t.message)
                 errorDialog.show(childFragmentManager, "NumberDialog")
             }
 
             override fun onResponse(call: Call<NumberMessage>, response: Response<NumberMessage>) {
-                val message = response.body()!!.text
-                numberViewModel.onResponseCallback(message)
-                val showDetailsDialog = NumberDetailsDialog().newInstance(message)
-                showDetailsDialog.show(childFragmentManager, "NumberDialog")
+                if (response.isSuccessful) {
+                    val message = response.body()!!.text
+                    numberViewModel.onResponseCallback(message)
+                    val showDetailsDialog = NumberDetailsDialog().newInstance(message)
+                    showDetailsDialog.show(childFragmentManager, "NumberDialog")
+                } else {
+                    val errorMessage = response.code()
+                    val responseNotSuccessfulDialog = ResponseNotSuccessfulDialog().newIntstance(errorMessage.toString())
+                    responseNotSuccessfulDialog.show(childFragmentManager, "KEY")
+                }
             }
         })
     }

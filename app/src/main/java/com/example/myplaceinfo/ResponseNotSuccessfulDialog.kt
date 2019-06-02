@@ -7,11 +7,11 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 
 /**
- * Created by Alexandr Mikhalev on 01.06.2019.
+ * Created by Alexandr Mikhalev on 02.06.2019.
  *
  * @author Alexandr Mikhalev
  */
-class ErrorDialog: DialogFragment(), View.OnClickListener {
+class ResponseNotSuccessfulDialog: DialogFragment(), View.OnClickListener {
 
     private lateinit var closeView: ImageView
     private lateinit var errorTextView: TextView
@@ -28,7 +28,7 @@ class ErrorDialog: DialogFragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
-        val view: View = inflater.inflate(R.layout.dialog_error, container, false)
+        val view: View = inflater.inflate(R.layout.dialog_response_not_successful, container, false)
         closeView = view.findViewById(R.id.close_view)
         errorTextView = view.findViewById(R.id.error_text_view)
 
@@ -57,10 +57,10 @@ class ErrorDialog: DialogFragment(), View.OnClickListener {
         }
     }
 
-    fun newIntstance(message: String?): ErrorDialog {
+    fun newIntstance(message: String?): DialogFragment {
         val args = Bundle()
         args.putString(KEY, message)
-        val fragment = ErrorDialog()
+        val fragment = DialogFragment()
         fragment.arguments = args
         return fragment
     }
