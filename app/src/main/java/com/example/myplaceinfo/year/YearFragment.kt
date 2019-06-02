@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.myplaceinfo.Controller
+import com.example.myplaceinfo.ErrorDialog
 import com.example.myplaceinfo.OnClickDialogCloseButtonListener
 import com.example.myplaceinfo.R
 import com.example.myplaceinfo.year.retrofit.YearsMessage
@@ -33,12 +34,6 @@ class YearFragment : Fragment(), OnClickDialogCloseButtonListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
-        /*
-        val numbersDao = NumbersDatabase.getNumberDatabase(activity!!.applicationContext)!!.numbersDao()
-        yearViewModel = ViewModelProviders
-            .of(this, YearFactory(yearInteractor = YearInteractor(numbersDao)))
-            .get(YearViewModelImpl::class.java)
-        */
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -49,7 +44,7 @@ class YearFragment : Fragment(), OnClickDialogCloseButtonListener {
     }
 
     private fun init() {
-        yearViewModel!!.yearDialogEvent.observe(this, Observer { getYearInfo(it.year) })
+        yearViewModel.yearDialogEvent.observe(this, Observer { getYearInfo(it.year) })
     }
 
     private fun getYearInfo(year: String) {
@@ -57,19 +52,20 @@ class YearFragment : Fragment(), OnClickDialogCloseButtonListener {
 
         messages.enqueue(object : Callback<YearsMessage> {
             override fun onFailure(call: Call<YearsMessage>, t: Throwable) {
-                Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()
+                val errorDialog = ErrorDialog().newIntstance(t.message)
+                errorDialog.show(childFragmentManager, "NumberDialog")
             }
 
             override fun onResponse(call: Call<YearsMessage>, response: Response<YearsMessage>) {
                 val showDetailsDialog = YearDetailsDialog().newInstance(response.body()!!.text)
                 showDetailsDialog.show(childFragmentManager, "sdfsdfs")
-                yearViewModel!!.onResponseCallback(response.body()!!.text)
+                yearViewModel.onResponseCallback(response.body()!!.text)
             }
         })
     }
 
     override fun onClickCloseButton(isSaved: Boolean) {
-        yearViewModel!!.onClickDialogCloseButtonCallback(isSaved)
+        yearViewModel.onClickDialogCloseButtonCallback(isSaved)
     }
 
     companion object {

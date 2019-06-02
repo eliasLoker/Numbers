@@ -32,6 +32,7 @@ class ErrorDialog: DialogFragment(), View.OnClickListener {
         closeView = view.findViewById(R.id.close_view)
         errorTextView = view.findViewById(R.id.error_text_view)
 
+        errorTextView.text = message
         closeView.setOnClickListener(this)
         return view
     }

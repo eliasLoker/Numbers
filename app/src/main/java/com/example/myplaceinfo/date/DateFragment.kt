@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.myplaceinfo.Controller
+import com.example.myplaceinfo.ErrorDialog
 import com.example.myplaceinfo.OnClickDialogCloseButtonListener
 import com.example.myplaceinfo.R
 import com.example.myplaceinfo.date.events.SetDaysQuantityEvent
@@ -70,7 +71,8 @@ class DateFragment : Fragment(), OnClickDialogCloseButtonListener {
 
         messages.enqueue(object : Callback<DateMessage> {
             override fun onFailure(call: Call<DateMessage>, t: Throwable) {
-                Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()
+                val errorDialog = ErrorDialog().newIntstance(t.message)
+                errorDialog.show(childFragmentManager, "NumberDialog")
             }
 
             override fun onResponse(call: Call<DateMessage>, response: Response<DateMessage>) {

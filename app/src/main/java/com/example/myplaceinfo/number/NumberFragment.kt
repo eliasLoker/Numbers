@@ -62,7 +62,7 @@ class NumberFragment : Fragment(), OnClickDialogCloseButtonListener {
                 val message = response.body()!!.text
                 numberViewModel.onResponseCallback(message)
                 val showDetailsDialog = NumberDetailsDialog().newInstance(message)
-                showDetailsDialog.show(childFragmentManager, "sdfsdfs")
+                showDetailsDialog.show(childFragmentManager, "NumberDialog")
             }
         })
     }
