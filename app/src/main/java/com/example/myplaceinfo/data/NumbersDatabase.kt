@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
  *
  * @author Alexandr Mikhalev
  */
-@Database(entities = [(NumbersEntity::class)], version = 1)
+@Database(entities = [(NumbersEntity::class)], version = 1, exportSchema = false)
 abstract class NumbersDatabase : RoomDatabase() {
     abstract fun numberDao(): NumbersDao
     /*
