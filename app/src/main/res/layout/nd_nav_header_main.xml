@@ -12,24 +12,26 @@
               android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@color/colorSteelBlue"
-            android:contentDescription="string/nav_header_desc"
+            android:id="@+id/logo"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/ic_numbers_nd"
+            android:contentDescription="@string/for_description_nav_drawer_logo"
             android:paddingTop="@dimen/nav_header_vertical_spacing" />
+
 
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:text="Заголовок"
+            android:text="@string/header_nav_drawer"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Подзаголовок" />
+            android:text="@string/subtitle_nav_drawer" />
+
 
 </LinearLayout>

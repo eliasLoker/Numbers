@@ -1,19 +1,44 @@
 <resources>
     <string name="app_name">NumberFacts</string>
-    <string name="for_show_my_ip_btn">Show my ip</string>
-    <string name="for_show_details_btn">More detailed</string>
-    <string name="for_show_info_btn">show details</string>
-    <string name="for_your_ip_text_view">Your IP:</string>
     <string name="random">random</string>
-
     <string name="delete_message">Do you really want to delete %1$s?</string>
+    <string name="for_show_fact_button">Show fact</string>
+    <string name="for_month_header_text_view">1. Choose month:</string>
+    <string name="for_date_header_text_view">2. Choose date:</string>
+    <string name="for_confirm_button">YES</string>
+    <string name="for_cancel_button">NO</string>
+    <string name="one_button">1</string>
+    <string name="two_button">2</string>
+    <string name="three_button">3</string>
+    <string name="four_button">4</string>
+    <string name="five_button">5</string>
+    <string name="six_button">6</string>
+    <string name="seven_button">7</string>
+    <string name="eight_button">8</string>
+    <string name="nine_button">9</string>
+    <string name="random_button">Random</string>
+    <string name="null_button">0</string>
+    <string name="reset_button">C</string>
+    <string name="for_empty_text_view">Your list is empty</string>
+    <string name="for_tip_switcher">change the input mode</string>
+    <string name="for_edit_text_hint">max length 4 characters</string>
+    <string name="for_header_number_list_item">Type:</string>
+
+    <!-- For ImageView description-->
+    <string name="for_description_delete_logo">description_delete_logo</string>
+    <string name="for_description_date_logo">description_date_logo</string>
+    <string name="for_description_close_view">description_close_view</string>
+    <string name="for_description_error_logo">description_error_logo</string>
+    <string name="for_description_number_logo">description_number_logo</string>
+    <string name="for_description_year_logo">description_year_logo</string>
+    <string name="for_description_nav_drawer_logo">description_nav_drawer_logo</string>
+    <string name="for_description_basket_view">description_basket_view</string>
 
     <!-- For Navigation drawer-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="for_show_fact_button">Show fact</string>
-    <string name="for_month_header_text_view">1. Choose month:</string>
-    <string name="for_date_header_text_view">2. Choose date:</string>
+    <string name="header_nav_drawer">Facts about numbers</string>
+    <string name="subtitle_nav_drawer">Keep interesting facts</string>
 
     <string-array name="typelist">
         <item>Math</item>

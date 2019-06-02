@@ -37,9 +37,9 @@ class DateDetailsDialog : DialogFragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
-        val view: View = inflater.inflate(R.layout.dialog_dates_details, container, false)
+        val view: View = inflater.inflate(R.layout.dialog_date_details, container, false)
         closeView = view.findViewById(R.id.close_view)
-        infoTextView = view.findViewById(R.id.delete_text_view)
+        infoTextView = view.findViewById(R.id.date_text_view)
         favouritesToggleButton = view.findViewById(R.id.favourites)
 
         infoTextView.text = message

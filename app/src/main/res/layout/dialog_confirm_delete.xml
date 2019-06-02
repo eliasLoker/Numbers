@@ -21,7 +21,8 @@
             android:src="@drawable/ic_delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/for_description_delete_logo"/>
 
     <TextView
             android:id="@+id/delete_text_view"
@@ -35,7 +36,6 @@
             android:textColor="@color/colorBlack"
             android:textSize="25sp"
             android:layout_marginTop="20dp"
-            android:text="Do you really want to delete a number?"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/year_logo"/>
@@ -44,7 +44,7 @@
             android:id="@+id/confirm_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="YES"
+            android:text="@string/for_confirm_button"
             android:textStyle="bold"
             android:textAlignment="center"
             android:textSize="35sp"
@@ -58,7 +58,7 @@
             android:id="@+id/cancel_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="NO"
+            android:text="@string/for_cancel_button"
             android:textStyle="bold"
             android:textAlignment="center"
             android:textSize="35sp"

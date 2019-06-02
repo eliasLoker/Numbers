@@ -55,60 +55,60 @@
 
             <TableRow>
                 <Button
-                        android:text="1"
+                        android:text="@string/one_button"
                         android:onClick="@{() -> viewModel.onClickNumberButton(1)}"/>
                 <Button
-                        android:text="2"
+                        android:text="@string/two_button"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         android:onClick="@{() -> viewModel.onClickNumberButton(2)}"/>
                 <Button
-                        android:text="3"
+                        android:text="@string/three_button"
                         android:onClick="@{() -> viewModel.onClickNumberButton(3)}"/>
             </TableRow>
 
             <TableRow
                     android:layout_marginTop="10dp">
                 <Button
-                        android:text="4"
+                        android:text="@string/four_button"
                         android:onClick="@{() -> viewModel.onClickNumberButton(4)}"/>
                 <Button
-                        android:text="5"
+                        android:text="@string/five_button"
                         android:onClick="@{() -> viewModel.onClickNumberButton(5)}"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"/>
                 <Button
-                        android:text="6"
+                        android:text="@string/six_button"
                         android:onClick="@{() -> viewModel.onClickNumberButton(6)}"/>
             </TableRow>
 
             <TableRow
                     android:layout_marginTop="10dp">
                 <Button
-                        android:text="7"
+                        android:text="@string/seven_button"
                         android:onClick="@{() -> viewModel.onClickNumberButton(7)}"/>
                 <Button
-                        android:text="8"
+                        android:text="@string/eight_button"
                         android:onClick="@{() -> viewModel.onClickNumberButton(8)}"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"/>
                 <Button
-                        android:text="9"
+                        android:text="@string/nine_button"
                         android:onClick="@{() -> viewModel.onClickNumberButton(9)}"/>
             </TableRow>
 
             <TableRow
                     android:layout_marginTop="10dp">
                 <Button
-                        android:text="Random"
+                        android:text="@string/random_button"
                         android:onClick="@{() -> viewModel.onClickRandomButton(@string/random)}"/>
                 <Button
-                        android:text="0"
+                        android:text="@string/null_button"
                         android:onClick="@{() -> viewModel.onClickNumberButton(0)}"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"/>
                 <Button
-                        android:text="C"
+                        android:text="@string/reset_button"
                         android:onClick="@{() -> viewModel.onClickReset()}"/>
             </TableRow>
 
