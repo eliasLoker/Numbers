@@ -15,6 +15,7 @@ import com.example.myplaceinfo.R
  * @author Alexandr Mikhalev
  */
 class YearDetailsDialog : DialogFragment(), View.OnClickListener {
+
     private lateinit var closeView: ImageView
     private var infoTextView: TextView? = null
     private lateinit var favouritesToggleButton: ToggleButton
@@ -38,14 +39,13 @@ class YearDetailsDialog : DialogFragment(), View.OnClickListener {
         dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
         val view: View = inflater.inflate(R.layout.dialog_year_details, container, false)
         closeView = view.findViewById(R.id.close_view)
-        infoTextView = view.findViewById(R.id.error_text_view)
+        infoTextView = view.findViewById(R.id.year_text_view)
         favouritesToggleButton = view.findViewById(R.id.favourites)
 
         infoTextView!!.text = message
         closeView.setOnClickListener(this)
         favouritesToggleButton.setOnClickListener(this)
         return view
-        //return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onResume() {

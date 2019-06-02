@@ -13,7 +13,8 @@ import io.reactivex.disposables.CompositeDisposable
  *
  * @author Alexandr Mikhalev
  */
-class NumberListViewModelImpl(private val numberListInteractor: NumberListInteractor) : ViewModel(), NumberListViewModel {
+class NumberListViewModelImpl(private val numberListInteractor: NumberListInteractor) : ViewModel(),
+    NumberListViewModel {
 
     override val stateEmptyTextView: ObservableField<Boolean> = ObservableField(false)
     override val stateRecycler: ObservableField<Boolean> = ObservableField(false)
@@ -41,7 +42,8 @@ class NumberListViewModelImpl(private val numberListInteractor: NumberListIntera
         compositeDisposable.add(disposable)
     }
 
-    override fun onBasketClickCallback(number: String) {
+    override fun onClickConfirmDialogButtonCallback(isConfirm: Boolean, number: String) {
+        if (!isConfirm) return
         val disposable = numberListInteractor.deleteByNumber(number)
             .subscribe {
                 numberListInteractor.getAll()

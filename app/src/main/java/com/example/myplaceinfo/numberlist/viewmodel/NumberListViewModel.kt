@@ -19,5 +19,5 @@ interface NumberListViewModel {
 
     val updateListEvent: SingleLiveEvent<UpdateListEvent>
 
-    fun onBasketClickCallback(number: String)
+    fun onClickConfirmDialogButtonCallback(isConfirm: Boolean, number: String)
 }

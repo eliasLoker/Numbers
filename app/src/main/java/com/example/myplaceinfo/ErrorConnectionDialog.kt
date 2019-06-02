@@ -30,7 +30,7 @@ class ErrorConnectionDialog: DialogFragment(), View.OnClickListener {
         dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
         val view: View = inflater.inflate(R.layout.dialog_error, container, false)
         closeView = view.findViewById(R.id.close_view)
-        errorTextView = view.findViewById(R.id.error_text_view)
+        errorTextView = view.findViewById(R.id.delete_text_view)
 
         errorTextView.text = message
         closeView.setOnClickListener(this)

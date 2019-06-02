@@ -21,7 +21,7 @@ import javax.inject.Inject
  *
  * @author Alexandr Mikhalev
  */
-class NumberListFragment : Fragment(), OnBasketClickListener {
+class NumberListFragment : Fragment(), OnBasketClickListener, OnClickConfirmDeleteDialogListener {
 
     @Inject
     lateinit var numberListViewModel: NumberListViewModel
@@ -65,7 +65,12 @@ class NumberListFragment : Fragment(), OnBasketClickListener {
     }
 
     override fun onBasketClick(number: String) {
-        numberListViewModel.onBasketClickCallback(number)
+        val confirmDeleteDialog = ConfirmDeleteDialog().newInstance(number)
+        confirmDeleteDialog.show(childFragmentManager, "NL")
+    }
+
+    override fun onClickConfirmDialogButton(isConfirm: Boolean, number: String) {
+        numberListViewModel.onClickConfirmDialogButtonCallback(isConfirm, number)
     }
 
     companion object {
