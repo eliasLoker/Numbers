@@ -38,7 +38,7 @@ class YearDetailsDialog : DialogFragment(), View.OnClickListener {
         dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
         val view: View = inflater.inflate(R.layout.dialog_year_details, container, false)
         closeView = view.findViewById(R.id.close_view)
-        infoTextView = view.findViewById(R.id.dialog_header)
+        infoTextView = view.findViewById(R.id.error_text_view)
         favouritesToggleButton = view.findViewById(R.id.favourites)
 
         infoTextView!!.text = message
